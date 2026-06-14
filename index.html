@@ -2,146 +2,153 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Marah Live</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marah TV</title>
 
 <style>
 
 body{
 margin:0;
-background:#000;
 font-family:Tahoma,sans-serif;
+background:linear-gradient(#bfe3ff,#7dc3ff);
+height:100vh;
 overflow:hidden;
 }
 
-.channel{
-width:100vw;
-height:100vh;
-position:relative;
-background:#111;
+.topbar{
+height:70px;
+background:linear-gradient(#6b89a8,#9ec1df);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 15px;
 color:white;
+font-size:22px;
+font-weight:bold;
 }
 
 .logo{
-position:absolute;
-top:10px;
-right:10px;
-background:#ff9900;
-padding:8px 15px;
-border-radius:8px;
+color:#ffb400;
+font-size:34px;
 font-weight:bold;
-z-index:10;
+}
+
+.clock{
+font-size:24px;
+}
+
+.container{
+display:flex;
+height:calc(100vh - 120px);
+}
+
+.sidebar{
+width:140px;
+padding:10px;
+}
+
+.menu-btn{
+background:linear-gradient(#f6f6f6,#c9c9c9);
+margin-bottom:8px;
+padding:10px;
+text-align:center;
+border-radius:10px;
+font-weight:bold;
+box-shadow:0 2px 4px rgba(0,0,0,.3);
+}
+
+.main{
+flex:1;
+padding:10px;
+overflow:hidden;
+}
+
+.message{
+background:rgba(255,255,255,.75);
+border:2px solid #8ab5d8;
+border-radius:10px;
+padding:15px;
+margin-bottom:15px;
+font-size:26px;
+font-weight:bold;
+min-height:90px;
+position:relative;
+}
+
+.folder{
+position:absolute;
+left:10px;
+top:10px;
+font-size:40px;
+}
+
+.sender{
+font-size:18px;
+color:#333;
+margin-top:10px;
+}
+
+.challenge{
+position:absolute;
+bottom:90px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,80,.8);
+color:white;
+width:300px;
+padding:15px;
+border-radius:20px;
+text-align:center;
+font-size:28px;
+}
+
+.score{
+font-size:50px;
+color:yellow;
+}
+
+.bottom{
+position:absolute;
+bottom:0;
+width:100%;
+height:50px;
+background:white;
+display:flex;
+align-items:center;
+overflow:hidden;
+}
+
+.ads{
+background:black;
+color:red;
+font-weight:bold;
+padding:10px 20px;
+margin-left:10px;
+border-radius:15px;
+}
+
+.ticker{
+white-space:nowrap;
+display:inline-block;
+animation:move 15s linear infinite;
+font-size:22px;
+}
+
+@keyframes move{
+from{transform:translateX(100%);}
+to{transform:translateX(-100%);}
 }
 
 .live{
 position:absolute;
-top:10px;
+top:80px;
 left:10px;
 background:red;
-padding:8px 15px;
-border-radius:8px;
+color:white;
+padding:10px 20px;
+border-radius:12px;
+font-size:24px;
 font-weight:bold;
-z-index:10;
-}
-
-.video{
-position:absolute;
-inset:0;
-background:
-linear-gradient(45deg,#002b7f,#0047cc,#0099ff);
-background-size:400% 400%;
-animation:bgmove 15s infinite;
-}
-
-@keyframes bgmove{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-.messages{
-position:absolute;
-top:70px;
-right:10px;
-width:150px;
-height:420px;
-overflow:hidden;
-background:rgba(0,0,0,.55);
-border-radius:10px;
-padding:10px;
-}
-
-.messages h3{
-margin:0 0 10px;
-font-size:15px;
-text-align:center;
-color:gold;
-}
-
-.msg{
-background:#222;
-padding:6px;
-margin-bottom:6px;
-font-size:12px;
-border-radius:5px;
-}
-
-.battle{
-position:absolute;
-bottom:170px;
-left:50%;
-transform:translateX(-50%);
-background:rgba(0,0,0,.7);
-padding:15px;
-border-radius:15px;
-text-align:center;
-font-size:22px;
-}
-
-.timer{
-font-size:32px;
-color:gold;
-margin-top:10px;
-}
-
-.players{
-position:absolute;
-bottom:90px;
-left:0;
-right:0;
-text-align:center;
-}
-
-.player{
-display:inline-block;
-margin:4px;
-padding:8px 12px;
-background:#0066ff;
-border-radius:20px;
-font-size:14px;
-}
-
-.news{
-position:absolute;
-bottom:0;
-left:0;
-right:0;
-height:50px;
-background:#003cff;
-overflow:hidden;
-white-space:nowrap;
-}
-
-.scroll{
-position:absolute;
-line-height:50px;
-font-size:18px;
-animation:scroll 18s linear infinite;
-}
-
-@keyframes scroll{
-from{right:-100%;}
-to{right:100%;}
 }
 
 </style>
@@ -149,89 +156,75 @@ to{right:100%;}
 
 <body>
 
-<div class="channel">
-
-<div class="video"></div>
-
-<div class="logo">marah TV</div>
+<div class="topbar">
+<div class="logo">Marah TV</div>
+<div class="clock" id="clock">00:00</div>
+</div>
 
 <div class="live">🔴 مباشر</div>
 
-<div class="messages">
+<div class="container">
 
-<h3>الرسائل</h3>
+<div class="sidebar">
+<div class="menu-btn">طلب صداقة</div>
+<div class="menu-btn">التحيات</div>
+<div class="menu-btn">مسابقات</div>
+<div class="menu-btn">أرسل رسالة</div>
+</div>
 
-<div class="msg">أحمد - حلب</div>
-<div class="msg">مساء الخير</div>
+<div class="main">
 
-<div class="msg">محمد - دمشق</div>
-<div class="msg">أشارك بالمسابقة</div>
+<div class="message">
+كونترول سوزوووري ❤️❤️
+<div class="folder">📁</div>
+<div class="sender">النورس - وات بخير</div>
+</div>
 
-<div class="msg">سارة - حمص</div>
-<div class="msg">تحياتي للجميع</div>
+<div class="message">
+تامر حبيبي ❤️❤️❤️
+<div class="folder">📁</div>
+<div class="sender">من سارة - حمص</div>
+</div>
 
-<div class="msg">عمر - إدلب</div>
-<div class="msg">سلام للجميع</div>
+<div class="message">
+تحياتي للجميع
+<div class="folder">📁</div>
+<div class="sender">محمد - دمشق</div>
+</div>
 
 </div>
 
-<div class="battle">
+</div>
+
+<div class="challenge">
 ⚔️ أحمد VS محمد
-<div class="timer" id="timer">15</div>
+<div class="score" id="counter">20</div>
 </div>
 
-<div class="players">
-<span class="player">أحمد</span>
-<span class="player">محمد</span>
-<span class="player">سارة</span>
-<span class="player">عمر</span>
+<div class="bottom">
+<div class="ads">إعلانات</div>
+<div class="ticker">
+أهلاً بكم في Marah TV • يمكنكم المشاركة بالمسابقات • الموقع قيد التطوير • مرحباً بالجميع
 </div>
-
-<div class="news">
-<div class="scroll">
-📢 اكتب ME للمشاركة — 📢 الجولة التالية خلال ثوانٍ — 📢 أهلاً بكم في قناة مراح لايف
-</div>
-</div>
-
 </div>
 
 <script>
 
-let t=15;
+function updateClock(){
+let now=new Date();
+let h=String(now.getHours()).padStart(2,'0');
+let m=String(now.getMinutes()).padStart(2,'0');
+document.getElementById("clock").innerHTML=h+":"+m;
+}
+setInterval(updateClock,1000);
+updateClock();
+
+let c=20;
 
 setInterval(()=>{
-
-t--;
-
-if(t<=0){
-
-t=15;
-
-const names=[
-"أحمد",
-"محمد",
-"سارة",
-"عمر",
-"خالد",
-"ريم",
-"نور"
-];
-
-let a=names[Math.floor(Math.random()*names.length)];
-let b=names[Math.floor(Math.random()*names.length)];
-
-document.querySelector(".battle").innerHTML=
-"⚔️ "+a+" VS "+b+
-'<div class="timer" id="timer">'+t+'</div>';
-
-}
-
-let timer=document.getElementById("timer");
-
-if(timer){
-timer.innerText=t;
-}
-
+c--;
+if(c<0)c=20;
+document.getElementById("counter").innerHTML=c;
 },1000);
 
 </script>
