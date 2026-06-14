@@ -2,27 +2,239 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Marah Live</title>
+
 <style>
+
 body{
+margin:0;
+background:#000;
+font-family:Tahoma,sans-serif;
+overflow:hidden;
+}
+
+.channel{
+width:100vw;
+height:100vh;
+position:relative;
 background:#111;
 color:white;
-font-family:Tahoma;
+}
+
+.logo{
+position:absolute;
+top:10px;
+right:10px;
+background:#ff9900;
+padding:8px 15px;
+border-radius:8px;
+font-weight:bold;
+z-index:10;
+}
+
+.live{
+position:absolute;
+top:10px;
+left:10px;
+background:red;
+padding:8px 15px;
+border-radius:8px;
+font-weight:bold;
+z-index:10;
+}
+
+.video{
+position:absolute;
+inset:0;
+background:
+linear-gradient(45deg,#002b7f,#0047cc,#0099ff);
+background-size:400% 400%;
+animation:bgmove 15s infinite;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.messages{
+position:absolute;
+top:70px;
+right:10px;
+width:150px;
+height:420px;
+overflow:hidden;
+background:rgba(0,0,0,.55);
+border-radius:10px;
+padding:10px;
+}
+
+.messages h3{
+margin:0 0 10px;
+font-size:15px;
 text-align:center;
-padding-top:100px;
+color:gold;
 }
-h1{
-color:#ffcc00;
+
+.msg{
+background:#222;
+padding:6px;
+margin-bottom:6px;
+font-size:12px;
+border-radius:5px;
 }
+
+.battle{
+position:absolute;
+bottom:170px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,.7);
+padding:15px;
+border-radius:15px;
+text-align:center;
+font-size:22px;
+}
+
+.timer{
+font-size:32px;
+color:gold;
+margin-top:10px;
+}
+
+.players{
+position:absolute;
+bottom:90px;
+left:0;
+right:0;
+text-align:center;
+}
+
+.player{
+display:inline-block;
+margin:4px;
+padding:8px 12px;
+background:#0066ff;
+border-radius:20px;
+font-size:14px;
+}
+
+.news{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+height:50px;
+background:#003cff;
+overflow:hidden;
+white-space:nowrap;
+}
+
+.scroll{
+position:absolute;
+line-height:50px;
+font-size:18px;
+animation:scroll 18s linear infinite;
+}
+
+@keyframes scroll{
+from{right:-100%;}
+to{right:100%;}
+}
+
 </style>
 </head>
+
 <body>
 
-<h1>مرحباً بكم في Marah Live</h1>
+<div class="channel">
 
-<p>
-أول نسخة من القناة تعمل بنجاح 🎉
-</p>
+<div class="video"></div>
+
+<div class="logo">marah TV</div>
+
+<div class="live">🔴 مباشر</div>
+
+<div class="messages">
+
+<h3>الرسائل</h3>
+
+<div class="msg">أحمد - حلب</div>
+<div class="msg">مساء الخير</div>
+
+<div class="msg">محمد - دمشق</div>
+<div class="msg">أشارك بالمسابقة</div>
+
+<div class="msg">سارة - حمص</div>
+<div class="msg">تحياتي للجميع</div>
+
+<div class="msg">عمر - إدلب</div>
+<div class="msg">سلام للجميع</div>
+
+</div>
+
+<div class="battle">
+⚔️ أحمد VS محمد
+<div class="timer" id="timer">15</div>
+</div>
+
+<div class="players">
+<span class="player">أحمد</span>
+<span class="player">محمد</span>
+<span class="player">سارة</span>
+<span class="player">عمر</span>
+</div>
+
+<div class="news">
+<div class="scroll">
+📢 اكتب ME للمشاركة — 📢 الجولة التالية خلال ثوانٍ — 📢 أهلاً بكم في قناة مراح لايف
+</div>
+</div>
+
+</div>
+
+<script>
+
+let t=15;
+
+setInterval(()=>{
+
+t--;
+
+if(t<=0){
+
+t=15;
+
+const names=[
+"أحمد",
+"محمد",
+"سارة",
+"عمر",
+"خالد",
+"ريم",
+"نور"
+];
+
+let a=names[Math.floor(Math.random()*names.length)];
+let b=names[Math.floor(Math.random()*names.length)];
+
+document.querySelector(".battle").innerHTML=
+"⚔️ "+a+" VS "+b+
+'<div class="timer" id="timer">'+t+'</div>';
+
+}
+
+let timer=document.getElementById("timer");
+
+if(timer){
+timer.innerText=t;
+}
+
+},1000);
+
+</script>
 
 </body>
 </html>
