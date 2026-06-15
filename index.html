@@ -4,230 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marah TV</title>
-
 <style>
-
-body{
-margin:0;
-font-family:Tahoma,sans-serif;
-background:linear-gradient(#bfe3ff,#7dc3ff);
-height:100vh;
-overflow:hidden;
-}
-
-.topbar{
-height:70px;
-background:linear-gradient(#6b89a8,#9ec1df);
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 15px;
-color:white;
-font-size:22px;
-font-weight:bold;
-}
-
-.logo{
-color:#ffb400;
-font-size:34px;
-font-weight:bold;
-}
-
-.clock{
-font-size:24px;
-}
-
-.container{
-display:flex;
-height:calc(100vh - 120px);
-}
-
-.sidebar{
-width:140px;
-padding:10px;
-}
-
-.menu-btn{
-background:linear-gradient(#f6f6f6,#c9c9c9);
-margin-bottom:8px;
-padding:10px;
-text-align:center;
-border-radius:10px;
-font-weight:bold;
-box-shadow:0 2px 4px rgba(0,0,0,.3);
-}
-
-.main{
-flex:1;
-padding:10px;
-overflow:hidden;
-}
-
-.message{
-background:rgba(255,255,255,.75);
-border:2px solid #8ab5d8;
-border-radius:10px;
-padding:15px;
-margin-bottom:15px;
-font-size:26px;
-font-weight:bold;
-min-height:90px;
-position:relative;
-}
-
-.folder{
-position:absolute;
-left:10px;
-top:10px;
-font-size:40px;
-}
-
-.sender{
-font-size:18px;
-color:#333;
-margin-top:10px;
-}
-
-.challenge{
-position:absolute;
-bottom:90px;
-left:50%;
-transform:translateX(-50%);
-background:rgba(0,0,80,.8);
-color:white;
-width:300px;
-padding:15px;
-border-radius:20px;
-text-align:center;
-font-size:28px;
-}
-
-.score{
-font-size:50px;
-color:yellow;
-}
-
-.bottom{
-position:absolute;
-bottom:0;
-width:100%;
-height:50px;
-background:white;
-display:flex;
-align-items:center;
-overflow:hidden;
-}
-
-.ads{
-background:black;
-color:red;
-font-weight:bold;
-padding:10px 20px;
-margin-left:10px;
-border-radius:15px;
-}
-
-.ticker{
-white-space:nowrap;
-display:inline-block;
-animation:move 15s linear infinite;
-font-size:22px;
-}
-
-@keyframes move{
-from{transform:translateX(100%);}
-to{transform:translateX(-100%);}
-}
-
-.live{
-position:absolute;
-top:80px;
-left:10px;
-background:red;
-color:white;
-padding:10px 20px;
-border-radius:12px;
-font-size:24px;
-font-weight:bold;
-}
-
+body{margin:0;font-family:Tahoma,sans-serif;background:#0f172a;color:#fff}
+header{padding:12px 16px;background:#1e293b;display:flex;justify-content:space-between}
+.wrap{max-width:1000px;margin:auto;padding:12px}
+.card{background:#1e293b;border-radius:12px;padding:12px;margin:10px 0}
+input,button{padding:10px;border-radius:8px;border:none}
+input{width:100%;margin:6px 0}
+button{cursor:pointer}
+#messages{max-height:300px;overflow:auto}
+.msg{padding:8px;border-bottom:1px solid #334155}
+.game{position:sticky;bottom:0}
 </style>
 </head>
-
 <body>
-
-<div class="topbar">
-<div class="logo">Marah TV</div>
-<div class="clock" id="clock">00:00</div>
+<header><div>🔴 Marah TV</div><div id="clock"></div></header>
+<div class="wrap">
+<div class="card">
+<h3>الرسائل المباشرة</h3>
+<input id="name" placeholder="اسمك">
+<input id="text" placeholder="اكتب رسالة أو me للانضمام">
+<button id="send">إرسال</button>
+<div id="messages"></div>
 </div>
 
-<div class="live">🔴 مباشر</div>
-
-<div class="container">
-
-<div class="sidebar">
-<div class="menu-btn">طلب صداقة</div>
-<div class="menu-btn">التحيات</div>
-<div class="menu-btn">مسابقات</div>
-<div class="menu-btn">أرسل رسالة</div>
-</div>
-
-<div class="main">
-
-<div class="message">
-كونترول سوزوووري ❤️❤️
-<div class="folder">📁</div>
-<div class="sender">النورس - وات بخير</div>
-</div>
-
-<div class="message">
-تامر حبيبي ❤️❤️❤️
-<div class="folder">📁</div>
-<div class="sender">من سارة - حمص</div>
-</div>
-
-<div class="message">
-تحياتي للجميع
-<div class="folder">📁</div>
-<div class="sender">محمد - دمشق</div>
-</div>
-
-</div>
-
-</div>
-
-<div class="challenge">
-⚔️ أحمد VS محمد
-<div class="score" id="counter">20</div>
-</div>
-
-<div class="bottom">
-<div class="ads">إعلانات</div>
-<div class="ticker">
-أهلاً بكم في Marah TV • يمكنكم المشاركة بالمسابقات • الموقع قيد التطوير • مرحباً بالجميع
+<div class="card game">
+<h3>⚔️ ساحة التحدي</h3>
+<div id="players">لا يوجد لاعبون بعد</div>
+<div id="battle">بانتظار المشاركين...</div>
 </div>
 </div>
 
 <script>
-
-function updateClock(){
-let now=new Date();
-let h=String(now.getHours()).padStart(2,'0');
-let m=String(now.getMinutes()).padStart(2,'0');
-document.getElementById("clock").innerHTML=h+":"+m;
-}
-setInterval(updateClock,1000);
-updateClock();
-
-let c=20;
-
 setInterval(()=>{
-c--;
-if(c<0)c=20;
-document.getElementById("counter").innerHTML=c;
+document.getElementById('clock').textContent=new Date().toLocaleTimeString('ar');
 },1000);
 
-</script>
+const saved=localStorage.getItem('marah_name');
+if(saved) document.getElementById('name').value=saved;
 
+document.getElementById('send').onclick=()=>{
+ const n=document.getElementById('name').value.trim();
+ const t=document.getElementById('text').value.trim();
+ if(!n||!t) return;
+ localStorage.setItem('marah_name',n);
+
+ const box=document.getElementById('messages');
+ const div=document.createElement('div');
+ div.className='msg';
+ div.textContent=n+': '+t;
+ box.prepend(div);
+
+ if(t.toLowerCase()==='me'){
+   const p=document.getElementById('players');
+   p.innerHTML += '<div>'+n+'</div>';
+ }
+ document.getElementById('text').value='';
+};
+</script>
 </body>
 </html>
