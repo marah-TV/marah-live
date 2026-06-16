@@ -110,7 +110,25 @@ div.textContent=name + ": " + text;
 document.getElementById("messages").prepend(div);
 
 document.getElementById("text").value="";
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getDatabase } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD8yIx-iVO4kCC-92lVHAzrVB7ye6ncbes",
+  authDomain: "marah-tv-ed147.firebaseapp.com",
+  databaseURL: "https://marah-tv-ed147-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "marah-tv-ed147",
+  storageBucket: "marah-tv-ed147.firebasestorage.app",
+  messagingSenderId: "868399469455",
+  appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
 };
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+console.log("Firebase Connected");
+</script>
 </script>
 
 </body>
