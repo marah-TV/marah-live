@@ -4,63 +4,114 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marah TV</title>
+
 <style>
-body{margin:0;font-family:Tahoma,sans-serif;background:#0f172a;color:#fff}
-header{padding:12px 16px;background:#1e293b;display:flex;justify-content:space-between}
-.wrap{max-width:1000px;margin:auto;padding:12px}
-.card{background:#1e293b;border-radius:12px;padding:12px;margin:10px 0}
-input,button{padding:10px;border-radius:8px;border:none}
-input{width:100%;margin:6px 0}
-button{cursor:pointer}
-#messages{max-height:300px;overflow:auto}
-.msg{padding:8px;border-bottom:1px solid #334155}
-.game{position:sticky;bottom:0}
+body{
+margin:0;
+background:#0f172a;
+color:white;
+font-family:Tahoma,sans-serif;
+}
+
+header{
+background:#1e293b;
+padding:15px;
+display:flex;
+justify-content:space-between;
+}
+
+.wrap{
+max-width:900px;
+margin:auto;
+padding:15px;
+}
+
+.card{
+background:#1e293b;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
+border:none;
+border-radius:8px;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+#messages{
+max-height:400px;
+overflow:auto;
+}
+
+.msg{
+padding:8px;
+border-bottom:1px solid #334155;
+}
 </style>
 </head>
+
 <body>
-<header><div>🔴 Marah TV</div><div id="clock"></div></header>
+
+<header>
+<div>🔴 Marah TV</div>
+<div id="clock"></div>
+</header>
+
 <div class="wrap">
+
 <div class="card">
 <h3>الرسائل المباشرة</h3>
+
 <input id="name" placeholder="اسمك">
-<input id="text" placeholder="اكتب رسالة أو me للانضمام">
+<input id="text" placeholder="اكتب رسالة">
+
 <button id="send">إرسال</button>
+
 <div id="messages"></div>
 </div>
 
-<div class="card game">
-<h3>⚔️ ساحة التحدي</h3>
-<div id="players">لا يوجد لاعبون بعد</div>
-<div id="battle">بانتظار المشاركين...</div>
-</div>
 </div>
 
 <script>
 setInterval(()=>{
-document.getElementById('clock').textContent=new Date().toLocaleTimeString('ar');
+document.getElementById("clock").textContent=
+new Date().toLocaleTimeString("ar");
 },1000);
 
-const saved=localStorage.getItem('marah_name');
-if(saved) document.getElementById('name').value=saved;
+const saved = localStorage.getItem("marah_name");
 
-document.getElementById('send').onclick=()=>{
- const n=document.getElementById('name').value.trim();
- const t=document.getElementById('text').value.trim();
- if(!n||!t) return;
- localStorage.setItem('marah_name',n);
+if(saved){
+document.getElementById("name").value=saved;
+}
 
- const box=document.getElementById('messages');
- const div=document.createElement('div');
- div.className='msg';
- div.textContent=n+': '+t;
- box.prepend(div);
+document.getElementById("send").onclick=()=>{
 
- if(t.toLowerCase()==='me'){
-   const p=document.getElementById('players');
-   p.innerHTML += '<div>'+n+'</div>';
- }
- document.getElementById('text').value='';
+const name=document.getElementById("name").value.trim();
+const text=document.getElementById("text").value.trim();
+
+if(!name || !text) return;
+
+localStorage.setItem("marah_name",name);
+
+const div=document.createElement("div");
+div.className="msg";
+div.textContent=name + ": " + text;
+
+document.getElementById("messages").prepend(div);
+
+document.getElementById("text").value="";
 };
 </script>
+
 </body>
 </html>
