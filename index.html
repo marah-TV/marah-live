@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -8,9 +9,9 @@
 <style>
 body{
 margin:0;
+font-family:Tahoma,sans-serif;
 background:#0f172a;
 color:white;
-font-family:Tahoma,sans-serif;
 }
 
 header{
@@ -18,6 +19,8 @@ background:#1e293b;
 padding:15px;
 display:flex;
 justify-content:space-between;
+align-items:center;
+font-size:20px;
 }
 
 .wrap{
@@ -35,29 +38,36 @@ margin-bottom:15px;
 
 input{
 width:100%;
-padding:10px;
-margin:5px 0;
+padding:12px;
+margin:6px 0;
 border:none;
 border-radius:8px;
+box-sizing:border-box;
 }
 
 button{
-padding:10px 20px;
+padding:12px 20px;
 border:none;
 border-radius:8px;
 cursor:pointer;
+background:#2563eb;
+color:white;
+font-size:16px;
 }
 
 #messages{
-max-height:400px;
+max-height:450px;
 overflow:auto;
+margin-top:10px;
 }
 
 .msg{
-padding:8px;
+padding:10px;
 border-bottom:1px solid #334155;
+word-break:break-word;
 }
 </style>
+
 </head>
 
 <body>
@@ -82,52 +92,50 @@ border-bottom:1px solid #334155;
 
 </div>
 
-<script>
-setInterval(()=>{
-document.getElementById("clock").textContent=
-new Date().toLocaleTimeString("ar");
-},1000);
-
-const saved = localStorage.getItem("marah_name");
-
-if(saved){
-document.getElementById("name").value=saved;
-}
-</script>
-  
 <script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 import {
-  getDatabase,
-  ref,
-  push,
-  onValue
+getDatabase,
+ref,
+push,
+onValue
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD8yIx-iVO4kCC-92lVHAzrVB7ye6ncbes",
-  authDomain: "marah-tv-ed147.firebaseapp.com",
-  databaseURL: "https://marah-tv-ed147-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "marah-tv-ed147",
-  storageBucket: "marah-tv-ed147.firebasestorage.app",
-  messagingSenderId: "868399469455",
-  appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
+apiKey: "AIzaSyD8yIx-iVO4kCC-92lVHAzrVB7ye6ncbes",
+authDomain: "marah-tv-ed147.firebaseapp.com",
+databaseURL: "https://marah-tv-ed147-default-rtdb.europe-west1.firebasedatabase.app",
+projectId: "marah-tv-ed147",
+storageBucket: "marah-tv-ed147.firebasestorage.app",
+messagingSenderId: "868399469455",
+appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+const messagesRef = ref(db,"messages");
+setInterval(()=>{
+document.getElementById("clock").textContent =
+new Date().toLocaleTimeString("ar");
+},1000);
 
-const messagesRef = ref(db, "messages");
+const savedName = localStorage.getItem("marah_name");
 
-document.getElementById("send").onclick = () => {
+if(savedName){
+document.getElementById("name").value = savedName;
+}
+
+document.getElementById("send").addEventListener("click",()=>{
 
 const name = document.getElementById("name").value.trim();
 const text = document.getElementById("text").value.trim();
 
 if(!name || !text) return;
 
-localStorage.setItem("marah_name", name);
+localStorage.setItem("marah_name",name);
 
 push(messagesRef,{
 name:name,
@@ -136,27 +144,32 @@ time:Date.now()
 });
 
 document.getElementById("text").value="";
-};
+
+});
 
 onValue(messagesRef,(snapshot)=>{
 
-const box=document.getElementById("messages");
-box.innerHTML="";
+const box = document.getElementById("messages");
+box.innerHTML = "";
 
-snapshot.forEach((child)=>{
+const data = snapshot.val();
 
-const msg=child.val();
+if(!data) return;
 
-const div=document.createElement("div");
+Object.values(data)
+.sort((a,b)=>b.time-a.time)
+.forEach(msg=>{
+
+const div = document.createElement("div");
 div.className="msg";
-div.textContent=msg.name + ": " + msg.text;
+div.textContent = msg.name + ": " + msg.text;
 
-box.prepend(div);
+box.appendChild(div);
+
+});
 
 });
 
-});
-console.log("Firebase Connected");
 </script>
 
 </body>
