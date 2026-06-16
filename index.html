@@ -96,21 +96,7 @@ document.getElementById("name").value=saved;
 
 
 
-const name=document.getElementById("name").value.trim();
-const text=document.getElementById("text").value.trim();
 
-if(!name || !text) return;
-
-localStorage.setItem("marah_name",name);
-
-const div=document.createElement("div");
-div.className="msg";
-div.textContent=name + ": " + text;
-
-document.getElementById("messages").prepend(div);
-
-document.getElementById("text").value="";
-};
   
 </script>
   
