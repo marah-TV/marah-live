@@ -340,7 +340,19 @@ document.getElementById("targetNumber").textContent =
 }
 
 });
-startGame();
+if(botEnabled){
+setTimeout(startGame, 2000);
+}
+let botEnabled = true;
+
+document.getElementById("toggleBot").addEventListener("click",()=>{
+
+botEnabled = !botEnabled;
+
+document.getElementById("autoStatus").textContent =
+botEnabled ? "🤖 الروبوت: يعمل" : "⛔ الروبوت متوقف";
+
+});
 </script>
 
 </body>
