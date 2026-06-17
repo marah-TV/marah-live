@@ -238,6 +238,26 @@ if(
 text.toLowerCase() !== "me" &&
 text.toLowerCase() !== "leave"
 ){
+
+get(gameRef).then((snapshot)=>{
+
+const game = snapshot.val();
+
+if(
+game &&
+game.targetNumber &&
+text == game.targetNumber &&
+!game.winner
+){
+
+update(gameRef,{
+winner:name
+});
+
+}
+
+});
+
 push(messagesRef,{
 name:name,
 text:text,
