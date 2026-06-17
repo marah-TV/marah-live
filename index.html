@@ -340,6 +340,31 @@ document.getElementById("targetNumber").textContent =
 
 }
 
+if(data.winner){
+
+document.getElementById("gameWinner").textContent =
+"🏆 الفائز: " + data.winner;
+
+}else{
+
+document.getElementById("gameWinner").textContent =
+"🏆 لا يوجد فائز بعد";
+
+}
+
+});
+
+const data = snapshot.val();
+
+if(!data) return;
+
+if(data.targetNumber){
+
+document.getElementById("targetNumber").textContent =
+"🎯 الرقم المطلوب: " + data.targetNumber;
+
+}
+
 });
 
 document.getElementById("toggleBot").addEventListener("click",()=>{
