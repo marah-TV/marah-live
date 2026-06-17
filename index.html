@@ -146,7 +146,7 @@ appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-
+const gameRef = ref(db,"game");
 const messagesRef = ref(db,"messages");
 
 let countdownStarted = false;
@@ -296,6 +296,11 @@ clearInterval(interval);
 
 const targetNumber =
 Math.floor(Math.random()*100)+1;
+
+set(gameRef,{
+targetNumber: targetNumber,
+status: "playing"
+});
 
 numberBox.textContent =
 "🎯 الرقم المطلوب: " + targetNumber;
