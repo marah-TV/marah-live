@@ -232,7 +232,31 @@ box.appendChild(div);
 
 });
 
+onValue(playersRef,(snapshot)=>{
 
+const playersBox = document.getElementById("players");
+
+if(!playersBox) return;
+
+const data = snapshot.val();
+
+playersBox.innerHTML = "";
+
+if(!data){
+playersBox.innerHTML = "لا يوجد مشاركون";
+return;
+}
+
+for(const key in data){
+
+const div = document.createElement("div");
+div.textContent = "⚔️ " + data[key].name;
+
+playersBox.appendChild(div);
+
+}
+
+});
 </script>
 
 </body>
