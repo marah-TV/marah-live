@@ -294,19 +294,8 @@ if(countdown < 0){
 
 clearInterval(interval);
 
-const targetNumber =
-Math.floor(Math.random()*100)+1;
-
-set(gameRef,{
-targetNumber: targetNumber,
-status: "playing"
-});
-
-numberBox.textContent =
-"🎯 الرقم المطلوب: " + targetNumber;
-
 statusBox.textContent =
-"🔥 ابحث عن الرقم وأرسله";
+"🔥 انتظار الرقم من Firebase";
 
 gameRunning = false;
 
