@@ -101,6 +101,9 @@ word-break:break-word;
 بانتظار اللاعبين...
 </div>
 
+<div id="timer">
+⏳ بانتظار لاعبين
+</div> 
 </div>
 
 </div>
@@ -133,6 +136,8 @@ const db = getDatabase(app);
 
 const messagesRef = ref(db,"messages");
 const playersRef = ref(db,"players");
+let countdownStarted = false;
+let countdown = 15;
 setInterval(()=>{
 document.getElementById("clock").textContent =
 new Date().toLocaleTimeString("ar");
@@ -259,7 +264,31 @@ div.textContent = "⚔️ " + data[key].name;
 playersBox.appendChild(div);
 
 }
+const playersCount = Object.keys(data).length;
 
+if(playersCount >= 2 && !countdownStarted){
+
+countdownStarted = true;
+countdown = 15;
+
+const timerBox = document.getElementById("timer");
+
+const interval = setInterval(()=>{
+
+timerBox.textContent = "⏳ " + countdown;
+
+countdown--;
+
+if(countdown < 0){
+clearInterval(interval);
+
+timerBox.textContent = "⏳ انتهت الجولة";
+countdownStarted = false;
+}
+
+},1000);
+
+}
 });
 </script>
 
