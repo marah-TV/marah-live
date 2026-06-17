@@ -352,7 +352,24 @@ document.getElementById("autoStatus").textContent =
 botEnabled ? "🤖 الروبوت: يعمل" : "⛔ الروبوت متوقف";
 
 });
+  
+document.getElementById("adminBtn").addEventListener("click",()=>{
 
+const panel =
+document.getElementById("adminPanel");
+
+if(panel.style.display === "none"){
+
+panel.style.display = "block";
+
+}else{
+
+panel.style.display = "none";
+
+}
+
+});
+  
 startGame();
 </script>
 
