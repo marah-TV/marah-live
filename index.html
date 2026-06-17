@@ -200,11 +200,16 @@ return;
 
 localStorage.setItem("marah_name",name);
 
+if(
+text.toLowerCase() !== "me" &&
+text.toLowerCase() !== "leave"
+){
 push(messagesRef,{
 name:name,
 text:text,
 time:Date.now()
 });
+}
 
 if(text.toLowerCase() === "me"){
 set(ref(db,"players/" + name),{
