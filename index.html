@@ -369,6 +369,19 @@ panel.style.display = "none";
 }
 
 });
+
+document.getElementById("startRound").addEventListener("click",()=>{
+
+const targetNumber =
+Math.floor(Math.random() * 100) + 1;
+
+set(gameRef,{
+targetNumber: targetNumber,
+status: "playing",
+winner: ""
+});
+
+});
   
 startGame();
 </script>
