@@ -135,6 +135,34 @@ const text = document.getElementById("text").value.trim();
 
 if(!name || !text) return;
 
+const bannedWords = [
+"كس",
+"كسا",
+"كسك",
+"اير",
+"ايري",
+"يلعن",
+"قحبة",
+"كلمة2",
+"قحب",
+"كلب",
+"حيوان",
+"خرا",
+"حمار",
+"منيك",
+"انيك",
+"جحش",
+"زب",
+"1234567890"
+];
+
+const lowerText = text.toLowerCase();
+
+if(bannedWords.some(word => lowerText.includes(word.toLowerCase()))){
+alert("هذه الرسالة تحتوي على كلمات غير مسموح بها");
+return;
+}
+
 localStorage.setItem("marah_name",name);
 
 push(messagesRef,{
