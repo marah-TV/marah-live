@@ -286,12 +286,33 @@ clearInterval(interval);
 timerBox.textContent = "⏳ انتهت الجولة";
 
 const players = Object.values(data);
-
 const randomPlayer =
 players[Math.floor(Math.random() * players.length)];
 
 document.getElementById("winner").textContent =
-"🏆 الفائز: " + randomPlayer.name;
+"🏆 بطل الساحة: " + randomPlayer.name;
+
+setTimeout(async ()=>{
+
+const snapshot = await get(playersRef);
+const currentPlayers = snapshot.val();
+
+if(currentPlayers){
+
+for(const key in currentPlayers){
+
+if(currentPlayers[key].name !== randomPlayer.name){
+remove(ref(db,"players/" + key));
+}
+
+}
+
+}
+
+document.getElementById("timer").textContent =
+"⏳ بانتظار لاعبين";
+
+},3000);
 
 countdownStarted = false;
 }
