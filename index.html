@@ -150,8 +150,6 @@ const text = document.getElementById("text").value.trim();
 
 if(!name || !text) return;
   
-alert("تم فحص الرسالة");
-  
 const bannedWords = [
 "كس",
 "كسا",
@@ -233,29 +231,7 @@ box.appendChild(div);
 });
 
 });
-onValue(playersRef,(snapshot)=>{
 
-const playersBox = document.getElementById("players");
-
-const data = snapshot.val();
-
-if(!data){
-playersBox.innerHTML = "لا يوجد مشاركون";
-return;
-}
-
-playersBox.innerHTML = "";
-
-Object.values(data).forEach(player=>{
-
-const div = document.createElement("div");
-div.textContent = "⚔️ " + player.name;
-
-playersBox.appendChild(div);
-
-});
-
-});
 
 </script>
 
