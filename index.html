@@ -315,7 +315,20 @@ gameRunning = false;
 },1000);
 
 }
+onValue(gameRef,(snapshot)=>{
 
+const data = snapshot.val();
+
+if(!data) return;
+
+if(data.targetNumber){
+
+document.getElementById("targetNumber").textContent =
+"🎯 الرقم المطلوب: " + data.targetNumber;
+
+}
+
+});
 startGame();
 </script>
 
