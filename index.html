@@ -148,7 +148,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const messagesRef = ref(db,"messages");
-const playersRef = ref(db,"players");
+
 let countdownStarted = false;
 let countdown = 15;
 setInterval(()=>{
@@ -259,85 +259,6 @@ box.appendChild(div);
 
 });
 
-onValue(playersRef,(snapshot)=>{
-
-const playersBox = document.getElementById("players");
-
-if(!playersBox) return;
-
-const data = snapshot.val();
-
-playersBox.innerHTML = "";
-
-if(!data){
-playersBox.innerHTML = "لا يوجد مشاركون";
-return;
-}
-
-for(const key in data){
-
-const div = document.createElement("div");
-div.textContent = "⚔️ " + data[key].name;
-
-playersBox.appendChild(div);
-
-}
-const playersCount = Object.keys(data).length;
-
-if(playersCount >= 2 && !countdownStarted){
-
-countdownStarted = true;
-countdown = 15;
-
-const timerBox = document.getElementById("timer");
-
-const interval = setInterval(()=>{
-
-timerBox.textContent = "⏳ " + countdown;
-
-countdown--;
-
-if(countdown < 0){
-clearInterval(interval);
-
-timerBox.textContent = "⏳ انتهت الجولة";
-
-const players = Object.values(data);
-const randomPlayer =
-players[Math.floor(Math.random() * players.length)];
-
-document.getElementById("winner").textContent =
-"🏆 بطل الساحة: " + randomPlayer.name;
-
-setTimeout(async ()=>{
-
-const snapshot = await get(playersRef);
-const currentPlayers = snapshot.val();
-
-if(currentPlayers){
-
-for(const key in currentPlayers){
-
-if(currentPlayers[key].name !== randomPlayer.name){
-remove(ref(db,"players/" + key));
-}
-
-}
-
-}
-
-document.getElementById("timer").textContent =
-"⏳ بانتظار لاعبين";
-
-},3000);
-
-countdownStarted = false;
-}
-
-},1000);
-
-}
-});
 </script>
 
 </body>
