@@ -114,7 +114,8 @@ getDatabase,
 ref,
 push,
 onValue,
-set
+set,
+remove
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -204,7 +205,10 @@ set(ref(db,"players/" + name),{
 name:name
 });
 }
-
+  
+if(text.toLowerCase() === "leave"){
+remove(ref(db,"players/" + name));
+}
 document.getElementById("text").value="";
 
 });
