@@ -283,6 +283,15 @@ if(countdown < 0){
 clearInterval(interval);
 
 timerBox.textContent = "⏳ انتهت الجولة";
+
+const players = Object.values(data);
+
+const randomPlayer =
+players[Math.floor(Math.random() * players.length)];
+
+document.getElementById("winner").textContent =
+"🏆 الفائز: " + randomPlayer.name;
+
 countdownStarted = false;
 }
 
