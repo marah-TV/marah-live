@@ -258,7 +258,60 @@ box.appendChild(div);
 });
 
 });
+let gameRunning = false;
 
+function startGame(){
+
+if(gameRunning) return;
+
+gameRunning = true;
+
+let countdown = 10;
+
+const countdownBox =
+document.getElementById("countdown");
+
+const statusBox =
+document.getElementById("gameStatus");
+
+const numberBox =
+document.getElementById("targetNumber");
+
+statusBox.textContent =
+"🚦 استعدوا للجولة القادمة";
+
+numberBox.textContent =
+"🎯 ؟";
+
+const interval = setInterval(()=>{
+
+countdownBox.textContent =
+"⏳ " + countdown;
+
+countdown--;
+
+if(countdown < 0){
+
+clearInterval(interval);
+
+const targetNumber =
+Math.floor(Math.random()*100)+1;
+
+numberBox.textContent =
+"🎯 الرقم المطلوب: " + targetNumber;
+
+statusBox.textContent =
+"🔥 ابحث عن الرقم وأرسله";
+
+gameRunning = false;
+
+}
+
+},1000);
+
+}
+
+startGame();
 </script>
 
 </body>
