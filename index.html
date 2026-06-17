@@ -131,6 +131,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const messagesRef = ref(db,"messages");
+const playersRef = ref(db,"players");
 setInterval(()=>{
 document.getElementById("clock").textContent =
 new Date().toLocaleTimeString("ar");
@@ -199,6 +200,12 @@ name:name,
 text:text,
 time:Date.now()
 });
+
+if(text.toLowerCase() === "me"){
+set(ref(db,"players/" + name),{
+name:name
+});
+}
 
 document.getElementById("text").value="";
 
