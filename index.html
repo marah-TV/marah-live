@@ -338,12 +338,8 @@ if(data.targetNumber){
 document.getElementById("targetNumber").textContent =
 "🎯 الرقم المطلوب: " + data.targetNumber;
 
-}
 
 });
-
-}
-let botEnabled = true;
 
 document.getElementById("toggleBot").addEventListener("click",()=>{
 
@@ -353,6 +349,8 @@ document.getElementById("autoStatus").textContent =
 botEnabled ? "🤖 الروبوت: يعمل" : "⛔ الروبوت متوقف";
 
 });
+
+startGame();
 </script>
 
 </body>
