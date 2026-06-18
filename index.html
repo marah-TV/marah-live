@@ -434,9 +434,18 @@ document.getElementById("gameWinner").textContent =
 
 document.getElementById("toggleBot").addEventListener("click",()=>{
 
-alert("تم الضغط على الزر");
+update(gameRef,{
+botEnabled: !botEnabled
+});
 
-botEnabled = !botEnabled;
+});
+onValue(gameRef,(snapshot)=>{
+
+const data = snapshot.val();
+
+if(!data) return;
+
+botEnabled = data.botEnabled;
 
 document.getElementById("autoStatus").textContent =
 botEnabled ? "🤖 الروبوت: يعمل" : "⛔ الروبوت متوقف";
