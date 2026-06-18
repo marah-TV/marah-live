@@ -171,6 +171,11 @@ const db = getDatabase(app);
 const gameRef = ref(db,"game");
 const messagesRef = ref(db,"messages");
 const winsRef = ref(db,"wins");
+
+set(ref(db,"wins/test"),{
+wins: 1
+});
+  
 let countdownStarted = false;
 let countdown = 15;
 setInterval(()=>{
