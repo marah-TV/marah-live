@@ -417,7 +417,11 @@ if(botEnabled){
 
 setTimeout(()=>{
 
-startNewRound();
+update(gameRef,{
+countdown: 10,
+status: "countdown",
+winner: ""
+});
 
 },5000);
 
