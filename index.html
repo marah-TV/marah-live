@@ -452,35 +452,6 @@ status: "playing",
 winner: ""
 });
 
-onValue(winsRef,(snapshot)=>{
-
-const board =
-document.getElementById("winsBoard");
-
-const data = snapshot.val();
-
-if(!data){
-board.innerHTML = "🏆 ترتيب اللاعبين";
-return;
-}
-
-let html = "🏆 ترتيب اللاعبين<br><br>";
-
-const players =
-Object.entries(data)
-.sort((a,b)=>b[1].wins - a[1].wins);
-
-players.forEach(([name,info])=>{
-
-html += name + " : " + info.wins + "<br>";
-
-});
-
-board.innerHTML = html;
-
-});
-
-startGame();
 </script>
 
 }
