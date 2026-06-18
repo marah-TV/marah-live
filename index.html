@@ -255,6 +255,10 @@ update(gameRef,{
 winner:name
 });
 
+set(ref(db,"wins/" + name),{
+wins: 1
+});
+
 }
 
 });
