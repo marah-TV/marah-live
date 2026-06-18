@@ -256,8 +256,18 @@ update(gameRef,{
 winner:name
 });
 
+get(ref(db,"wins/" + name)).then((winSnap)=>{
+
+let currentWins = 0;
+
+if(winSnap.exists()){
+currentWins = winSnap.val().wins || 0;
+}
+
 set(ref(db,"wins/" + name),{
-wins: 1
+wins: currentWins + 1
+});
+
 });
 
 }
