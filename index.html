@@ -480,7 +480,7 @@ document.getElementById("startRound").addEventListener("click",()=>{
 const targetNumber =
 Math.floor(Math.random() * 100) + 1;
 
-set(gameRef,{
+update(gameRef,{
 targetNumber: targetNumber,
 status: "playing",
 winner: ""
@@ -493,7 +493,7 @@ function startNewRound(){
 const targetNumber =
 Math.floor(Math.random() * 100) + 1;
 
-set(gameRef,{
+update(gameRef,{
 targetNumber: targetNumber,
 status: "playing",
 winner: ""
