@@ -264,8 +264,6 @@ if(winSnap.exists()){
 currentWins = winSnap.val().wins || 0;
 }
 
-alert(name + " : " + (currentWins + 1));
-
 set(ref(db,"wins/" + name),{
 wins: currentWins + 1
 });
