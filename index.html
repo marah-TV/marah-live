@@ -456,6 +456,40 @@ startGame();
 
 }
 
+onValue(winsRef,(snapshot)=>{
+
+const board =
+document.getElementById("winsBoard");
+
+const data = snapshot.val();
+
+if(!data){
+board.innerHTML = "🏆 ترتيب اللاعبين";
+return;
+}
+
+const players =
+Object.entries(data)
+.sort((a,b)=>b[1].wins - a[1].wins);
+
+let html = "🏆 ترتيب اللاعبين<br><br>";
+
+players.forEach(([name,info],index)=>{
+
+let medal = "🏅";
+
+if(index === 0) medal = "🥇";
+if(index === 1) medal = "🥈";
+if(index === 2) medal = "🥉";
+
+html += medal + " " + name + " : " + info.wins + "<br>";
+
+});
+
+board.innerHTML = html;
+
+});
+  
 startGame();  
 </script>
 
