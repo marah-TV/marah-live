@@ -531,6 +531,26 @@ winner: ""
 
 function startNewRound(){
 
+update(gameRef,{
+countdown: 10,
+status: "countdown",
+winner: ""
+});
+
+let count = 10;
+
+const timer = setInterval(()=>{
+
+count--;
+
+update(gameRef,{
+countdown: count
+});
+
+if(count <= 0){
+
+clearInterval(timer);
+
 const targetNumber =
 Math.floor(Math.random() * 100) + 1;
 
@@ -540,7 +560,9 @@ status: "playing",
 winner: ""
 });
 
-startGame();
+}
+
+},1000);
 
 }
 
