@@ -365,6 +365,18 @@ if(data.winner){
 document.getElementById("gameWinner").textContent =
 "🏆 الفائز: " + data.winner;
 
+if(botEnabled){
+
+setTimeout(()=>{
+
+startNewRound();
+
+},5000);
+
+}
+
+}
+
 }else{
 
 document.getElementById("gameWinner").textContent =
@@ -404,6 +416,8 @@ panel.style.display = "none";
 
 document.getElementById("startRound").addEventListener("click",()=>{
 
+function startNewRound(){
+
 const targetNumber =
 Math.floor(Math.random() * 100) + 1;
 
@@ -413,9 +427,9 @@ status: "playing",
 winner: ""
 });
 
-});
-  
 startGame();
+
+}
 </script>
 
 </body>
