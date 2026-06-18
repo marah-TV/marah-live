@@ -445,6 +445,19 @@ const data = snapshot.val();
 
 if(!data) return;
 
+if(data.status === "countdown"){
+
+document.getElementById("gameStatus").textContent =
+"🚦 استعدوا للجولة القادمة";
+
+document.getElementById("countdown").textContent =
+"⏳ " + data.countdown;
+
+document.getElementById("targetNumber").textContent =
+"🎯 ؟";
+
+}
+
 botEnabled = data.botEnabled;
 
 document.getElementById("autoStatus").textContent =
@@ -477,6 +490,26 @@ panel.style.display = "none";
 });
 document.getElementById("startRound").addEventListener("click",()=>{
 
+update(gameRef,{
+countdown: 10,
+status: "countdown",
+winner: ""
+});
+
+let count = 10;
+
+const timer = setInterval(()=>{
+
+count--;
+
+update(gameRef,{
+countdown: count
+});
+
+if(count <= 0){
+
+clearInterval(timer);
+
 const targetNumber =
 Math.floor(Math.random() * 100) + 1;
 
@@ -485,6 +518,10 @@ targetNumber: targetNumber,
 status: "playing",
 winner: ""
 });
+
+}
+
+},1000);
 
 });
 
