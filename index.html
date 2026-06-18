@@ -365,19 +365,7 @@ if(data.winner){
 document.getElementById("gameWinner").textContent =
 "🏆 الفائز: " + data.winner;
 
-if(botEnabled){
-
-setTimeout(()=>{
-
-startNewRound();
-
-},5000);
-
-}
-
 }else{
-
-}
 
 document.getElementById("gameWinner").textContent =
 "🏆 لا يوجد فائز بعد";
