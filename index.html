@@ -476,10 +476,10 @@ return;
 const players =
 Object.entries(data)
 .sort((a,b)=>b[1].wins - a[1].wins);
-
+const topPlayers = players.slice(0,3);
 let html = "🏆 ترتيب اللاعبين<br><br>";
 
-players.forEach(([name,info],index)=>{
+topPlayers.forEach(([name,info],index)=>{
 
 let medal = "🏅";
 
