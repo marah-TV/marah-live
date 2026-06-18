@@ -387,6 +387,13 @@ botEnabled ? "🤖 الروبوت: يعمل" : "⛔ الروبوت متوقف";
   
 document.getElementById("adminBtn").addEventListener("click",()=>{
 
+const pass = prompt("أدخل كلمة المرور");
+
+if(pass !== "talya1122334455"){
+alert("كلمة المرور غير صحيحة");
+return;
+}
+
 const panel =
 document.getElementById("adminPanel");
 
@@ -401,7 +408,6 @@ panel.style.display = "none";
 }
 
 });
-
 document.getElementById("startRound").addEventListener("click",()=>{
 
 const targetNumber =
