@@ -10,43 +10,10 @@
 body{
 margin:0;
 font-family:Tahoma,sans-serif;
+background:#0f172a;
 color:white;
-background:url("munirmunir.jpg");
-background-size:100% 100%;
-background-repeat:no-repeat;
-background-attachment:fixed;
-overflow:hidden;
 }
-h3{
-position:absolute;
-top:95px;
-left:330px;
-width:320px;
-font-size:22px;
-text-align:center;
-}
-#gameStatus{
-position:absolute;
-top:170px;
-left:320px;
-width:330px;
-font-size:18px;
-text-align:center;
-}
-#player1Image{
-position:absolute;
-top:115px;
-left:575px;
-width:110px;
-height:110px;
-}
-#player2Image{
-position:absolute;
-top:350px;
-left:575px;
-width:110px;
-height:110px;
-}
+
 header{
 background:#1e293b;
 padding:15px;
@@ -57,20 +24,16 @@ font-size:20px;
 }
 
 .wrap{
-position:relative;
-width:100%;
-max-width:720px;
-height:100vh;
+max-width:900px;
 margin:auto;
-overflow:hidden;
+padding:15px;
 }
+
 .card{
-background:transparent;
+background:#1e293b;
 padding:15px;
 border-radius:12px;
 margin-bottom:15px;
-box-shadow:none;
-border:none;
 }
 
 input{
@@ -103,26 +66,17 @@ padding:10px;
 border-bottom:1px solid #334155;
 word-break:break-word;
 }
-#targetNumber{
-font-size:28px;
-font-weight:bold;
-text-align:center;
-padding:8px;
-background:#0f172a;
-border-radius:12px;
-border:2px solid #2563eb;
-margin:8px 0;
-}
 #winsBoard{
-position:absolute;
-top:610px;
-left:35px;
-width:145px;
-height:180px;
+background:#0f172a;
+border:2px solid gold;
+border-radius:12px;
+padding:12px;
+margin-top:10px;
 font-size:18px;
-line-height:1.6;
-background:rgba(0,0,0,0.08);
+line-height:1.8;
+text-align:center;
 }
+
 #playersCount{
 background:#0f172a;
 border-radius:12px;
@@ -130,91 +84,6 @@ padding:10px;
 margin-top:10px;
 text-align:center;
 font-size:17px;
-}
-#winsBoard{
-background:#0f172a;
-border:2px solid gold;
-border-radius:12px;
-padding:8px;
-margin-top:8px;
-font-size:16px;
-text-align:center;
-}
-#countdown{
-font-size:40px;
-font-weight:bold;
-text-align:center;
-color:#facc15;
-}
-.card{
-background:transparent;
-box-shadow:none;
-border:none;
-}
-#targetNumber{
-position:absolute;
-top:1020px;
-left:120px;
-width:520px;
-font-size:48px;
-text-align:center;
-background:transparent;
-}
-
-
-#countdown{
-position:absolute;
-top:1125px;
-left:70px;
-font-size:60px;
-}
-
-#gameWinner{
-position:absolute;
-top:1320px;
-left:250px;
-width:250px;
-font-size:24px;
-text-align:center;
-}
-
-#winsBoard{
-position:absolute;
-top:690px;
-left:32px;
-width:145px;
-height:185px;
-font-size:18px;
-line-height:1.7;
-text-align:center;
-background:rgba(0,0,0,0.10);
-border-radius:12px;
-border:2px solid cyan;
-}
-
-#playersCount{
-position:absolute;
-top:1450px;
-left:120px;
-font-size:24px;
-font-weight:bold;
-}
-
-#autoStatus{
-position:absolute;
-top:1550px;
-left:120px;
-font-size:24px;
-font-weight:bold;
-}
-
-#adminBtn{
-position:absolute;
-top:1660px;
-left:250px;
-width:200px;
-height:70px;
-font-size:28px;
 }
 </style>
 
@@ -229,7 +98,7 @@ font-size:28px;
 
 <div class="wrap">
 
-<div class="card" style="display:none;">
+<div class="card">
 <h3>الرسائل المباشرة</h3>
 
 <div id="messages"></div>
@@ -468,8 +337,7 @@ const data = snapshot.val();
 if(!data) return;
 
 Object.values(data)
-.sort((a,b)=>a.time-b.time)
-.slice(-5)
+.sort((a,b)=>b.time-a.time)
 .forEach(msg=>{
 
 const div = document.createElement("div");
@@ -710,7 +578,7 @@ const players =
 Object.entries(data)
 .sort((a,b)=>b[1].wins - a[1].wins);
 const topPlayers = players.slice(0,3);
-let html = "";
+let html = "🏆 ترتيب اللاعبين<br><br>";
 
 topPlayers.forEach(([name,info],index)=>{
 
@@ -720,7 +588,7 @@ if(index === 0) medal = "🥇";
 if(index === 1) medal = "🥈";
 if(index === 2) medal = "🥉";
 
-html += medal + " " + name + " " + info.wins + " | ";
+html += medal + " " + name + " : " + info.wins + "<br>";
 
 });
 
