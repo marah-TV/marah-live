@@ -145,17 +145,41 @@ border:none;
 cursor:pointer;
 color:white;
 }
+#topBar{
+position:absolute;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:999;
+}
 
+#logo{
+font-size:24px;
+font-weight:bold;
+color:white;
+text-shadow:2px 2px 5px black;
+}
+
+#clock{
+font-size:22px;
+font-weight:bold;
+color:white;
+text-shadow:2px 2px 5px black;
+}
 </style>
 
 </head>
 
 <body>
 
-<header>
-<div>🔴 Marah TV</div>
+<div id="topBar">
+<div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
-</header>
+</div>
 
 <div class="wrap">
 
