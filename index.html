@@ -644,11 +644,11 @@ let html = "🏆 ترتيب اللاعبين<br><br>";
 
 topPlayers.forEach(([name,info],index)=>{
 
-let medal = "🏅    ";
+let medal = "🏅";
 
-if(index === 0) medal = "🥇    ";
-if(index === 1) medal = "🥈    ";
-if(index === 2) medal = "🥉    ";
+if(index === 0) medal = "🥇";
+if(index === 1) medal = "🥈";
+if(index === 2) medal = "🥉";
 
 html += medal + " " + name + " : " + info.wins + "<br>";
 
