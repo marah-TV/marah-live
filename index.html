@@ -17,13 +17,13 @@ body {
   font-family: Tahoma, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: center; 
   height: 100vh;
-  overflow: hidden; /* يمنع ظهور أشرطة التمرير نهائياً */
+  overflow: hidden;
   padding: 0;
 }
 
-/* حاوية اللعبة الثابتة والمضمونة لجميع المتصفحات */
+/* حاوية اللعبة الثابتة والنسبية بالكامل */
 .game-container {
   position: relative;
   width: 100vw;
@@ -35,10 +35,11 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  margin-top: 0;
+  /* الميزة السحرية: تجعل الخطوط بداخل الحاوية تقاس بناءً على عرض الحاوية نفسها */
+  container-type: inline-size;
 }
 
-/* شاشات الكمبيوتر: نضمن عدم وجود تمرير عبر إجبار الطول ألا يتعدى الشاشة الظاهرة */
+/* شاشات الكمبيوتر: نضمن عدم وجود تمرير وملاءمة الشاشة عمودياً */
 @media (min-height: 740px) and (min-width: 420px) {
   .game-container {
     height: 740px;
@@ -52,24 +53,22 @@ body {
   }
 }
 
-/* مواضع العناصر الدقيقة بالنسبة المئوية % */
+/* ضبط الخطوط لتقرأ من حجم الحاوية (cqw) بدلاً من الشاشة (vw) لمنع تحركها وتداخلها */
 #logo {
   position: absolute;
   top: 1.35%;
   left: 52.38%;
-  font-size: 3.1vw;
+  font-size: 3.1cqw;
   font-weight: bold;
 }
-@media (min-width: 420px) { #logo { font-size: 13px; } }
 
 #clock {
   position: absolute;
   top: 6.08%;
   left: 57.14%;
-  font-size: 3.1vw;
+  font-size: 3.1cqw;
   font-weight: bold;
 }
-@media (min-width: 420px) { #clock { font-size: 13px; } }
 
 #nameBox1 {
   position: absolute;
@@ -79,6 +78,10 @@ body {
   height: 4.73%;
   text-align: center;
   font-weight: bold;
+  font-size: 3.5cqw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #msgBox1 {
@@ -88,11 +91,13 @@ body {
   width: 52.38%;
   height: 8.11%;
   text-align: center;
-  font-size: min(3.5vw, 14px);
-  /* أسطر الحماية المضافة */
+  font-size: 3.5cqw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 #nameBox2 {
@@ -103,6 +108,10 @@ body {
   height: 4.73%;
   text-align: center;
   font-weight: bold;
+  font-size: 3.5cqw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #msgBox2 {
@@ -112,8 +121,10 @@ body {
   width: 52.38%;
   height: 8.11%;
   text-align: center;
-  font-size: min(3.5vw, 14px);
-  /* أسطر الحماية المضافة */
+  font-size: 3.5cqw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -124,10 +135,9 @@ body {
   top: 33.1%;
   left: 1.19%;
   width: 33%;
-  font-size: 3.3vw;
+  font-size: 3.3cqw;
   line-height: 1.4;
 }
-@media (min-width: 420px) { #winsBoard { font-size: 14px; } }
 
 #gameStatus {
   position: absolute;
@@ -135,25 +145,22 @@ body {
   left: 23.8%;
   width: 52.38%;
   text-align: center;
-  font-size: 3.5vw;
+  font-size: 3.5cqw;
 }
-@media (min-width: 420px) { #gameStatus { font-size: 15px; } }
 
 #countdown {
   position: absolute;
   top: 58.78%;
   left: 8.33%;
-  font-size: 3.5vw;
+  font-size: 3.5cqw;
 }
-@media (min-width: 420px) { #countdown { font-size: 15px; } }
 
 #targetNumber {
   position: absolute;
   top: 58.78%;
   left: 69.04%;
-  font-size: 3.5vw;
+  font-size: 3.5cqw;
 }
-@media (min-width: 420px) { #targetNumber { font-size: 15px; } }
 
 #gameWinner {
   position: absolute;
@@ -161,18 +168,16 @@ body {
   left: 32.14%;
   width: 35.71%;
   text-align: center;
-  font-size: 3.3vw;
+  font-size: 3.3cqw;
 }
-@media (min-width: 420px) { #gameWinner { font-size: 14px; } }
 
 #playersCount {
   position: absolute;
   top: 67.56%;
   left: 3.57%;
   color: white;
-  font-size: 3.3vw;
+  font-size: 3.3cqw;
 }
-@media (min-width: 420px) { #playersCount { font-size: 14px; } }
 
 #adminBtn {
   position: absolute;
@@ -182,20 +187,18 @@ body {
   height: 5.4%;
   background: transparent;
   color: white;
-  font-size: 3.8vw;
+  font-size: 3.8cqw;
   border: none;
   cursor: pointer;
   text-align: center;
 }
-@media (min-width: 420px) { #adminBtn { font-size: 16px; } }
 
 #autoStatus {
   position: absolute;
   top: 79.45%;
   left: 0.23%;
-  font-size: 3.1vw;
+  font-size: 3.1cqw;
 }
-@media (min-width: 420px) { #autoStatus { font-size: 13px; } }
 
 #adminPanel {
   position: absolute;
@@ -212,9 +215,8 @@ body {
   width: 100%;
   margin: 2% 0;
   padding: 3%;
-  font-size: 3.5vw;
+  font-size: 3.5cqw;
 }
-@media (min-width: 420px) { #adminPanel button { font-size: 14px; } }
 </style>
 
 </head>
@@ -226,7 +228,6 @@ body {
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
 
-<!-- إطارات الرسائل والأسماء -->
 <div id="nameBox1"></div>
 <div id="msgBox1"></div>
 <div id="nameBox2"></div>
@@ -241,7 +242,7 @@ body {
 </div>
 
 <div id="targetNumber">
-🎯 ؟
+🎯 ？
 </div>
 
 <div id="gameWinner">
@@ -431,7 +432,7 @@ document.getElementById("countdown").textContent =
 "⏳ " + data.countdown;
 
 document.getElementById("targetNumber").textContent =
-"🎯 ؟";
+"🎯 ？";
 
 }
 
