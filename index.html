@@ -35,7 +35,6 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  /* الميزة السحرية: تجعل الخطوط بداخل الحاوية تقاس بناءً على عرض الحاوية نفسها */
   container-type: inline-size;
 }
 
@@ -53,12 +52,12 @@ body {
   }
 }
 
-/* ضبط الخطوط لتقرأ من حجم الحاوية (cqw) بدلاً من الشاشة (vw) لمنع تحركها وتداخلها */
+/* ضبط الخطوط لتقرأ من حجم الحاوية (cqw) بدلاً من الشاشة */
 #logo {
   position: absolute;
   top: 1.35%;
   left: 52.38%;
-  font-size: 3.1cqw;
+  font-size: 3.1 cqw;
   font-weight: bold;
 }
 
@@ -66,7 +65,7 @@ body {
   position: absolute;
   top: 6.08%;
   left: 57.14%;
-  font-size: 3.1cqw;
+  font-size: 3.1 cqw;
   font-weight: bold;
 }
 
@@ -78,7 +77,7 @@ body {
   height: 4.73%;
   text-align: center;
   font-weight: bold;
-  font-size: 3.5cqw;
+  font-size: 3.5 cqw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,7 +90,7 @@ body {
   width: 52.38%;
   height: 8.11%;
   text-align: center;
-  font-size: 3.5cqw;
+  font-size: 3.5 cqw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,7 +107,7 @@ body {
   height: 4.73%;
   text-align: center;
   font-weight: bold;
-  font-size: 3.5cqw;
+  font-size: 3.5 cqw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +120,7 @@ body {
   width: 52.38%;
   height: 8.11%;
   text-align: center;
-  font-size: 3.5cqw;
+  font-size: 3.5 cqw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -135,7 +134,7 @@ body {
   top: 33.1%;
   left: 1.19%;
   width: 33%;
-  font-size: 3.3cqw;
+  font-size: 3.3 cqw;
   line-height: 1.4;
 }
 
@@ -145,21 +144,21 @@ body {
   left: 23.8%;
   width: 52.38%;
   text-align: center;
-  font-size: 3.5cqw;
+  font-size: 3.5 cqw;
 }
 
 #countdown {
   position: absolute;
   top: 58.78%;
   left: 8.33%;
-  font-size: 3.5cqw;
+  font-size: 3.5 cqw;
 }
 
 #targetNumber {
   position: absolute;
   top: 58.78%;
   left: 69.04%;
-  font-size: 3.5cqw;
+  font-size: 3.5 cqw;
 }
 
 #gameWinner {
@@ -168,7 +167,7 @@ body {
   left: 32.14%;
   width: 35.71%;
   text-align: center;
-  font-size: 3.3cqw;
+  font-size: 3.3 cqw;
 }
 
 #playersCount {
@@ -176,7 +175,7 @@ body {
   top: 67.56%;
   left: 3.57%;
   color: white;
-  font-size: 3.3cqw;
+  font-size: 3.3 cqw;
 }
 
 #adminBtn {
@@ -187,7 +186,7 @@ body {
   height: 5.4%;
   background: transparent;
   color: white;
-  font-size: 3.8cqw;
+  font-size: 3.8 cqw;
   border: none;
   cursor: pointer;
   text-align: center;
@@ -197,7 +196,7 @@ body {
   position: absolute;
   top: 79.45%;
   left: 0.23%;
-  font-size: 3.1cqw;
+  font-size: 3.1 cqw;
 }
 
 #adminPanel {
@@ -215,7 +214,7 @@ body {
   width: 100%;
   margin: 2% 0;
   padding: 3%;
-  font-size: 3.5cqw;
+  font-size: 3.5 cqw;
 }
 </style>
 
@@ -317,13 +316,22 @@ if(!data) return;
 
 const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
 
+// فلتر تنظيف تلقائي لمنع الكلمات العشوائية الطويلة جداً من تخريب التصميم
+const cleanText = (txt) => {
+  if (!txt) return "";
+  if (txt.length > 25 || txt.includes("نينيتيم") || txt.includes("بزينين")) {
+    return "...";
+  }
+  return txt;
+};
+
 if(sorted[0]) {
   if(document.getElementById("nameBox1")) document.getElementById("nameBox1").textContent = sorted[0].name;
-  if(document.getElementById("msgBox1")) document.getElementById("msgBox1").textContent = sorted[0].text;
+  if(document.getElementById("msgBox1")) document.getElementById("msgBox1").textContent = cleanText(sorted[0].text);
 }
 if(sorted[1]) {
   if(document.getElementById("nameBox2")) document.getElementById("nameBox2").textContent = sorted[1].name;
-  if(document.getElementById("msgBox2")) document.getElementById("msgBox2").textContent = sorted[1].text;
+  if(document.getElementById("msgBox2")) document.getElementById("msgBox2").textContent = cleanText(sorted[1].text);
 }
 
 });
@@ -432,7 +440,7 @@ document.getElementById("countdown").textContent =
 "⏳ " + data.countdown;
 
 document.getElementById("targetNumber").textContent =
-"🎯 ？";
+"🎯 ؟";
 
 }
 
