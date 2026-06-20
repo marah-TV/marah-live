@@ -7,150 +7,202 @@
 <title>Marah TV</title>
 
 <style>
-body{
-    margin:0;
-    padding:0;
-    overflow-x:hidden;
-    background:#000;
-}
-header{
-height:60px;
-background:#5b3a1f;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 15px;
-font-size:22px;
-font-weight:bold;
-}
+body {
+  margin: 0;
+  height: 100vh;
+width: 100vw;
+overflow: hidden;
+  background: url("munirmunir.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
 
-.wrap{
-    position:relative;
-
-    width:100vw;
-    height:100vh;
-
-    background:url("munirmunir.jpg") no-repeat center center;
-
-    background-size:100% 100%;
+  font-family:
+    Tahoma,
+    "Segoe UI Emoji",
+    "Noto Color Emoji",
+    sans-serif;
 }
 
-.card{
-background:none;
-border:none;
-padding:0;
-margin:0;
+#winsBoard {
+  position: absolute;
+  top: 340px;
+  left: 19px;
+  padding: 10px;
 }
 
-/* اخفاء الدردشة مؤقتاً */
-#messages,
-#chatBar{
-display:none;
+#countdown {
+  position: absolute;
+  top: 505px;
+  left: 35px;
+  padding: 3px;
+background:transparent;
 }
 
-/* لوحة الترتيب */
-#winsBoard{
-position:absolute;
-top:130px;
-left:10px;
-width:170px;
-height:220px;
-background:rgba(255,215,0,.25);
-border:3px solid gold;
-border-radius:15px;
-padding:10px;
-font-size:18px;
-line-height:1.8;
-text-align:center;
+#targetNumber {
+  position: absolute;
+  top: 505px;
+  left: 290px;
+  padding: 3px;
+  background:transparent;
 }
 
-/* لوحة اللعبة */
-#gameStatus{
-position:absolute;
-top:150px;
-left:50%;
-transform:translateX(-50%);
+#gameWinner {
+  position: absolute;
+  top: 515px;
+  left: 170px;
+  padding: 10px;
+  background:transparent;
 }
 
-#countdown{
-position:absolute;
-top:505px;
-left:299%;
-transform:translateX(-50%);
+#autoStatus {
+  position: absolute;
+  top: 588px;
+  left: 1px;
+ background: transparent;
+  
+  padding: 3px;
+}
+#gameStatus {
+  position: absolute;
+  top: 485px;
+  left: 100px;
+  background: transparent;
+  
+  padding: 1px;
+}
+#adminBtn {
+  position: absolute;
+  top: 620px;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+  background: transparent;
+  
+  color: white;
+  font-size: 20px;
+}
+#nameBox1 {
+  position: absolute;
+  top: 75px;
+  left: 140px;
+  
+  width: 140px;
+  height: 35px;
+  
+  text-align: center;
+  line-height: 35px;
 }
 
-#targetNumber{
-position:absolute;
-top:300px;
-left:50%;
-transform:translateX(-50%);
+#msgBox1 {
+  position: absolute;
+  top: 115px;
+  left: 60px;
+  
+  width: 220px;
+  height: 60px;
+  
+  text-align: center;
 }
 
-#gameWinner{
-position:absolute;
-top:380px;
-left:50%;
-transform:translateX(-50%);
+#nameBox2 {
+  position: absolute;
+  top: 193px;
+  left: 140px;
+  
+  width: 140px;
+  height: 35px;
+  
+  text-align: center;
+  line-height: 35px;
 }
 
-#winsBoard{
-position:absolute;
-top:470px;
-left:50%;
-transform:translateX(-50%);
+#msgBox2 {
+  position: absolute;
+  top: 234px;
+  left: 60px;
+  
+  width: 220px;
+  height: 60px;
+  
+  text-align: center;
+}
+#chatInput {
+  position: absolute;
+  top: 580px;
+  left: 100px;
+  
+  width: 175px;
+  height: 30px;
+  
+  font-size: 20px;
 }
 
-#playersCount{
-position:absolute;
-top:650px;
-left:50%;
-transform:translateX(-50%);
+#sendBtn {
+  position: absolute;
+  top: 583px;
+  left: 290px;
+  
+  width: 60px;
+  height: 30px;
+  
+  font-size: 20px;
+}
+#logo {
+  position: absolute;
+  top: 10px;
+  left: 220px;
+  
+  padding: 10px;
+  font-size: 13px;
+  font-weight: bold;
 }
 
-#autoStatus{
-position:absolute;
-top:720px;
-left:50%;
-transform:translateX(-50%);
+#clock {
+  position: absolute;
+  top: 45px;
+  left: 240px;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+#liveChatTitle {
+  position: absolute;
+  top: 330px;
+  left: 110px;
+  padding: 10px;
 }
 
-#adminBtn{
-position:absolute;
-top:800px;
-left:50%;
-transform:translateX(-50%);
+#liveName {
+  position: absolute;
+  top: 290px;
+  left: 250px;
+  padding: 10px;
 }
-
-button{
-padding:12px 20px;
-border:none;
-cursor:pointer;
-color:white;
+#liveMessage {
+  position: absolute;
+  top: 290px;
+  left: 130px;
+  padding: 10px;
+  width: 250px;
 }
-#topBar{
-position:absolute;
-top:20px;
-left:50%;
-transform:translateX(-50%);
-width:90%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:999;
+#gameBoxTitle {
+  position: absolute;
+  top: 330px;
+  left: 220px;
+  padding: 10px;
 }
-
-#logo{
-font-size:24px;
-font-weight:bold;
-color:white;
-text-shadow:2px 2px 5px black;
+#gameEntry1 {
+  position: absolute;
+  top: 350px;
+  left: 130px;
+  padding: 10px;
 }
-
-#clock{
-font-size:22px;
-font-weight:bold;
-color:white;
-text-shadow:2px 2px 5px black;
+#gameEntry2 {
+  position: absolute;
+  top: 370px;
+  left: 130px;
+  padding: 10px;
 }
 </style>
 
