@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Marah TV</title>
 
 <style>
@@ -13,26 +13,29 @@
 }
 
 body {
-  background: #111;
+  background: #0c0f12;
   font-family: Tahoma, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
+  padding: 10px;
 }
 
-/* هذه الحاوية تضمن بقاء أبعاد صورتك وعناصرك ثابتة ومثالية على الكمبيوتر وكل الموبايلات */
+/* هذه الحاوية الذكية تثبت أبعاد لوحة اللعبة وتجعلها تتقلص وتتكبر تلقائياً ككتلة واحدة في الكمبيوتر والموبايل */
 .game-container {
   position: relative;
   width: 100vw;
-  height: 80vh;
-  max-width: 420px; /* يحافظ على أبعاد لوحة اللعبة للكمبيوتر والموبايل */
+  height: calc(100vw * (740 / 420)); /* تحافظ على النسبة التناسبية الدقيقة للصورة */
+  max-width: 420px; 
   max-height: 740px;
   background: url("munirmunir.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: 4px;
 }
 
 #winsBoard {
@@ -224,10 +227,8 @@ body {
 
 <div class="game-container">
 
-<div id="topBar">
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
-</div>
 
 <div id="gameStatus">
 🚦 الاستعداد للجولة القادمة
@@ -267,6 +268,7 @@ body {
 </div>
 
 </div>
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
@@ -413,7 +415,7 @@ name:name
 }
   
 if(text.toLowerCase() === "leave"){
-remove(ref(db,"players/" + name));
+remove(ref(db("players/" + name));
 }
 if(document.getElementById("text")) document.getElementById("text").value="";
 
