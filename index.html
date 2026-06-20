@@ -13,137 +13,208 @@
 }
 
 body {
-  background-image: url("munirmunir.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
+  background: #111;
   font-family: Tahoma, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 15px;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-#topBar {
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
+/* هذه الحاوية تضمن بقاء أبعاد صورتك وعناصرك ثابتة ومثالية على الكمبيوتر وكل الموبايلات */
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  max-width: 420px; /* يحافظ على أبعاد لوحة اللعبة للكمبيوتر والموبايل */
+  max-height: 740px;
+  background: url("munirmunir.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+#winsBoard {
+  position: absolute;
+  top: 245px;
+  left: 5px;
+  padding: 10px;
+}
+#countdown {
+  position: absolute;
+  top: 435px;
+  left: 35px;
+  padding: 3px;
+  background:transparent;
+}
+
+#targetNumber {
+  position: absolute;
+  top: 435px;
+  left: 290px;
+  padding: 3px;
+  background:transparent;
+}
+
+#gameWinner {
+  position: absolute;
+  top: 430px;
+  left: 135px;
+  padding: 10px;
+  background:transparent;
+}
+
+#autoStatus {
+  position: absolute;
+  top: 588px;
+  left: 1px;
+  background: transparent;
+  padding: 3px;
+}
+#gameStatus {
+  position: absolute;
+  top: 415px;
+  left: 100px;
+  background: transparent;
+  padding: 1px;
+}
+#adminBtn {
+  position: absolute;
+  top: 520px;
+  left: 260px;
+  width: 100px;
+  height: 40px;
+  background: transparent;
   color: white;
-  margin-bottom: 15px;
+  font-size: 20px;
+}
+#nameBox1 {
+  position: absolute;
+  top: 75px;
+  left: 140px;
+  width: 140px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
 }
 
+#msgBox1 {
+  position: absolute;
+  top: 115px;
+  left: 60px;
+  width: 220px;
+  height: 60px;
+  text-align: center;
+}
+
+#nameBox2 {
+  position: absolute;
+  top: 193px;
+  left: 140px;
+  width: 140px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+}
+
+#msgBox2 {
+  position: absolute;
+  top: 234px;
+  left: 60px;
+  width: 220px;
+  height: 60px;
+  text-align: center;
+}
+#chatInput {
+  position: absolute;
+  top: 580px;
+  left: 100px;
+  width: 175px;
+  height: 30px;
+  font-size: 20px;
+}
+
+#sendBtn {
+  position: absolute;
+  top: 583px;
+  left: 290px;
+  width: 60px;
+  height: 30px;
+  font-size: 20px;
+}
 #logo {
-  font-size: 16px;
+  position: absolute;
+  top: 10px;
+  left: 220px;
+  padding: 10px;
+  font-size: 13px;
   font-weight: bold;
 }
 
 #clock {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.card {
-  width: 100%;
-  max-width: 500px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-  color: white;
-  text-align: center;
-}
-
-.card h3 {
-  font-size: 20px;
-  margin-bottom: 15px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 8px;
-  border-radius: 8px;
-}
-
-#gameStatus, #countdown, #targetNumber, #gameWinner, #winsBoard, #playersCount, #autoStatus {
-  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 45px;
+  left: 240px;
   padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
 }
-
-#countdown {
-  color: #ffde59;
+#liveChatTitle {
+  position: absolute;
+  top: 330px;
+  left: 110px;
+  padding: 10px;
 }
 
-#targetNumber {
-  font-size: 18px;
-  color: #5ce1e6;
+#liveName {
+  position: absolute;
+  top: 290px;
+  left: 250px;
+  padding: 10px;
+}
+#liveMessage {
+  position: absolute;
+  top: 290px;
+  left: 130px;
+  padding: 10px;
+  width: 250px;
+}
+#gameBoxTitle {
+  position: absolute;
+  top: 330px;
+  left: 220px;
+  padding: 10px;
+}
+#gameEntry1 {
+  position: absolute;
+  top: 350px;
+  left: 130px;
+  padding: 10px;
+}
+#gameEntry2 {
+  position: absolute;
+  top: 370px;
+  left: 130px;
+  padding: 10px;
 }
 
-#adminBtn {
-  width: 100%;
-  padding: 12px;
-  background: #ff5757;
-  border: none;
-  border-radius: 8px;
+#playersCount {
+  position: absolute;
+  top: 500px;
+  left: 15px;
+  padding: 3px;
   color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: 0.2s;
-}
-
-#adminBtn:hover {
-  background: #ff3333;
 }
 
 #adminPanel {
-  margin-top: 15px;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 15px;
-  border-radius: 8px;
-}
-
-#adminPanel button {
-  width: 100%;
+  position: absolute;
+  top: 460px;
+  left: 100px;
+  background: rgba(0,0,0,0.8);
   padding: 10px;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-#startRound {
-  background: #28a745;
-  color: white;
-}
-
-#toggleBot {
-  background: #17a2b8;
-  color: white;
-  margin-bottom: 0 !important;
-}
-
-@media (min-width: 768px) {
-  body {
-    justify-content: center;
-  }
-  #topBar, .card {
-    max-width: 600px;
-  }
+  border-radius: 5px;
+  z-index: 10;
 }
 </style>
 
@@ -151,14 +222,12 @@ body {
 
 <body>
 
+<div class="game-container">
+
 <div id="topBar">
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
 </div>
-
-<div class="card">
-
-<h3>🎯 لعبة الرقم السريع</h3>
 
 <div id="gameStatus">
 🚦 الاستعداد للجولة القادمة
@@ -193,18 +262,11 @@ body {
 </button>
 
 <div id="adminPanel" style="display:none;">
-
-<button id="startRound">
-▶️ بدء جولة
-</button>
-
-<button id="toggleBot">
-🤖 تشغيل/إيقاف الروبوت
-</button>
-
-</div>
+<button id="startRound">▶️ بدء جولة</button>
+<button id="toggleBot">🤖 تشغيل/إيقاف الروبوت</button>
 </div>
 
+</div>
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
@@ -248,10 +310,10 @@ if(savedName){
 document.getElementById("name").value = savedName;
 }
 
-document.getElementById("send").addEventListener("click",()=>{
+document.getElementById("sendBtn")?.addEventListener("click",()=>{
 
-const name = document.getElementById("name").value.trim();
-const text = document.getElementById("text").value.trim();
+const name = document.getElementById("name")?.value.trim() || "";
+const text = document.getElementById("text")?.value.trim() || "";
 
 if(!name || !text) return;
   
@@ -345,7 +407,7 @@ time:Date.now()
 }
 
 if(text.toLowerCase() === "me"){
-set(ref(db,"players/" + name),{
+set(ref(db("players/" + name)),{
 name:name
 });
 }
@@ -353,30 +415,26 @@ name:name
 if(text.toLowerCase() === "leave"){
 remove(ref(db,"players/" + name));
 }
-document.getElementById("text").value="";
+if(document.getElementById("text")) document.getElementById("text").value="";
 
 });
 
 onValue(messagesRef,(snapshot)=>{
 
-const box = document.getElementById("messages");
-box.innerHTML = "";
-
 const data = snapshot.val();
 
 if(!data) return;
 
-Object.values(data)
-.sort((a,b)=>b.time-a.time)
-.forEach(msg=>{
+const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
 
-const div = document.createElement("div");
-div.className="msg";
-div.textContent = msg.name + ": " + msg.text;
-
-box.appendChild(div);
-
-});
+if(sorted[0]) {
+  if(document.getElementById("nameBox1")) document.getElementById("nameBox1").textContent = sorted[0].name;
+  if(document.getElementById("msgBox1")) document.getElementById("msgBox1").textContent = sorted[0].text;
+}
+if(sorted[1]) {
+  if(document.getElementById("nameBox2")) document.getElementById("nameBox2").textContent = sorted[1].name;
+  if(document.getElementById("msgBox2")) document.getElementById("msgBox2").textContent = sorted[1].text;
+}
 
 });
 let botEnabled = true;
