@@ -35,10 +35,11 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  /* تحديد خط أساسي ديناميكي سيتم التحكم به عبر السكريبت للتثبيت الكامل */
   font-size: 16px; 
 }
 
-/* شاشات الكمبيوتر */
+/* شاشات الكمبيوتر: ملاءمة الطول ومنع التمرير */
 @media (min-height: 740px) and (min-width: 420px) {
   .game-container {
     height: 740px;
@@ -52,6 +53,7 @@ body {
   }
 }
 
+/* استخدام الـ em لربط الخطوط بالحاوية مباشرة لمنع أي تحرك نهائياً */
 #logo {
   position: absolute;
   top: 1.35%;
@@ -93,7 +95,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; 
+  overflow: hidden; /* يخفي النص الزائد تماماً دون ترك نقاط ثلاثية */
   white-space: nowrap;
 }
 
@@ -122,29 +124,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; 
+  overflow: hidden; /* يخفي النص الزائد تماماً دون ترك نقاط ثلاثية */
   white-space: nowrap;
 }
 
-/* ضبط مكان الترتيب بالملي فوق الميداليات داخل المربع الذهبي */
 #winsBoard {
   position: absolute;
-  top: 50.5%;
-  left: 3.5%;
-  width: 29%;
-  height: 18%;
-  font-size: 0.75em;
-  line-height: 1.7;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  color: #ffffff;
-  padding-top: 5px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
-  background: transparent;
-  z-index: 20;
+  top: 33.1%;
+  left: 1.19%;
+  width: 33%;
+  font-size: 0.85em;
+  line-height: 1.4;
 }
 
 #gameStatus {
@@ -187,18 +177,18 @@ body {
   font-size: 0.85em;
 }
 
-/* زر الإدارة الشفاف تماماً فوق نص الإدارة المطبوع في الخلفية أسفل اليمين */
 #adminBtn {
   position: absolute;
-  top: 94.0%;
-  left: 72.0%;
-  width: 26.0%;
-  height: 5.5%;
+  top: 70.27%;
+  left: 61.9%;
+  width: 23.8%;
+  height: 5.4%;
   background: transparent;
-  color: transparent; /* شفاف لأن الكلمة مطبوعة بالخلفية جاهزة */
+  color: white;
+  font-size: 1em;
   border: none;
   cursor: pointer;
-  z-index: 999;
+  text-align: center;
 }
 
 #autoStatus {
@@ -208,28 +198,22 @@ body {
   font-size: 0.8em;
 }
 
-/* لوحة تحكم الإدارة تظهر في منتصف الشاشة بدلاً من الأسفل لكي لا تغطي على الأزرار */
 #adminPanel {
   position: absolute;
-  top: 40.0%;
+  top: 62.16%;
   left: 23.8%;
   width: 52.38%;
-  background: rgba(0,0,0,0.95);
-  padding: 4%;
-  border: 2px solid gold;
-  border-radius: 8px;
-  z-index: 1000;
+  background: rgba(0,0,0,0.9);
+  padding: 2%;
+  border-radius: 5px;
+  z-index: 10;
   text-align: center;
 }
 #adminPanel button {
   width: 100%;
-  margin: 4% 0;
-  padding: 6%;
+  margin: 2% 0;
+  padding: 3%;
   font-size: 0.9em;
-  background: #222;
-  color: white;
-  border: 1px solid #44;
-  cursor: pointer;
 }
 </style>
 
@@ -289,10 +273,12 @@ body {
 
 <script type="module">
 
+// سكريبت سحري لتثبيت الخطوط والعناصر بنسبة 100% عند تصغير وتكبير المتصفح
 function resizeGame() {
   const container = document.getElementById("mainContainer");
   if (container) {
     const currentWidth = container.offsetWidth;
+    // جعل الخط متناسباً تماماً مع عرض الحاوية الفعلي لحماية العناصر من التحرك
     container.style.fontSize = (currentWidth / 420) * 16 + "px";
   }
 }
@@ -342,10 +328,11 @@ if(!data) return;
 
 const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
 
+// تنظيف الكلمات العشوائية فوراً ودون ترك ثلاث نقاط تشوه المظهر
 const cleanText = (txt) => {
   if (!txt) return "";
   if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 30) {
-    return ""; 
+    return ""; // يتم تصفير النص العشوائي تماماً لتنظيف الشاشة
   }
   return txt;
 };
@@ -581,7 +568,7 @@ document.getElementById("winsBoard");
 const data = snapshot.val();
 
 if(!data){
-board.innerHTML = "";
+board.innerHTML = "🏆 ترتيب اللاعبين";
 return;
 }
 
@@ -589,13 +576,17 @@ const players =
 Object.entries(data)
 .sort((a,b)=>b[1].wins - a[1].wins);
 const topPlayers = players.slice(0,3);
-let html = "";
+let html = "🏆 ترتيب اللاعبين<br><br>";
 
 topPlayers.forEach(([name,info],index)=>{
 
-let medal = ""; // تمت إزالة الإيموجي لأن الميداليات مطبوعة مسبقاً في الصورة 8195_3.png
+let medal = "🏅";
 
-html += name + " : " + info.wins + "<br>";
+if(index === 0) medal = "🥇";
+if(index === 1) medal = "🥈";
+if(index === 2) medal = "🥉";
+
+html += medal + " " + name + " : " + info.wins + "<br>";
 
 });
 
