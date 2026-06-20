@@ -38,7 +38,7 @@ body {
   font-size: 16px; 
 }
 
-/* شاشات الكمبيوتر: ملاءمة الطول ومنع التمرير */
+/* شاشات الكمبيوتر */
 @media (min-height: 740px) and (min-width: 420px) {
   .game-container {
     height: 740px;
@@ -52,7 +52,6 @@ body {
   }
 }
 
-/* استخدام الـ em لربط الخطوط بالحاوية مباشرة لمنع أي تحرك نهائياً */
 #logo {
   position: absolute;
   top: 1.35%;
@@ -63,24 +62,21 @@ body {
 
 #clock {
   position: absolute;
-  top: 1.8%;
-  left: 17.5%;
-  width: 42%;
-  text-align: center;
-  font-size: 0.95em;
+  top: 6.08%;
+  left: 57.14%;
+  font-size: 0.8em;
   font-weight: bold;
-  color: #ffffff;
 }
 
 #nameBox1 {
   position: absolute;
-  top: 13.0%;
-  left: 37.5%;
-  width: 41.5%;
-  height: 4.2%;
+  top: 10.13%;
+  left: 33.33%;
+  width: 33.33%;
+  height: 4.73%;
   text-align: center;
   font-weight: bold;
-  font-size: 1.05em;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,29 +84,28 @@ body {
 
 #msgBox1 {
   position: absolute;
-  top: 17.5%;
-  left: 37.5%;
-  width: 41.5%;
-  height: 11.5%;
+  top: 15.54%;
+  left: 14.28%;
+  width: 52.38%;
+  height: 8.11%;
   text-align: center;
-  font-size: 0.95em;
-  font-weight: bold;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: hidden; 
   white-space: nowrap;
 }
 
 #nameBox2 {
   position: absolute;
-  top: 30.7%;
-  left: 37.5%;
-  width: 41.5%;
-  height: 4.2%;
+  top: 26.08%;
+  left: 33.33%;
+  width: 33.33%;
+  height: 4.73%;
   text-align: center;
   font-weight: bold;
-  font-size: 1.05em;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,141 +113,123 @@ body {
 
 #msgBox2 {
   position: absolute;
-  top: 35.2%;
-  left: 37.5%;
-  width: 41.5%;
-  height: 11.5%;
+  top: 31.62%;
+  left: 14.28%;
+  width: 52.38%;
+  height: 8.11%;
   text-align: center;
-  font-size: 0.95em;
-  font-weight: bold;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: hidden; 
   white-space: nowrap;
 }
 
-/* تم تعديل مكان لوحة الترتيب لتظهر بدقة داخل المربع الذهبي المخصص لها على اليسار */
+/* ضبط مكان الترتيب بالملي فوق الميداليات داخل المربع الذهبي */
 #winsBoard {
   position: absolute;
-  top: 52.8%;
-  left: 4.0%;
-  width: 27.5%;
-  height: 14.2%;
-  font-size: 0.8em;
-  font-weight: bold;
-  color: #ffffff;
-  line-height: 1.6;
+  top: 50.5%;
+  left: 3.5%;
+  width: 29%;
+  height: 18%;
+  font-size: 0.75em;
+  line-height: 1.7;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+  color: #ffffff;
+  padding-top: 5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+  background: transparent;
+  z-index: 20;
 }
 
 #gameStatus {
   position: absolute;
-  top: 71.5%;
-  left: 32.0%;
-  width: 37.0%;
+  top: 56.08%;
+  left: 23.8%;
+  width: 52.38%;
   text-align: center;
-  font-size: 0.82em;
-  font-weight: bold;
-  color: #ffffff;
+  font-size: 0.9em;
 }
 
 #countdown {
   position: absolute;
-  top: 74.0%;
-  left: 10.5%;
-  width: 14.0%;
-  text-align: center;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #ffffff;
+  top: 58.78%;
+  left: 8.33%;
+  font-size: 0.9em;
 }
 
 #targetNumber {
   position: absolute;
-  top: 74.0%;
-  left: 75.0%;
-  width: 14.0%;
-  text-align: center;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #ffffff;
+  top: 58.78%;
+  left: 69.04%;
+  font-size: 0.9em;
 }
 
 #gameWinner {
   position: absolute;
-  top: 74.8%;
-  left: 31.0%;
-  width: 38.0%;
+  top: 58.1%;
+  left: 32.14%;
+  width: 35.71%;
   text-align: center;
-  font-size: 0.95em;
-  font-weight: bold;
-  color: #ffffff;
+  font-size: 0.85em;
 }
 
 #playersCount {
   position: absolute;
-  top: 80.5%;
-  left: 3.5%;
-  color: #ffffff;
-  font-size: 0.8em;
-  font-weight: bold;
-  width: 14%;
-  text-align: center;
+  top: 67.56%;
+  left: 3.57%;
+  color: white;
+  font-size: 0.85em;
 }
 
-/* زر الإدارة الشفاف تم نقله إلى أسفل اليمين ليتطابق مع نص الإدارة المطبوع في الخلفية */
+/* زر الإدارة الشفاف تماماً فوق نص الإدارة المطبوع في الخلفية أسفل اليمين */
 #adminBtn {
   position: absolute;
   top: 94.0%;
-  right: 2.0%;
-  width: 25.0%;
+  left: 72.0%;
+  width: 26.0%;
   height: 5.5%;
   background: transparent;
-  color: transparent;
+  color: transparent; /* شفاف لأن الكلمة مطبوعة بالخلفية جاهزة */
   border: none;
   cursor: pointer;
-  z-index: 20;
+  z-index: 999;
 }
 
 #autoStatus {
   position: absolute;
-  top: 94.8%;
-  left: 27.0%;
-  width: 46.0%;
-  text-align: center;
-  font-size: 0.95em;
-  font-weight: bold;
-  color: #ff00ff;
+  top: 79.45%;
+  left: 0.23%;
+  font-size: 0.8em;
 }
 
+/* لوحة تحكم الإدارة تظهر في منتصف الشاشة بدلاً من الأسفل لكي لا تغطي على الأزرار */
 #adminPanel {
   position: absolute;
-  bottom: 16%;
-  right: 5%;
-  width: 50%;
-  background: rgba(0, 0, 0, 0.9);
-  border: 2px solid #ff00ff;
-  padding: 8px;
-  border-radius: 6px;
-  z-index: 100;
+  top: 40.0%;
+  left: 23.8%;
+  width: 52.38%;
+  background: rgba(0,0,0,0.95);
+  padding: 4%;
+  border: 2px solid gold;
+  border-radius: 8px;
+  z-index: 1000;
   text-align: center;
 }
 #adminPanel button {
   width: 100%;
-  margin: 4px 0;
-  padding: 6px;
-  font-size: 0.8em;
-  font-weight: bold;
-  cursor: pointer;
+  margin: 4% 0;
+  padding: 6%;
+  font-size: 0.9em;
   background: #222;
-  color: #fff;
-  border: 1px solid #aaa;
+  color: white;
+  border: 1px solid #44;
+  cursor: pointer;
 }
 </style>
 
@@ -262,6 +239,7 @@ body {
 
 <div class="game-container" id="mainContainer">
 
+<div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
 
 <!-- إطارات الرسائل والأسماء -->
@@ -275,31 +253,29 @@ body {
 </div>
 
 <div id="countdown">
---
+⏳ 10
 </div>
 
 <div id="targetNumber">
-؟
+🎯 ？
 </div>
 
 <div id="gameWinner">
 🏆 لا يوجد فائز بعد
 </div>
 
-<!-- لوحة الترتيب داخل البرواز الذهبي المخصص لها تماماً -->
 <div id="winsBoard">
-جاري التحميل...
+🏆 ترتيب اللاعبين
 </div>
 
 <div id="playersCount">
-0
+👥 اللاعبون المتصلون: 0
 </div>
 
 <div id="autoStatus">
 🤖 الروبوت: يعمل
 </div>
 
-<!-- زر إدارة شفاف يغطي مكان زر الإدارة أسفل اليمين تماماً -->
 <button id="adminBtn">
 ⚙️ الإدارة
 </button>
@@ -313,7 +289,6 @@ body {
 
 <script type="module">
 
-// سكريبت لتثبيت الخطوط والعناصر بنسبة 100% عند تصغير وتكبير المتصفح
 function resizeGame() {
   const container = document.getElementById("mainContainer");
   if (container) {
@@ -355,8 +330,8 @@ const winsRef = ref(db,"wins");
 let countdownStarted = false;
 let countdown = 15;
 setInterval(()=>{
-const clk = document.getElementById("clock");
-if(clk) clk.textContent = new Date().toLocaleTimeString("ar", {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+document.getElementById("clock").textContent =
+new Date().toLocaleTimeString("ar");
 },1000);
 
 onValue(messagesRef,(snapshot)=>{
@@ -367,11 +342,10 @@ if(!data) return;
 
 const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
 
-// تنظيف الكلمات العشوائية فوراً ودون ترك ثلاث نقاط تشوه المظهر
 const cleanText = (txt) => {
   if (!txt) return "";
   if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 30) {
-    return ""; // يتم تصفير النص العشوائي تماماً لتنظيف الشاشة
+    return ""; 
   }
   return txt;
 };
@@ -410,10 +384,11 @@ statusBox.textContent =
 "🚦 استعدوا للجولة القادمة";
 
 numberBox.textContent =
-"؟";
+"🎯 جاري اختيار الرقم...";
 const interval = setInterval(()=>{
 
-countdownBox.textContent = countdown;
+countdownBox.textContent =
+"⏳ " + countdown;
 
 countdown--;
 
@@ -422,7 +397,7 @@ if(countdown < 0){
 clearInterval(interval);
 
 statusBox.textContent =
-"🎮 لعبة الرقم السريع";
+"🔥 انتظار الرقم من Firebase";
 
 gameRunning = false;
 
@@ -438,7 +413,10 @@ const data = snapshot.val();
 if(!data) return;
 
 if(data.targetNumber){
-document.getElementById("targetNumber").textContent = data.targetNumber;
+
+document.getElementById("targetNumber").textContent =
+"🎯 الرقم المطلوب: " + data.targetNumber;
+
 }
 
 if(data.winner){
@@ -483,16 +461,18 @@ if(data.status === "countdown"){
 document.getElementById("gameStatus").textContent =
 "🚦 استعدوا للجولة القادمة";
 
-document.getElementById("countdown").textContent = data.countdown;
+document.getElementById("countdown").textContent =
+"⏳ " + data.countdown;
 
-document.getElementById("targetNumber").textContent = "؟";
+document.getElementById("targetNumber").textContent =
+"🎯 ؟";
 
 }
 
 botEnabled = data.botEnabled;
 
 document.getElementById("autoStatus").textContent =
-botEnabled ? "المشرف كونترول: منير" : "المشرف كونترول: متوقف";
+botEnabled ? "🤖 الروبوت: يعمل" : "⛔ الروبوت متوقف";
 
 });
   
@@ -613,13 +593,9 @@ let html = "";
 
 topPlayers.forEach(([name,info],index)=>{
 
-let medal = "🏅";
+let medal = ""; // تمت إزالة الإيموجي لأن الميداليات مطبوعة مسبقاً في الصورة 8195_3.png
 
-if(index === 0) medal = "🥇";
-if(index === 1) medal = "🥈";
-if(index === 2) medal = "🥉";
-
-html += medal + " " + name + " : " + info.wins + "<br>";
+html += name + " : " + info.wins + "<br>";
 
 });
 
