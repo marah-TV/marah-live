@@ -17,12 +17,13 @@ body {
   font-family: Tahoma, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* لرفع اللوحة لأعلى الصفحة في شاشات الكمبيوتر الكبيرة */
   min-height: 100vh;
-  overflow: hidden;
-  padding: 10px;
+  overflow-x: hidden;
+  padding: 0;
 }
 
+/* حاوية اللعبة الثابتة والمتطابقة تماماً */
 .game-container {
   position: relative;
   width: 100vw;
@@ -34,14 +35,15 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  border-radius: 4px;
 }
 
+/* مواقع العناصر الدقيقة بالنسبة المئوية % */
 #logo {
   position: absolute;
   top: 1.35%;
   left: 52.38%;
   font-size: 3.1vw;
+  font-weight: bold;
 }
 @media (min-width: 420px) { #logo { font-size: 13px; } }
 
@@ -61,6 +63,7 @@ body {
   width: 33.33%;
   height: 4.73%;
   text-align: center;
+  font-weight: bold;
 }
 
 #msgBox1 {
@@ -79,6 +82,7 @@ body {
   width: 33.33%;
   height: 4.73%;
   text-align: center;
+  font-weight: bold;
 }
 
 #msgBox2 {
@@ -96,6 +100,7 @@ body {
   left: 1.19%;
   width: 33%;
   font-size: 3.3vw;
+  line-height: 1.4;
 }
 @media (min-width: 420px) { #winsBoard { font-size: 14px; } }
 
@@ -152,12 +157,12 @@ body {
   height: 5.4%;
   background: transparent;
   color: white;
-  font-size: 4.7vw;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 4px;
+  font-size: 3.8vw;
+  border: none;
   cursor: pointer;
+  text-align: center;
 }
-@media (min-width: 420px) { #adminBtn { font-size: 20px; } }
+@media (min-width: 420px) { #adminBtn { font-size: 16px; } }
 
 #autoStatus {
   position: absolute;
@@ -166,26 +171,6 @@ body {
   font-size: 3.1vw;
 }
 @media (min-width: 420px) { #autoStatus { font-size: 13px; } }
-
-#chatInput {
-  position: absolute;
-  top: 78.37%;
-  left: 23.8%;
-  width: 41.66%;
-  height: 4.05%;
-  font-size: 4.7vw;
-}
-@media (min-width: 420px) { #chatInput { font-size: 20px; } }
-
-#sendBtn {
-  position: absolute;
-  top: 78.78%;
-  left: 69.04%;
-  width: 14.28%;
-  height: 4.05%;
-  font-size: 4.7vw;
-}
-@media (min-width: 420px) { #sendBtn { font-size: 20px; } }
 
 #adminPanel {
   position: absolute;
@@ -216,14 +201,14 @@ body {
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
 
-<!-- إطارات الرسائل والأسماء -->
+<!-- إطارات الرسائل والأسماء الممسوحة والمجهزة للعرض النظيف -->
 <div id="nameBox1"></div>
 <div id="msgBox1"></div>
 <div id="nameBox2"></div>
 <div id="msgBox2"></div>
 
 <div id="gameStatus">
-🚦 الاستعداد للجولة القادمة
+🚦 الاستعدَاد للجولة القادمة
 </div>
 
 <div id="countdown">
@@ -297,121 +282,6 @@ setInterval(()=>{
 document.getElementById("clock").textContent =
 new Date().toLocaleTimeString("ar");
 },1000);
-
-const savedName = localStorage.getItem("marah_name");
-
-if(savedName){
-document.getElementById("name").value = savedName;
-}
-
-document.getElementById("sendBtn")?.addEventListener("click",()=>{
-
-const name = document.getElementById("name")?.value.trim() || "";
-const text = document.getElementById("text")?.value.trim() || "";
-
-if(!name || !text) return;
-  
-const bannedWords = [
-"كس",
-"كسا",
-"كسك",
-"اير",
-"ايري",
-"يلعن",
-"قحبة",
-"كلمة2",
-"قحب",
-"كلب",
-"حيوان",
-"خرا",
-"حمار",
-"منيك",
-"انيك",
-"جحش",
-"حمار",
-"كديش",
-"شرموطة",
-"شرموط",
-"منتاك",
-"عير",
-"بزاز",
-"تلحس",
-"ترضع",
-"بوس",
-"بعص",
-"ابعص",
-"عرصة",
-"جلب",
-"1234567890"
-];
-
-const lowerText = text.toLowerCase();
-
-if(bannedWords.some(word => lowerText.includes(word.toLowerCase()))){
-alert("هذه الرسالة تحتوي على كلمات غير مسموح بها");
-return;
-}
-
-localStorage.setItem("marah_name",name);
-
-if(
-text.toLowerCase() !== "me" &&
-text.toLowerCase() !== "leave"
-){
-
-get(gameRef).then((snapshot)=>{
-
-const game = snapshot.val();
-
-if(
-game &&
-game.targetNumber &&
-text == game.targetNumber &&
-!game.winner
-){
-console.log("الفائز هو:",name);
-  
-update(gameRef,{
-winner:name
-});
-
-get(ref(db,"wins/" + name)).then((winSnap)=>{
-
-let currentWins = 0;
-
-if(winSnap.exists()){
-currentWins = winSnap.val().wins || 0;
-}
-
-set(ref(db,"wins/" + name),{
-wins: currentWins + 1
-});
-
-});
-
-}
-
-});
-
-push(messagesRef,{
-name:name,
-text:text,
-time:Date.now()
-});
-}
-
-if(text.toLowerCase() === "me"){
-set(ref(db("players/" + name)),{
-name:name
-});
-}
-  
-if(text.toLowerCase() === "leave"){
-remove(ref(db,"players/" + name));
-}
-if(document.getElementById("text")) document.getElementById("text").value="";
-
-});
 
 onValue(messagesRef,(snapshot)=>{
 
