@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -7,201 +6,144 @@
 <title>Marah TV</title>
 
 <style>
-body {
+* {
   margin: 0;
-  height: 80vh;
-width: 100vw;
-overflow: hidden;
-  background: url("munirmunir.jpg");
-  background-size: 100% 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("munirmunir.jpg");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  position: relative;
-
-  font-family:
-    Tahoma,
-    "Segoe UI Emoji",
-    "Noto Color Emoji",
-    sans-serif;
+  background-attachment: fixed;
+  min-height: 100vh;
+  font-family: Tahoma, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
 }
 
-#winsBoard {
-  position: absolute;
-  top: 245px;
-  left: 5px;
-  padding: 10px;
-}
-#countdown {
-  position: absolute;
-  top: 435px;
-  left: 35px;
-  padding: 3px;
-background:transparent;
-}
-
-#targetNumber {
-  position: absolute;
-  top: 435px;
-  left: 290px;
-  padding: 3px;
-  background:transparent;
-}
-
-#gameWinner {
-  position: absolute;
-  top: 430px;
-  left: 135px;
-  padding: 10px;
-  background:transparent;
-}
-
-#autoStatus {
-  position: absolute;
-  top: 588px;
-  left: 1px;
- background: transparent;
-  
-  padding: 3px;
-}
-#gameStatus {
-  position: absolute;
-  top: 415px;
-  left: 100px;
-  background: transparent;
-  
-  padding: 1px;
-}
-#adminBtn {
-  position: absolute;
-  top: 520px;
-  left: 260px;
-  width: 100px;
-  height: 40px;
-  background: transparent;
-  
+#topBar {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
   color: white;
-  font-size: 20px;
-}
-#nameBox1 {
-  position: absolute;
-  top: 75px;
-  left: 140px;
-  
-  width: 140px;
-  height: 35px;
-  
-  text-align: center;
-  line-height: 35px;
+  margin-bottom: 15px;
 }
 
-#msgBox1 {
-  position: absolute;
-  top: 115px;
-  left: 60px;
-  
-  width: 220px;
-  height: 60px;
-  
-  text-align: center;
-}
-
-#nameBox2 {
-  position: absolute;
-  top: 193px;
-  left: 140px;
-  
-  width: 140px;
-  height: 35px;
-  
-  text-align: center;
-  line-height: 35px;
-}
-
-#msgBox2 {
-  position: absolute;
-  top: 234px;
-  left: 60px;
-  
-  width: 220px;
-  height: 60px;
-  
-  text-align: center;
-}
-#chatInput {
-  position: absolute;
-  top: 580px;
-  left: 100px;
-  
-  width: 175px;
-  height: 30px;
-  
-  font-size: 20px;
-}
-
-#sendBtn {
-  position: absolute;
-  top: 583px;
-  left: 290px;
-  
-  width: 60px;
-  height: 30px;
-  
-  font-size: 20px;
-}
 #logo {
-  position: absolute;
-  top: 10px;
-  left: 220px;
-  
-  padding: 10px;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bold;
 }
 
 #clock {
-  position: absolute;
-  top: 45px;
-  left: 240px;
-  padding: 10px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
 }
-#liveChatTitle {
-  position: absolute;
-  top: 330px;
-  left: 110px;
-  padding: 10px;
+
+.card {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+  text-align: center;
 }
 
-#liveName {
-  position: absolute;
-  top: 290px;
-  left: 250px;
-  padding: 10px;
+.card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 8px;
 }
-#liveMessage {
-  position: absolute;
-  top: 290px;
-  left: 130px;
+
+#gameStatus, #countdown, #targetNumber, #gameWinner, #winsBoard, #playersCount, #autoStatus {
+  background: rgba(0, 0, 0, 0.3);
   padding: 10px;
-  width: 250px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
 }
-#gameBoxTitle {
-  position: absolute;
-  top: 330px;
-  left: 220px;
-  padding: 10px;
+
+#countdown {
+  color: #ffde59;
 }
-#gameEntry1 {
-  position: absolute;
-  top: 350px;
-  left: 130px;
-  padding: 10px;
+
+#targetNumber {
+  font-size: 18px;
+  color: #5ce1e6;
 }
-#gameEntry2 {
-  position: absolute;
-  top: 370px;
-  left: 130px;
+
+#adminBtn {
+  width: 100%;
+  padding: 12px;
+  background: #ff5757;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+#adminBtn:hover {
+  background: #ff3333;
+}
+
+#adminPanel {
+  margin-top: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+#adminPanel button {
+  width: 100%;
   padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#startRound {
+  background: #28a745;
+  color: white;
+}
+
+#toggleBot {
+  background: #17a2b8;
+  color: white;
+  margin-bottom: 0 !important;
+}
+
+@media (min-width: 768px) {
+  body {
+    justify-content: center;
+  }
+  #topBar, .card {
+    max-width: 600px;
+  }
 }
 </style>
 
@@ -214,12 +156,6 @@ background:transparent;
 <div id="clock"></div>
 </div>
 
-<div class="wrap">
-
-
-</div>
-</div>
-
 <div class="card">
 
 <h3>🎯 لعبة الرقم السريع</h3>
@@ -228,39 +164,29 @@ background:transparent;
 🚦 الاستعداد للجولة القادمة
 </div>
 
-<br>
-
 <div id="countdown">
 ⏳ 10
 </div>
-
-<br>
 
 <div id="targetNumber">
 🎯 ؟
 </div>
 
-<br>
-
 <div id="gameWinner">
 🏆 لا يوجد فائز بعد
 </div>
-<br>
 
 <div id="winsBoard">
 🏆 ترتيب اللاعبين
 </div>
-<br>
 
 <div id="playersCount">
 👥 اللاعبون المتصلون: 0
 </div>
-<br>
+
 <div id="autoStatus">
 🤖 الروبوت: يعمل
 </div>
-
-<br>
 
 <button id="adminBtn">
 ⚙️ الإدارة
@@ -277,8 +203,6 @@ background:transparent;
 </button>
 
 </div>
-</div>
-
 </div>
 
 <script type="module">
