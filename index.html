@@ -255,6 +255,18 @@ body {
   font-size:12px;
   font-weight:bold;
 }
+#playersList{
+  position:absolute;
+  top:52%;
+  left:2%;
+  width:35%;
+  height:15%;
+  overflow:hidden;
+
+  color:white;
+  font-size:0.8em;
+  line-height:1.4;
+}
 </style>
 
 </head>
@@ -290,6 +302,10 @@ body {
     <span style="top:90%">90</span>
     <span style="top:98%">100</span>
   </div>
+<div id="playersList">
+👥 المشاركون
+</div>
+  
 </div>
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
@@ -376,7 +392,7 @@ const db = getDatabase(app);
 const gameRef = ref(db,"game");
 const messagesRef = ref(db,"messages");
 const winsRef = ref(db,"wins");
-  
+const playersRef = ref(db,"players");
 let countdownStarted = false;
 let countdown = 15;
 setInterval(()=>{
@@ -657,7 +673,32 @@ html += medal + " " + name + " : " + info.wins + "<br>";
 board.innerHTML = html;
 
 });
-id="startRound"
+onValue(playersRef,(snapshot)=>{
+
+const players = snapshot.val();
+
+const box =
+document.getElementById("playersList");
+
+if(!players){
+
+box.innerHTML = "👥 المشاركون";
+
+return;
+
+}
+
+let html = "👥 المشاركون<br>";
+
+Object.keys(players).forEach(name=>{
+
+html += "👤 " + name + "<br>";
+
+});
+
+box.innerHTML = html;
+
+});
 resizeGame();
 </script>
 
