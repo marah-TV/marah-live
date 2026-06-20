@@ -23,6 +23,7 @@ body {
   padding: 0;
 }
 
+/* حاوية اللعبة الثابتة والمضمونة */
 .game-container {
   position: relative;
   width: 100vw;
@@ -37,6 +38,7 @@ body {
   font-size: 16px; 
 }
 
+/* شاشات الكمبيوتر: ملاءمة الطول ومنع التمرير */
 @media (min-height: 740px) and (min-width: 420px) {
   .game-container {
     height: 740px;
@@ -50,6 +52,15 @@ body {
   }
 }
 
+/* استخدام الـ em لربط الخطوط بالحاوية مباشرة لمنع أي تحرك نهائياً */
+#logo {
+  position: absolute;
+  top: 1.35%;
+  left: 52.38%;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
 #clock {
   position: absolute;
   top: 1.8%;
@@ -61,52 +72,6 @@ body {
   color: #ffffff;
 }
 
-#marahTvText {
-  position: absolute;
-  top: 1.5%;
-  left: 54%;
-  width: 40%;
-  height: 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-weight: 900;
-  font-size: 1.7em;
-  color: #000000;
-  text-align: center;
-  line-height: 0.95;
-  z-index: 5;
-  pointer-events: none;
-}
-#marahTvText span {
-  color: red;
-  font-size: 0.8em;
-  display: inline-block;
-  margin-left: -5px;
-}
-
-#topControlButtons {
-  position: absolute;
-  top: 6.5%;
-  left: 2%;
-  width: 45%;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  z-index: 15;
-}
-#topControlButtons button {
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 0.72em;
-  font-weight: bold;
-  text-align: right;
-  cursor: pointer;
-  text-shadow: 1px 1px 2px #000;
-}
-
 #nameBox1 {
   position: absolute;
   top: 13.0%;
@@ -116,7 +81,6 @@ body {
   text-align: center;
   font-weight: bold;
   font-size: 1.05em;
-  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,14 +95,11 @@ body {
   text-align: center;
   font-size: 0.95em;
   font-weight: bold;
-  color: #002D62;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  white-space: normal;
-  line-height: 1.3;
-  padding: 2px 5px;
+  white-space: nowrap;
 }
 
 #nameBox2 {
@@ -150,7 +111,6 @@ body {
   text-align: center;
   font-weight: bold;
   font-size: 1.05em;
-  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -165,34 +125,30 @@ body {
   text-align: center;
   font-size: 0.95em;
   font-weight: bold;
-  color: #002D62;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  white-space: normal;
-  line-height: 1.3;
-  padding: 2px 5px;
+  white-space: nowrap;
 }
 
-/* تعديل إحداثيات لوحة الترتيب لتناسب البرواز الذهبي تماماً */
+/* تم تعديل مكان لوحة الترتيب لتظهر بدقة داخل المربع الذهبي المخصص لها على اليسار */
 #winsBoard {
   position: absolute;
   top: 52.8%;
   left: 4.0%;
   width: 27.5%;
   height: 14.2%;
-  font-size: 0.85em;
+  font-size: 0.8em;
   font-weight: bold;
-  color: #5d3a1a; /* لون بني داكن متناسق مع البرواز أو يمكنك إبقاؤه أبيض */
   color: #ffffff;
-  line-height: 1.8;
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
 }
 
 #gameStatus {
@@ -202,6 +158,28 @@ body {
   width: 37.0%;
   text-align: center;
   font-size: 0.82em;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#countdown {
+  position: absolute;
+  top: 74.0%;
+  left: 10.5%;
+  width: 14.0%;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#targetNumber {
+  position: absolute;
+  top: 74.0%;
+  left: 75.0%;
+  width: 14.0%;
+  text-align: center;
+  font-size: 1.5em;
   font-weight: bold;
   color: #ffffff;
 }
@@ -217,62 +195,29 @@ body {
   color: #ffffff;
 }
 
-#countdownContainer {
-  position: absolute;
-  top: 71.5%;
-  left: 10.5%;
-  width: 14.0%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#countdownContainer .emoji {
-  font-size: 1.2em;
-}
-#countdown {
-  font-size: 1.6em;
-  font-weight: bold;
-  color: #ffffff;
-  margin-top: -4px;
-}
-
-#targetContainer {
-  position: absolute;
-  top: 71.5%;
-  left: 75.0%;
-  width: 14.0%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#targetContainer .emoji {
-  font-size: 1.2em;
-}
-#targetNumber {
-  font-size: 1.6em;
-  font-weight: bold;
-  color: #ffffff;
-  margin-top: -4px;
-}
-
 #playersCount {
   position: absolute;
-  top: 83.5%;
+  top: 80.5%;
   left: 3.5%;
   color: #ffffff;
   font-size: 0.8em;
   font-weight: bold;
   width: 14%;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
-#playersCount span {
-  font-size: 1.4em;
-  margin-bottom: -3px;
+
+/* زر الإدارة الشفاف تم نقله إلى أسفل اليمين ليتطابق مع نص الإدارة المطبوع في الخلفية */
+#adminBtn {
+  position: absolute;
+  top: 94.0%;
+  right: 2.0%;
+  width: 25.0%;
+  height: 5.5%;
+  background: transparent;
+  color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
 }
 
 #autoStatus {
@@ -284,20 +229,6 @@ body {
   font-size: 0.95em;
   font-weight: bold;
   color: #ff00ff;
-}
-
-/* نقل زر الإدارة وتعديل مكانه ليكون أسفل اليمين تماماً فوق العجلة السوداء المضيئة */
-#adminBtn {
-  position: absolute;
-  top: 85.5%;
-  right: 28.0%;
-  width: 44.0%;
-  height: 6.5%;
-  background: transparent;
-  color: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 20;
 }
 
 #adminPanel {
@@ -333,45 +264,45 @@ body {
 
 <div id="clock"></div>
 
-<div id="marahTvText">marah<br>TV<span>🔴</span></div>
+<!-- إطارات الرسائل والأسماء -->
+<div id="nameBox1"></div>
+<div id="msgBox1"></div>
+<div id="nameBox2"></div>
+<div id="msgBox2"></div>
 
-<div id="topControlButtons">
-  <button id="fastBotBtn">🤖 تشغيل/إيقاف الروبوت</button>
-  <button id="fastStartBtn">▶️ بدء الجولة</button>
+<div id="gameStatus">
+🚦 الاستعدَاد للجولة القادمة
 </div>
 
-<div id="nameBox1">منير</div>
-<div id="msgBox1">جاري التحميل...</div>
-<div id="nameBox2">أحمد</div>
-<div id="msgBox2">جاري التحميل...</div>
-
-<div id="gameStatus">🎮 لعبة الرقم السريع</div>
-<div id="gameWinner">🏆 لا يوجد فائز بعد</div>
-
-<div id="countdownContainer">
-  <div class="emoji">⏳</div>
-  <div id="countdown">--</div>
+<div id="countdown">
+--
 </div>
 
-<div id="targetContainer">
-  <div class="emoji">🎯</div>
-  <div id="targetNumber">؟</div>
+<div id="targetNumber">
+؟
 </div>
 
-<!-- لوحة الترتيب داخل البرواز الذهبي المخصص لها -->
+<div id="gameWinner">
+🏆 لا يوجد فائز بعد
+</div>
+
+<!-- لوحة الترتيب داخل البرواز الذهبي المخصص لها تماماً -->
 <div id="winsBoard">
-  جاري التحميل...
+جاري التحميل...
 </div>
 
 <div id="playersCount">
-  <span>🤪</span>
-  <small id="pCountText">سمايلات</small>
+0
 </div>
 
-<div id="autoStatus">المشرف كونترول منير</div>
+<div id="autoStatus">
+🤖 الروبوت: يعمل
+</div>
 
-<!-- زر الإدارة الشفاف موضوع الآن أسفل اليمين في المكان المخصص -->
-<button id="adminBtn">⚙️</button>
+<!-- زر إدارة شفاف يغطي مكان زر الإدارة أسفل اليمين تماماً -->
+<button id="adminBtn">
+⚙️ الإدارة
+</button>
 
 <div id="adminPanel" style="display:none;">
 <button id="startRound">▶️ بدء جولة</button>
@@ -382,6 +313,7 @@ body {
 
 <script type="module">
 
+// سكريبت لتثبيت الخطوط والعناصر بنسبة 100% عند تصغير وتكبير المتصفح
 function resizeGame() {
   const container = document.getElementById("mainContainer");
   if (container) {
@@ -393,13 +325,17 @@ window.addEventListener("resize", resizeGame);
 window.addEventListener("DOMContentLoaded", resizeGame);
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 import {
 getDatabase,
 ref,
+push,
 onValue,
+set,
+remove,
+get,
 update
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-
 const firebaseConfig = {
 apiKey: "AIzaSyD8yIx-iVO4kCC-92lVHAzrVB7ye6ncbes",
 authDomain: "marah-tv-ed147.firebaseapp.com",
@@ -413,26 +349,29 @@ appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const gameRef = ref(db,"game");
-const messagesRef = ref(db["messages"]);
+const messagesRef = ref(db,"messages");
 const winsRef = ref(db,"wins");
   
-let botEnabled = true;
-
+let countdownStarted = false;
+let countdown = 15;
 setInterval(()=>{
-  const clk = document.getElementById("clock");
-  if(clk) clk.textContent = new Date().toLocaleTimeString("ar", {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+const clk = document.getElementById("clock");
+if(clk) clk.textContent = new Date().toLocaleTimeString("ar", {hour: '2-digit', minute:'2-digit', second:'2-digit'});
 },1000);
 
 onValue(messagesRef,(snapshot)=>{
+
 const data = snapshot.val();
+
 if(!data) return;
 
 const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
 
+// تنظيف الكلمات العشوائية فوراً ودون ترك ثلاث نقاط تشوه المظهر
 const cleanText = (txt) => {
   if (!txt) return "";
-  if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 40) {
-    return ""; 
+  if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 30) {
+    return ""; // يتم تصفير النص العشوائي تماماً لتنظيف الشاشة
   }
   return txt;
 };
@@ -445,90 +384,250 @@ if(sorted[1]) {
   if(document.getElementById("nameBox2")) document.getElementById("nameBox2").textContent = sorted[1].name;
   if(document.getElementById("msgBox2")) document.getElementById("msgBox2").textContent = cleanText(sorted[1].text);
 }
+
 });
+let botEnabled = true;
+let gameRunning = false;
 
-onValue(gameRef,(snapshot)=>{
-const data = snapshot.val();
-if(!data) return;
+function startGame(){
 
-if(data.countdown !== undefined){
-  const countEl = document.getElementById("countdown");
-  if(countEl) countEl.textContent = data.countdown;
+if(gameRunning) return;
+
+gameRunning = true;
+
+let countdown = 10;
+
+const countdownBox =
+document.getElementById("countdown");
+
+const statusBox =
+document.getElementById("gameStatus");
+
+const numberBox =
+document.getElementById("targetNumber");
+
+statusBox.textContent =
+"🚦 استعدوا للجولة القادمة";
+
+numberBox.textContent =
+"؟";
+const interval = setInterval(()=>{
+
+countdownBox.textContent = countdown;
+
+countdown--;
+
+if(countdown < 0){
+
+clearInterval(interval);
+
+statusBox.textContent =
+"🎮 لعبة الرقم السريع";
+
+gameRunning = false;
+
 }
 
-if(data.status === "countdown"){
-  if(document.getElementById("gameStatus")) document.getElementById("gameStatus").textContent = "🚦 استعدوا للجولة القادمة";
-  if(document.getElementById("targetNumber")) document.getElementById("targetNumber").textContent = "؟";
-} else if(data.status === "playing") {
-  if(document.getElementById("gameStatus")) document.getElementById("gameStatus").textContent = "🎮 لعبة الرقم السريع";
-  if(data.targetNumber && document.getElementById("targetNumber")){
-    document.getElementById("targetNumber").textContent = data.targetNumber;
-  }
+},1000);
+
+}
+onValue(gameRef,(snapshot)=>{
+
+const data = snapshot.val();
+
+if(!data) return;
+
+if(data.targetNumber){
+document.getElementById("targetNumber").textContent = data.targetNumber;
 }
 
 if(data.winner){
-  const gWin = document.getElementById("gameWinner");
-  if(gWin) gWin.textContent = "🏆 الفائز: " + data.winner;
-} else {
-  const gWin = document.getElementById("gameWinner");
-  if(gWin) gWin.textContent = "🏆 لا يوجد فائز بعد";
+
+document.getElementById("gameWinner").textContent =
+"🏆 الفائز: " + data.winner;
+
+if(botEnabled){
+
+setTimeout(()=>{
+
+startNewRound();
+
+},5000);
+
+}
+
+}else{
+
+document.getElementById("gameWinner").textContent =
+"🏆 لا يوجد فائز بعد";
+
+}
+  
+});
+
+document.getElementById("toggleBot").addEventListener("click",()=>{
+
+update(gameRef,{
+botEnabled: !botEnabled
+});
+
+});
+onValue(gameRef,(snapshot)=>{
+
+const data = snapshot.val();
+
+if(!data) return;
+
+if(data.status === "countdown"){
+
+document.getElementById("gameStatus").textContent =
+"🚦 استعدوا للجولة القادمة";
+
+document.getElementById("countdown").textContent = data.countdown;
+
+document.getElementById("targetNumber").textContent = "؟";
+
 }
 
 botEnabled = data.botEnabled;
-if(document.getElementById("autoStatus")) {
-  document.getElementById("autoStatus").textContent = botEnabled ? "المشرف كونترول: منير" : "المشرف كونترول: متوقف";
+
+document.getElementById("autoStatus").textContent =
+botEnabled ? "المشرف كونترول: منير" : "المشرف كونترول: متوقف";
+
+});
+  
+document.getElementById("adminBtn").addEventListener("click",()=>{
+
+const pass = prompt("أدخل كلمة المرور");
+
+if(pass !== "3"){
+alert("كلمة المرور غير صحيحة");
+return;
 }
+
+const panel =
+document.getElementById("adminPanel");
+
+if(panel.style.display === "none"){
+
+panel.style.display = "block";
+
+}else{
+
+panel.style.display = "none";
+
+}
+
+});
+document.getElementById("startRound").addEventListener("click",()=>{
+
+update(gameRef,{
+countdown: 10,
+status: "countdown",
+winner: ""
 });
 
-const adminBtn = document.getElementById("adminBtn");
-if(adminBtn){
-  adminBtn.addEventListener("click",()=>{
-    const pass = prompt("أدخل كلمة المرور");
-    if(pass !== "3"){
-      alert("كلمة المرور غير صحيحة");
-      return;
-    }
-    const panel = document.getElementById("adminPanel");
-    if(panel) panel.style.display = (panel.style.display === "none") ? "block" : "none";
-  });
+let count = 10;
+
+const timer = setInterval(()=>{
+
+count--;
+
+update(gameRef,{
+countdown: count
+});
+
+if(count <= 0){
+
+clearInterval(timer);
+
+const targetNumber =
+Math.floor(Math.random() * 100) + 1;
+
+update(gameRef,{
+targetNumber: targetNumber,
+status: "playing",
+winner: ""
+});
+
 }
 
-const triggerStartRound = ()=>{
-  update(gameRef,{ countdown: 10, status: "countdown", winner: "" });
-};
+},1000);
 
-const toggleBotAction = ()=>{
-  botEnabled = !botEnabled;
-  update(gameRef, { botEnabled: botEnabled });
-};
+});
 
-try {
-  if(document.getElementById("startRound")) document.getElementById("startRound").addEventListener("click", triggerStartRound);
-  if(document.getElementById("fastStartBtn")) document.getElementById("fastStartBtn").addEventListener("click", triggerStartRound);
-  if(document.getElementById("toggleBot")) document.getElementById("toggleBot").addEventListener("click", toggleBotAction);
-  if(document.getElementById("fastBotBtn")) document.getElementById("fastBotBtn").addEventListener("click", toggleBotAction);
-} catch(e) {
-  console.log("Buttons registration log:", e);
+function startNewRound(){
+
+update(gameRef,{
+countdown: 10,
+status: "countdown",
+winner: ""
+});
+
+let count = 10;
+
+const timer = setInterval(()=>{
+
+count--;
+
+update(gameRef,{
+countdown: count
+});
+
+if(count <= 0){
+
+clearInterval(timer);
+
+const targetNumber =
+Math.floor(Math.random() * 100) + 1;
+
+update(gameRef,{
+targetNumber: targetNumber,
+status: "playing",
+winner: ""
+});
+
+}
+
+},1000);
+
 }
 
 onValue(winsRef,(snapshot)=>{
-const board = document.getElementById("winsBoard");
-if(!board) return;
+
+const board =
+document.getElementById("winsBoard");
+
 const data = snapshot.val();
+
 if(!data){
-  board.innerHTML = "🥇 منير 0<br>🥈 أحمد 0<br>🥉 محمد 0";
-  return;
+board.innerHTML = "";
+return;
 }
-const players = Object.entries(data).sort((a,b)=>b[1].wins - a[1].wins);
+
+const players =
+Object.entries(data)
+.sort((a,b)=>b[1].wins - a[1].wins);
 const topPlayers = players.slice(0,3);
 let html = "";
+
 topPlayers.forEach(([name,info],index)=>{
-  let num = (index === 0) ? "🥇" : (index === 1) ? "🥈" : "🥉";
-  html += num + " " + name + " " + info.wins + "<br>";
+
+let medal = "🏅";
+
+if(index === 0) medal = "🥇";
+if(index === 1) medal = "🥈";
+if(index === 2) medal = "🥉";
+
+html += medal + " " + name + " : " + info.wins + "<br>";
+
 });
+
 board.innerHTML = html;
+
 });
   
+startGame();
 resizeGame();
 </script>
 
