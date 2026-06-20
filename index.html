@@ -17,10 +17,10 @@ body {
   font-family: Tahoma, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* لرفع اللوحة لأعلى الصفحة في شاشات الكمبيوتر الكبيرة */
+  align-items: flex-start; /* يرفع حاوية اللعبة إلى أعلى الشاشة تماماً */
   min-height: 100vh;
   overflow-x: hidden;
-  padding: 0;
+  padding: 0; /* إلغاء الفراغات للحفاظ على الالتصاق بالأعلى */
 }
 
 /* حاوية اللعبة الثابتة والمتطابقة تماماً */
@@ -35,9 +35,10 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  margin-top: 0; /* تأكيد الالتصاق بالسقف الأعلى للشاشة */
 }
 
-/* مواقع العناصر الدقيقة بالنسبة المئوية % */
+/* مواضع العناصر الدقيقة بالنسبة المئوية % */
 #logo {
   position: absolute;
   top: 1.35%;
@@ -201,7 +202,7 @@ body {
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
 
-<!-- إطارات الرسائل والأسماء الممسوحة والمجهزة للعرض النظيف -->
+<!-- إطارات الرسائل والأسماء -->
 <div id="nameBox1"></div>
 <div id="msgBox1"></div>
 <div id="nameBox2"></div>
