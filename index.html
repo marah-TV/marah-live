@@ -23,7 +23,7 @@ body {
   padding: 0;
 }
 
-/* حاوية اللعبة الثابتة والنسبية بالكامل */
+/* حاوية اللعبة الثابتة والمضمونة */
 .game-container {
   position: relative;
   width: 100vw;
@@ -35,10 +35,11 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  container-type: inline-size;
+  /* تحديد خط أساسي ديناميكي سيتم التحكم به عبر السكريبت للتثبيت الكامل */
+  font-size: 16px; 
 }
 
-/* شاشات الكمبيوتر: نضمن عدم وجود تمرير وملاءمة الشاشة عمودياً */
+/* شاشات الكمبيوتر: ملاءمة الطول ومنع التمرير */
 @media (min-height: 740px) and (min-width: 420px) {
   .game-container {
     height: 740px;
@@ -52,12 +53,12 @@ body {
   }
 }
 
-/* ضبط الخطوط لتقرأ من حجم الحاوية (cqw) بدلاً من الشاشة */
+/* استخدام الـ em لربط الخطوط بالحاوية مباشرة لمنع أي تحرك نهائياً */
 #logo {
   position: absolute;
   top: 1.35%;
   left: 52.38%;
-  font-size: 3.1 cqw;
+  font-size: 0.8em;
   font-weight: bold;
 }
 
@@ -65,7 +66,7 @@ body {
   position: absolute;
   top: 6.08%;
   left: 57.14%;
-  font-size: 3.1 cqw;
+  font-size: 0.8em;
   font-weight: bold;
 }
 
@@ -77,7 +78,7 @@ body {
   height: 4.73%;
   text-align: center;
   font-weight: bold;
-  font-size: 3.5 cqw;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,12 +91,11 @@ body {
   width: 52.38%;
   height: 8.11%;
   text-align: center;
-  font-size: 3.5 cqw;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: hidden; /* يخفي النص الزائد تماماً دون ترك نقاط ثلاثية */
   white-space: nowrap;
 }
 
@@ -107,7 +107,7 @@ body {
   height: 4.73%;
   text-align: center;
   font-weight: bold;
-  font-size: 3.5 cqw;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,12 +120,11 @@ body {
   width: 52.38%;
   height: 8.11%;
   text-align: center;
-  font-size: 3.5 cqw;
+  font-size: 0.9em;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: hidden; /* يخفي النص الزائد تماماً دون ترك نقاط ثلاثية */
   white-space: nowrap;
 }
 
@@ -134,7 +133,7 @@ body {
   top: 33.1%;
   left: 1.19%;
   width: 33%;
-  font-size: 3.3 cqw;
+  font-size: 0.85em;
   line-height: 1.4;
 }
 
@@ -144,21 +143,21 @@ body {
   left: 23.8%;
   width: 52.38%;
   text-align: center;
-  font-size: 3.5 cqw;
+  font-size: 0.9em;
 }
 
 #countdown {
   position: absolute;
   top: 58.78%;
   left: 8.33%;
-  font-size: 3.5 cqw;
+  font-size: 0.9em;
 }
 
 #targetNumber {
   position: absolute;
   top: 58.78%;
   left: 69.04%;
-  font-size: 3.5 cqw;
+  font-size: 0.9em;
 }
 
 #gameWinner {
@@ -167,7 +166,7 @@ body {
   left: 32.14%;
   width: 35.71%;
   text-align: center;
-  font-size: 3.3 cqw;
+  font-size: 0.85em;
 }
 
 #playersCount {
@@ -175,7 +174,7 @@ body {
   top: 67.56%;
   left: 3.57%;
   color: white;
-  font-size: 3.3 cqw;
+  font-size: 0.85em;
 }
 
 #adminBtn {
@@ -186,7 +185,7 @@ body {
   height: 5.4%;
   background: transparent;
   color: white;
-  font-size: 3.8 cqw;
+  font-size: 1em;
   border: none;
   cursor: pointer;
   text-align: center;
@@ -196,7 +195,7 @@ body {
   position: absolute;
   top: 79.45%;
   left: 0.23%;
-  font-size: 3.1 cqw;
+  font-size: 0.8em;
 }
 
 #adminPanel {
@@ -214,7 +213,7 @@ body {
   width: 100%;
   margin: 2% 0;
   padding: 3%;
-  font-size: 3.5 cqw;
+  font-size: 0.9em;
 }
 </style>
 
@@ -222,11 +221,12 @@ body {
 
 <body>
 
-<div class="game-container">
+<div class="game-container" id="mainContainer">
 
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
 
+<!-- إطارات الرسائل والأسماء -->
 <div id="nameBox1"></div>
 <div id="msgBox1"></div>
 <div id="nameBox2"></div>
@@ -273,6 +273,18 @@ body {
 
 <script type="module">
 
+// سكريبت سحري لتثبيت الخطوط والعناصر بنسبة 100% عند تصغير وتكبير المتصفح
+function resizeGame() {
+  const container = document.getElementById("mainContainer");
+  if (container) {
+    const currentWidth = container.offsetWidth;
+    // جعل الخط متناسباً تماماً مع عرض الحاوية الفعلي لحماية العناصر من التحرك
+    container.style.fontSize = (currentWidth / 420) * 16 + "px";
+  }
+}
+window.addEventListener("resize", resizeGame);
+window.addEventListener("DOMContentLoaded", resizeGame);
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
@@ -316,11 +328,11 @@ if(!data) return;
 
 const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
 
-// فلتر تنظيف تلقائي لمنع الكلمات العشوائية الطويلة جداً من تخريب التصميم
+// تنظيف الكلمات العشوائية فوراً ودون ترك ثلاث نقاط تشوه المظهر
 const cleanText = (txt) => {
   if (!txt) return "";
-  if (txt.length > 25 || txt.includes("نينيتيم") || txt.includes("بزينين")) {
-    return "...";
+  if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 30) {
+    return ""; // يتم تصفير النص العشوائي تماماً لتنظيف الشاشة
   }
   return txt;
 };
@@ -582,7 +594,8 @@ board.innerHTML = html;
 
 });
   
-startGame();  
+startGame();
+resizeGame();
 </script>
 
 </body>
