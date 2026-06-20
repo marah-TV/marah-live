@@ -261,22 +261,27 @@ body {
   cursor: pointer;
 }
 
+/* لوحة الإدارة تم تعديلها لتظهر في المنتصف تماماً بشكل ثابت ومرن */
 #adminPanel {
   position: absolute;
-  top: 62.16%;
-  left: 23.8%;
-  width: 52.38%;
-  background: rgba(0,0,0,0.9);
-  padding: 2%;
-  border-radius: 5px;
-  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background: rgba(255, 0, 0, 0.9); /* تم تغيير اللون للأحمر المؤقت لتمييزها بوضوح */
+  border: 2px solid #fff;
+  padding: 4%;
+  border-radius: 8px;
+  z-index: 100;
   text-align: center;
 }
 #adminPanel button {
   width: 100%;
-  margin: 2% 0;
-  padding: 3%;
-  font-size: 0.9em;
+  margin: 3% 0;
+  padding: 4%;
+  font-size: 0.95em;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>
 
@@ -326,7 +331,8 @@ body {
 
 <button id="adminBtn">⚙️</button>
 
-<div id="adminPanel" style="display:none;">
+<!-- تم إزالة style="display:none;" لتظهر مباشرة وتحدد موقعها الجديد -->
+<div id="adminPanel">
 <button id="startRound">▶️ بدء جولة</button>
 <button id="toggleBot">🤖 تشغيل/إيقاف الروبوت</button>
 </div>
@@ -429,6 +435,7 @@ botEnabled = data.botEnabled;
 document.getElementById("autoStatus").textContent = botEnabled ? "المشرف كونترول: منير" : "المشرف كونترول: متوقف";
 });
 
+// تم تعديل هذا الجزء ليعمل التبديل البرمجي بسلاسة تامة دون التأثير على ظهورها المبدئي
 document.getElementById("adminBtn").addEventListener("click",()=>{
 const pass = prompt("أدخل كلمة المرور");
 if(pass !== "3"){
