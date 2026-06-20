@@ -17,17 +17,18 @@ body {
   font-family: Tahoma, "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* يرفع حاوية اللعبة إلى أعلى الشاشة تماماً */
-  min-height: 100vh;
-  overflow-x: hidden;
-  padding: 0; /* إلغاء الفراغات للحفاظ على الالتصاق بالأعلى */
+  align-items: flex-start; 
+  height: 100vh;
+  overflow: hidden; /* يمنع ظهور أي شريط تمرير نهائياً في البث */
+  padding: 0;
 }
 
-/* حاوية اللعبة الثابتة والمتطابقة تماماً */
+/* حاوية اللعبة الذكية للبث المباشر */
 .game-container {
   position: relative;
-  width: 100vw;
-  height: calc(100vw * (740 / 420));
+  /* الميزة السحرية: تجعل اللعبة تتناسب مع الارتفاع في الكمبيوتر ومع العرض في الموبايل */
+  width: min(100vw, calc(100vh * (420 / 740)));
+  height: min(100vh, calc(100vw * (740 / 420)));
   max-width: 420px; 
   max-height: 740px;
   background: url("munirmunir.jpg");
@@ -35,27 +36,25 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  margin-top: 0; /* تأكيد الالتصاق بالسقف الأعلى للشاشة */
+  margin-top: 0;
 }
 
-/* مواضع العناصر الدقيقة بالنسبة المئوية % */
+/* ضبط حجم الخطوط بناءً على حجم الحاوية المرنة لضمان عدم تداخلها */
 #logo {
   position: absolute;
   top: 1.35%;
   left: 52.38%;
-  font-size: 3.1vw;
+  font-size: min(3.1vw, 13px);
   font-weight: bold;
 }
-@media (min-width: 420px) { #logo { font-size: 13px; } }
 
 #clock {
   position: absolute;
   top: 6.08%;
   left: 57.14%;
-  font-size: 3.1vw;
+  font-size: min(3.1vw, 13px);
   font-weight: bold;
 }
-@media (min-width: 420px) { #clock { font-size: 13px; } }
 
 #nameBox1 {
   position: absolute;
@@ -65,6 +64,7 @@ body {
   height: 4.73%;
   text-align: center;
   font-weight: bold;
+  font-size: min(3.5vw, 14px);
 }
 
 #msgBox1 {
@@ -74,6 +74,7 @@ body {
   width: 52.38%;
   height: 8.11%;
   text-align: center;
+  font-size: min(3.5vw, 14px);
 }
 
 #nameBox2 {
@@ -84,6 +85,7 @@ body {
   height: 4.73%;
   text-align: center;
   font-weight: bold;
+  font-size: min(3.5vw, 14px);
 }
 
 #msgBox2 {
@@ -93,6 +95,7 @@ body {
   width: 52.38%;
   height: 8.11%;
   text-align: center;
+  font-size: min(3.5vw, 14px);
 }
 
 #winsBoard {
@@ -100,10 +103,9 @@ body {
   top: 33.1%;
   left: 1.19%;
   width: 33%;
-  font-size: 3.3vw;
+  font-size: min(3.3vw, 14px);
   line-height: 1.4;
 }
-@media (min-width: 420px) { #winsBoard { font-size: 14px; } }
 
 #gameStatus {
   position: absolute;
@@ -111,25 +113,22 @@ body {
   left: 23.8%;
   width: 52.38%;
   text-align: center;
-  font-size: 3.5vw;
+  font-size: min(3.5vw, 15px);
 }
-@media (min-width: 420px) { #gameStatus { font-size: 15px; } }
 
 #countdown {
   position: absolute;
   top: 58.78%;
   left: 8.33%;
-  font-size: 3.5vw;
+  font-size: min(3.5vw, 15px);
 }
-@media (min-width: 420px) { #countdown { font-size: 15px; } }
 
 #targetNumber {
   position: absolute;
   top: 58.78%;
   left: 69.04%;
-  font-size: 3.5vw;
+  font-size: min(3.5vw, 15px);
 }
-@media (min-width: 420px) { #targetNumber { font-size: 15px; } }
 
 #gameWinner {
   position: absolute;
@@ -137,420 +136,10 @@ body {
   left: 32.14%;
   width: 35.71%;
   text-align: center;
-  font-size: 3.3vw;
+  font-size: min(3.3vw, 14px);
 }
-@media (min-width: 420px) { #gameWinner { font-size: 14px; } }
 
 #playersCount {
   position: absolute;
   top: 67.56%;
   left: 3.57%;
-  color: white;
-  font-size: 3.3vw;
-}
-@media (min-width: 420px) { #playersCount { font-size: 14px; } }
-
-#adminBtn {
-  position: absolute;
-  top: 70.27%;
-  left: 61.9%;
-  width: 23.8%;
-  height: 5.4%;
-  background: transparent;
-  color: white;
-  font-size: 3.8vw;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-}
-@media (min-width: 420px) { #adminBtn { font-size: 16px; } }
-
-#autoStatus {
-  position: absolute;
-  top: 79.45%;
-  left: 0.23%;
-  font-size: 3.1vw;
-}
-@media (min-width: 420px) { #autoStatus { font-size: 13px; } }
-
-#adminPanel {
-  position: absolute;
-  top: 62.16%;
-  left: 23.8%;
-  width: 52.38%;
-  background: rgba(0,0,0,0.9);
-  padding: 2%;
-  border-radius: 5px;
-  z-index: 10;
-  text-align: center;
-}
-#adminPanel button {
-  width: 100%;
-  margin: 2% 0;
-  padding: 3%;
-  font-size: 3.5vw;
-}
-@media (min-width: 420px) { #adminPanel button { font-size: 14px; } }
-</style>
-
-</head>
-
-<body>
-
-<div class="game-container">
-
-<div id="logo">🔴 Marah TV</div>
-<div id="clock"></div>
-
-<!-- إطارات الرسائل والأسماء -->
-<div id="nameBox1"></div>
-<div id="msgBox1"></div>
-<div id="nameBox2"></div>
-<div id="msgBox2"></div>
-
-<div id="gameStatus">
-🚦 الاستعدَاد للجولة القادمة
-</div>
-
-<div id="countdown">
-⏳ 10
-</div>
-
-<div id="targetNumber">
-🎯 ؟
-</div>
-
-<div id="gameWinner">
-🏆 لا يوجد فائز بعد
-</div>
-
-<div id="winsBoard">
-🏆 ترتيب اللاعبين
-</div>
-
-<div id="playersCount">
-👥 اللاعبون المتصلون: 0
-</div>
-
-<div id="autoStatus">
-🤖 الروبوت: يعمل
-</div>
-
-<button id="adminBtn">
-⚙️ الإدارة
-</button>
-
-<div id="adminPanel" style="display:none;">
-<button id="startRound">▶️ بدء جولة</button>
-<button id="toggleBot">🤖 تشغيل/إيقاف الروبوت</button>
-</div>
-
-</div>
-
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-getDatabase,
-ref,
-push,
-onValue,
-set,
-remove,
-get,
-update
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
-const firebaseConfig = {
-apiKey: "AIzaSyD8yIx-iVO4kCC-92lVHAzrVB7ye6ncbes",
-authDomain: "marah-tv-ed147.firebaseapp.com",
-databaseURL: "https://marah-tv-ed147-default-rtdb.europe-west1.firebasedatabase.app",
-projectId: "marah-tv-ed147",
-storageBucket: "marah-tv-ed147.firebasestorage.app",
-messagingSenderId: "868399469455",
-appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const gameRef = ref(db,"game");
-const messagesRef = ref(db,"messages");
-const winsRef = ref(db,"wins");
-  
-let countdownStarted = false;
-let countdown = 15;
-setInterval(()=>{
-document.getElementById("clock").textContent =
-new Date().toLocaleTimeString("ar");
-},1000);
-
-onValue(messagesRef,(snapshot)=>{
-
-const data = snapshot.val();
-
-if(!data) return;
-
-const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
-
-if(sorted[0]) {
-  if(document.getElementById("nameBox1")) document.getElementById("nameBox1").textContent = sorted[0].name;
-  if(document.getElementById("msgBox1")) document.getElementById("msgBox1").textContent = sorted[0].text;
-}
-if(sorted[1]) {
-  if(document.getElementById("nameBox2")) document.getElementById("nameBox2").textContent = sorted[1].name;
-  if(document.getElementById("msgBox2")) document.getElementById("msgBox2").textContent = sorted[1].text;
-}
-
-});
-let botEnabled = true;
-let gameRunning = false;
-
-function startGame(){
-
-if(gameRunning) return;
-
-gameRunning = true;
-
-let countdown = 10;
-
-const countdownBox =
-document.getElementById("countdown");
-
-const statusBox =
-document.getElementById("gameStatus");
-
-const numberBox =
-document.getElementById("targetNumber");
-
-statusBox.textContent =
-"🚦 استعدوا للجولة القادمة";
-
-numberBox.textContent =
-"🎯 جاري اختيار الرقم...";
-const interval = setInterval(()=>{
-
-countdownBox.textContent =
-"⏳ " + countdown;
-
-countdown--;
-
-if(countdown < 0){
-
-clearInterval(interval);
-
-statusBox.textContent =
-"🔥 انتظار الرقم من Firebase";
-
-gameRunning = false;
-
-}
-
-},1000);
-
-}
-onValue(gameRef,(snapshot)=>{
-
-const data = snapshot.val();
-
-if(!data) return;
-
-if(data.targetNumber){
-
-document.getElementById("targetNumber").textContent =
-"🎯 الرقم المطلوب: " + data.targetNumber;
-
-}
-
-if(data.winner){
-
-document.getElementById("gameWinner").textContent =
-"🏆 الفائز: " + data.winner;
-
-if(botEnabled){
-
-setTimeout(()=>{
-
-startNewRound();
-
-},5000);
-
-}
-
-}else{
-
-document.getElementById("gameWinner").textContent =
-"🏆 لا يوجد فائز بعد";
-
-}
-  
-});
-
-document.getElementById("toggleBot").addEventListener("click",()=>{
-
-update(gameRef,{
-botEnabled: !botEnabled
-});
-
-});
-onValue(gameRef,(snapshot)=>{
-
-const data = snapshot.val();
-
-if(!data) return;
-
-if(data.status === "countdown"){
-
-document.getElementById("gameStatus").textContent =
-"🚦 استعدوا للجولة القادمة";
-
-document.getElementById("countdown").textContent =
-"⏳ " + data.countdown;
-
-document.getElementById("targetNumber").textContent =
-"🎯 ؟";
-
-}
-
-botEnabled = data.botEnabled;
-
-document.getElementById("autoStatus").textContent =
-botEnabled ? "🤖 الروبوت: يعمل" : "⛔ الروبوت متوقف";
-
-});
-  
-document.getElementById("adminBtn").addEventListener("click",()=>{
-
-const pass = prompt("أدخل كلمة المرور");
-
-if(pass !== "3"){
-alert("كلمة المرور غير صحيحة");
-return;
-}
-
-const panel =
-document.getElementById("adminPanel");
-
-if(panel.style.display === "none"){
-
-panel.style.display = "block";
-
-}else{
-
-panel.style.display = "none";
-
-}
-
-});
-document.getElementById("startRound").addEventListener("click",()=>{
-
-update(gameRef,{
-countdown: 10,
-status: "countdown",
-winner: ""
-});
-
-let count = 10;
-
-const timer = setInterval(()=>{
-
-count--;
-
-update(gameRef,{
-countdown: count
-});
-
-if(count <= 0){
-
-clearInterval(timer);
-
-const targetNumber =
-Math.floor(Math.random() * 100) + 1;
-
-update(gameRef,{
-targetNumber: targetNumber,
-status: "playing",
-winner: ""
-});
-
-}
-
-},1000);
-
-});
-
-function startNewRound(){
-
-update(gameRef,{
-countdown: 10,
-status: "countdown",
-winner: ""
-});
-
-let count = 10;
-
-const timer = setInterval(()=>{
-
-count--;
-
-update(gameRef,{
-countdown: count
-});
-
-if(count <= 0){
-
-clearInterval(timer);
-
-const targetNumber =
-Math.floor(Math.random() * 100) + 1;
-
-update(gameRef,{
-targetNumber: targetNumber,
-status: "playing",
-winner: ""
-});
-
-}
-
-},1000);
-
-}
-
-onValue(winsRef,(snapshot)=>{
-
-const board =
-document.getElementById("winsBoard");
-
-const data = snapshot.val();
-
-if(!data){
-board.innerHTML = "🏆 ترتيب اللاعبين";
-return;
-}
-
-const players =
-Object.entries(data)
-.sort((a,b)=>b[1].wins - a[1].wins);
-const topPlayers = players.slice(0,3);
-let html = "🏆 ترتيب اللاعبين<br><br>";
-
-topPlayers.forEach(([name,info],index)=>{
-
-let medal = "🏅";
-
-if(index === 0) medal = "🥇";
-if(index === 1) medal = "🥈";
-if(index === 2) medal = "🥉";
-
-html += medal + " " + name + " : " + info.wins + "<br>";
-
-});
-
-board.innerHTML = html;
-
-});
-  
-startGame();  
-</script>
-
-</body>
-</html>
