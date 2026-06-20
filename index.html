@@ -23,14 +23,13 @@ body {
   padding: 0;
 }
 
-/* حاوية اللعبة الثابتة - تم إضافة خلفية زرقاء احتياطية في حال لم تتحمل الصورة */
 .game-container {
   position: relative;
   width: 100vw;
   height: calc(100vw * (740 / 420));
   max-width: 420px; 
   max-height: 740px;
-  background: #1a242f url("munirmunir.jpg");
+  background: url("munirmunir.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -38,7 +37,6 @@ body {
   font-size: 16px; 
 }
 
-/* شاشات الكمبيوتر: ملاءمة الطول ومنع التمرير */
 @media (min-height: 740px) and (min-width: 420px) {
   .game-container {
     height: 740px;
@@ -63,7 +61,6 @@ body {
   color: #ffffff;
 }
 
-/* نص marah TV المثبت داخل النافذة */
 #marahTvText {
   position: absolute;
   top: 1.5%;
@@ -89,7 +86,6 @@ body {
   margin-left: -5px;
 }
 
-/* أزرار التحكم في أعلى اليسار فوق النجوم */
 #topControlButtons {
   position: absolute;
   top: 6.5%;
@@ -111,7 +107,6 @@ body {
   text-shadow: 1px 1px 2px #000;
 }
 
-/* صندوق اسم منير العلوي */
 #nameBox1 {
   position: absolute;
   top: 13.0%;
@@ -127,7 +122,6 @@ body {
   align-items: center;
 }
 
-/* صندوق رسالة منير العلوية */
 #msgBox1 {
   position: absolute;
   top: 17.5%;
@@ -147,7 +141,6 @@ body {
   padding: 2px 5px;
 }
 
-/* صندوق اسم أحمد السفلي */
 #nameBox2 {
   position: absolute;
   top: 30.7%;
@@ -163,7 +156,6 @@ body {
   align-items: center;
 }
 
-/* صندوق رسالة أحمد السفلية */
 #msgBox2 {
   position: absolute;
   top: 35.2%;
@@ -183,7 +175,6 @@ body {
   padding: 2px 5px;
 }
 
-/* لوحة ترتيب اللاعبين */
 #winsBoard {
   position: absolute;
   top: 52.5%;
@@ -197,7 +188,6 @@ body {
   padding-right: 2px;
 }
 
-/* حالة اللعبة داخل اللوحة الزرقاء */
 #gameStatus {
   position: absolute;
   top: 74.0%;
@@ -209,7 +199,6 @@ body {
   color: #ffffff;
 }
 
-/* الفائز بالجولة داخل اللوحة الزرقاء */
 #gameWinner {
   position: absolute;
   top: 77.5%;
@@ -221,7 +210,6 @@ body {
   color: #ffffff;
 }
 
-/* عداد الثواني */
 #countdownContainer {
   position: absolute;
   top: 74.5%;
@@ -243,7 +231,6 @@ body {
   margin-top: -2px;
 }
 
-/* الرقم المطلوب */
 #targetContainer {
   position: absolute;
   top: 74.5%;
@@ -265,7 +252,6 @@ body {
   margin-top: -2px;
 }
 
-/* عدد اللاعبين المتصلين والسمايل بالأسفل */
 #playersCount {
   position: absolute;
   top: 90.2%;
@@ -284,7 +270,6 @@ body {
   margin-bottom: -3px;
 }
 
-/* نص المشرف / الروبوت السفلي */
 #autoStatus {
   position: absolute;
   top: 94.8%;
@@ -296,7 +281,6 @@ body {
   color: #ff00ff;
 }
 
-/* زر الإدارة الشفاف السفلي على اليسار */
 #adminBtn {
   position: absolute;
   top: 93.8%;
@@ -310,7 +294,6 @@ body {
   z-index: 20;
 }
 
-/* لوحة الإدارة المثبتة في الأسفل يمين */
 #adminPanel {
   position: absolute;
   bottom: 6.5%;
@@ -354,25 +337,196 @@ body {
 <div id="msgBox2">جاري التحميل...</div>
 
 <div id="gameStatus">🎮 لعبة الرقم السريع</div>
-<div id="gameWinner">🏆 الفائز: منير</div>
+<div id="gameWinner">🏆 لا يوجد فائز بعد</div>
 
 <div id="countdownContainer">
   <div class="emoji">⏳</div>
-  <div id="countdown">37</div>
+  <div id="countdown">--</div>
 </div>
 
 <div id="targetContainer">
   <div class="emoji">🎯</div>
-  <div id="targetNumber">48</div>
+  <div id="targetNumber">؟</div>
 </div>
 
 <div id="winsBoard">
-  🥇 منير 20<br>
-  🥈 أحمد 13<br>
-  🥉 محمد 7
+  جاري تحميل الترتيب...
 </div>
 
 <div id="playersCount">
   <span>🤪</span>
   <small id="pCountText">سمايلات</small>
 </div>
+
+<div id="autoStatus">المشرف كونترول منير</div>
+
+<button id="adminBtn">⚙️</button>
+
+<div id="adminPanel" style="display:none;">
+<button id="startRound">▶️ بدء جولة</button>
+<button id="toggleBot">🤖 تشغيل/إيقاف الروبوت</button>
+</div>
+
+</div>
+
+<script type="module">
+
+function resizeGame() {
+  const container = document.getElementById("mainContainer");
+  if (container) {
+    const currentWidth = container.offsetWidth;
+    container.style.fontSize = (currentWidth / 420) * 16 + "px";
+  }
+}
+window.addEventListener("resize", resizeGame);
+window.addEventListener("DOMContentLoaded", resizeGame);
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+getDatabase,
+ref,
+onValue,
+update
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyD8yIx-iVO4kCC-92lVHAzrVB7ye6ncbes",
+authDomain: "marah-tv-ed147.firebaseapp.com",
+databaseURL: "https://marah-tv-ed147-default-rtdb.europe-west1.firebasedatabase.app",
+projectId: "marah-tv-ed147",
+storageBucket: "marah-tv-ed147.firebasestorage.app",
+messagingSenderId: "868399469455",
+appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const gameRef = ref(db,"game");
+const messagesRef = ref(db,"messages");
+const winsRef = ref(db,"wins");
+  
+let botEnabled = true;
+
+setInterval(()=>{
+  const clk = document.getElementById("clock");
+  if(clk) clk.textContent = new Date().toLocaleTimeString("ar", {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+},1000);
+
+onValue(messagesRef,(snapshot)=>{
+const data = snapshot.val();
+if(!data) return;
+
+const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
+
+const cleanText = (txt) => {
+  if (!txt) return "";
+  if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 40) {
+    return ""; 
+  }
+  return txt;
+};
+
+if(sorted[0]) {
+  if(document.getElementById("nameBox1")) document.getElementById("nameBox1").textContent = sorted[0].name;
+  if(document.getElementById("msgBox1")) document.getElementById("msgBox1").textContent = cleanText(sorted[0].text);
+}
+if(sorted[1]) {
+  if(document.getElementById("nameBox2")) document.getElementById("nameBox2").textContent = sorted[1].name;
+  if(document.getElementById("msgBox2")) document.getElementById("msgBox2").textContent = cleanText(sorted[1].text);
+}
+});
+
+// هنا تم تعديل الاستقبال ليعتمد كلياً وبشكل صحيح على قيم السيرفر (Firebase) دون أي تدخل محلي
+onValue(gameRef,(snapshot)=>{
+const data = snapshot.val();
+if(!data) return;
+
+// تحديث العداد من الـ Firebase مباشرة
+if(data.countdown !== undefined){
+  const countEl = document.getElementById("countdown");
+  if(countEl) countEl.textContent = data.countdown;
+}
+
+// تحديث الرقم المطلوب بناءً على حالة اللعبة
+if(data.status === "countdown"){
+  if(document.getElementById("gameStatus")) document.getElementById("gameStatus").textContent = "🚦 استعدوا للجولة القادمة";
+  if(document.getElementById("targetNumber")) document.getElementById("targetNumber").textContent = "؟";
+} else if(data.status === "playing") {
+  if(document.getElementById("gameStatus")) document.getElementById("gameStatus").textContent = "🎮 لعبة الرقم السريع";
+  if(data.targetNumber && document.getElementById("targetNumber")){
+    document.getElementById("targetNumber").textContent = data.targetNumber;
+  }
+}
+
+// تحديث الفائز
+if(data.winner){
+  const gWin = document.getElementById("gameWinner");
+  if(gWin) gWin.textContent = "🏆 الفائز: " + data.winner;
+} else {
+  const gWin = document.getElementById("gameWinner");
+  if(gWin) gWin.textContent = "🏆 لا يوجد فائز بعد";
+}
+
+botEnabled = data.botEnabled;
+if(document.getElementById("autoStatus")) {
+  document.getElementById("autoStatus").textContent = botEnabled ? "المشرف كونترول: منير" : "المشرف كونترول: متوقف";
+}
+});
+
+// فتح لوحة الإدارة
+const adminBtn = document.getElementById("adminBtn");
+if(adminBtn){
+  adminBtn.addEventListener("click",()=>{
+    const pass = prompt("أدخل كلمة المرور");
+    if(pass !== "3"){
+      alert("كلمة المرور غير صحيحة");
+      return;
+    }
+    const panel = document.getElementById("adminPanel");
+    if(panel) panel.style.display = (panel.style.display === "none") ? "block" : "none";
+  });
+}
+
+// دالة الإدارة عند الضغط لإرسال إشارة البدء فقط للسيرفر
+const triggerStartRound = ()=>{
+  update(gameRef,{ countdown: 10, status: "countdown", winner: "" });
+};
+
+const toggleBotAction = ()=>{
+  botEnabled = !botEnabled;
+  update(gameRef, { botEnabled: botEnabled });
+};
+
+// ربط الأزرار العلوية والداخلية بشكل آمن لتتحكم بالسيرفر فقط
+try {
+  if(document.getElementById("startRound")) document.getElementById("startRound").addEventListener("click", triggerStartRound);
+  if(document.getElementById("fastStartBtn")) document.getElementById("fastStartBtn").addEventListener("click", triggerStartRound);
+  if(document.getElementById("toggleBot")) document.getElementById("toggleBot").addEventListener("click", toggleBotAction);
+  if(document.getElementById("fastBotBtn")) document.getElementById("fastBotBtn").addEventListener("click", toggleBotAction);
+} catch(e) {
+  console.log("Buttons event tracking error:", e);
+}
+
+onValue(winsRef,(snapshot)=>{
+const board = document.getElementById("winsBoard");
+if(!board) return;
+const data = snapshot.val();
+if(!data){
+  board.innerHTML = "🥇 منير 0<br>🥈 أحمد 0<br>🥉 محمد 0";
+  return;
+}
+const players = Object.entries(data).sort((a,b)=>b[1].wins - a[1].wins);
+const topPlayers = players.slice(0,3);
+let html = "";
+topPlayers.forEach(([name,info],index)=>{
+  let num = (index === 0) ? "🥇" : (index === 1) ? "🥈" : "🥉";
+  html += num + " " + name + " " + info.wins + "<br>";
+});
+board.innerHTML = html;
+});
+  
+resizeGame();
+</script>
+
+</body>
+</html>
