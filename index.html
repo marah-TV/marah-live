@@ -175,86 +175,91 @@ body {
   padding: 2px 5px;
 }
 
+/* تعديل إحداثيات لوحة الترتيب لتناسب البرواز الذهبي تماماً */
 #winsBoard {
   position: absolute;
-  top: 52.5%;
-  left: 4.5%;
+  top: 52.8%;
+  left: 4.0%;
   width: 27.5%;
-  height: 15.0%;
-  font-size: 0.88em;
+  height: 14.2%;
+  font-size: 0.85em;
   font-weight: bold;
+  color: #5d3a1a; /* لون بني داكن متناسق مع البرواز أو يمكنك إبقاؤه أبيض */
   color: #ffffff;
   line-height: 1.8;
-  padding-right: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.6);
 }
 
 #gameStatus {
   position: absolute;
-  top: 74.0%;
+  top: 71.5%;
   left: 32.0%;
   width: 37.0%;
   text-align: center;
-  font-size: 0.88em;
+  font-size: 0.82em;
   font-weight: bold;
   color: #ffffff;
 }
 
 #gameWinner {
   position: absolute;
-  top: 77.5%;
+  top: 74.8%;
   left: 31.0%;
   width: 38.0%;
   text-align: center;
-  font-size: 1.05em;
+  font-size: 0.95em;
   font-weight: bold;
   color: #ffffff;
 }
 
 #countdownContainer {
   position: absolute;
-  top: 74.5%;
+  top: 71.5%;
   left: 10.5%;
   width: 14.0%;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
 }
 #countdownContainer .emoji {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 #countdown {
-  font-size: 1.7em;
+  font-size: 1.6em;
   font-weight: bold;
   color: #ffffff;
-  margin-top: -2px;
+  margin-top: -4px;
 }
 
 #targetContainer {
   position: absolute;
-  top: 74.5%;
+  top: 71.5%;
   left: 75.0%;
   width: 14.0%;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
 }
 #targetContainer .emoji {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 #targetNumber {
-  font-size: 1.7em;
+  font-size: 1.6em;
   font-weight: bold;
   color: #ffffff;
-  margin-top: -2px;
+  margin-top: -4px;
 }
 
 #playersCount {
   position: absolute;
-  top: 90.2%;
+  top: 83.5%;
   left: 3.5%;
   color: #ffffff;
   font-size: 0.8em;
@@ -281,12 +286,13 @@ body {
   color: #ff00ff;
 }
 
+/* نقل زر الإدارة وتعديل مكانه ليكون أسفل اليمين تماماً فوق العجلة السوداء المضيئة */
 #adminBtn {
   position: absolute;
-  top: 93.8%;
-  left: 73.0%;
-  width: 25.0%;
-  height: 5.5%;
+  top: 85.5%;
+  right: 28.0%;
+  width: 44.0%;
+  height: 6.5%;
   background: transparent;
   color: transparent;
   border: none;
@@ -296,23 +302,26 @@ body {
 
 #adminPanel {
   position: absolute;
-  bottom: 6.5%;
-  right: 2%;
-  width: 45%;
-  background: rgba(0, 0, 0, 0.85);
-  border: 1px solid #ff00ff;
-  padding: 5px;
-  border-radius: 4px;
+  bottom: 16%;
+  right: 5%;
+  width: 50%;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #ff00ff;
+  padding: 8px;
+  border-radius: 6px;
   z-index: 100;
   text-align: center;
 }
 #adminPanel button {
   width: 100%;
-  margin: 2px 0;
-  padding: 4px;
-  font-size: 0.75em;
+  margin: 4px 0;
+  padding: 6px;
+  font-size: 0.8em;
   font-weight: bold;
   cursor: pointer;
+  background: #222;
+  color: #fff;
+  border: 1px solid #aaa;
 }
 </style>
 
@@ -349,8 +358,9 @@ body {
   <div id="targetNumber">؟</div>
 </div>
 
+<!-- لوحة الترتيب داخل البرواز الذهبي المخصص لها -->
 <div id="winsBoard">
-  جاري تحميل الترتيب...
+  جاري التحميل...
 </div>
 
 <div id="playersCount">
@@ -360,6 +370,7 @@ body {
 
 <div id="autoStatus">المشرف كونترول منير</div>
 
+<!-- زر الإدارة الشفاف موضوع الآن أسفل اليمين في المكان المخصص -->
 <button id="adminBtn">⚙️</button>
 
 <div id="adminPanel" style="display:none;">
@@ -402,7 +413,7 @@ appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const gameRef = ref(db,"game");
-const messagesRef = ref(db,"messages");
+const messagesRef = ref(db["messages"]);
 const winsRef = ref(db,"wins");
   
 let botEnabled = true;
@@ -436,18 +447,15 @@ if(sorted[1]) {
 }
 });
 
-// هنا تم تعديل الاستقبال ليعتمد كلياً وبشكل صحيح على قيم السيرفر (Firebase) دون أي تدخل محلي
 onValue(gameRef,(snapshot)=>{
 const data = snapshot.val();
 if(!data) return;
 
-// تحديث العداد من الـ Firebase مباشرة
 if(data.countdown !== undefined){
   const countEl = document.getElementById("countdown");
   if(countEl) countEl.textContent = data.countdown;
 }
 
-// تحديث الرقم المطلوب بناءً على حالة اللعبة
 if(data.status === "countdown"){
   if(document.getElementById("gameStatus")) document.getElementById("gameStatus").textContent = "🚦 استعدوا للجولة القادمة";
   if(document.getElementById("targetNumber")) document.getElementById("targetNumber").textContent = "؟";
@@ -458,7 +466,6 @@ if(data.status === "countdown"){
   }
 }
 
-// تحديث الفائز
 if(data.winner){
   const gWin = document.getElementById("gameWinner");
   if(gWin) gWin.textContent = "🏆 الفائز: " + data.winner;
@@ -473,7 +480,6 @@ if(document.getElementById("autoStatus")) {
 }
 });
 
-// فتح لوحة الإدارة
 const adminBtn = document.getElementById("adminBtn");
 if(adminBtn){
   adminBtn.addEventListener("click",()=>{
@@ -487,7 +493,6 @@ if(adminBtn){
   });
 }
 
-// دالة الإدارة عند الضغط لإرسال إشارة البدء فقط للسيرفر
 const triggerStartRound = ()=>{
   update(gameRef,{ countdown: 10, status: "countdown", winner: "" });
 };
@@ -497,14 +502,13 @@ const toggleBotAction = ()=>{
   update(gameRef, { botEnabled: botEnabled });
 };
 
-// ربط الأزرار العلوية والداخلية بشكل آمن لتتحكم بالسيرفر فقط
 try {
   if(document.getElementById("startRound")) document.getElementById("startRound").addEventListener("click", triggerStartRound);
   if(document.getElementById("fastStartBtn")) document.getElementById("fastStartBtn").addEventListener("click", triggerStartRound);
   if(document.getElementById("toggleBot")) document.getElementById("toggleBot").addEventListener("click", toggleBotAction);
   if(document.getElementById("fastBotBtn")) document.getElementById("fastBotBtn").addEventListener("click", toggleBotAction);
 } catch(e) {
-  console.log("Buttons event tracking error:", e);
+  console.log("Buttons registration log:", e);
 }
 
 onValue(winsRef,(snapshot)=>{
