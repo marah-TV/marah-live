@@ -52,19 +52,6 @@ body {
   }
 }
 
-/* ========================================================
-   توزيع العناصر الدقيق والمطابق تماماً للصورة "7269.png"
-   ======================================================== */
-
-#logo {
-  position: absolute;
-  top: 3.5%;
-  left: 70.0%;
-  font-size: 0.8em;
-  font-weight: bold;
-  display: none; /* مخفي لأن اللوجو مطبوع داخل نافذة الخلفية الجديدة */
-}
-
 #clock {
   position: absolute;
   top: 1.8%;
@@ -148,21 +135,21 @@ body {
   padding: 2px 5px;
 }
 
-/* لوحة ترتيب اللاعبين (عدد مرات الفوز) جهة اليمين في الخلفية المطبوعة */
+/* لوحة ترتيب اللاعبين (عدد مرات الفوز) */
 #winsBoard {
   position: absolute;
   top: 52.5%;
   left: 4.5%;
   width: 27.5%;
   height: 15.0%;
-  font-size: 0.95em;
+  font-size: 0.88em;
   font-weight: bold;
   color: #ffffff;
   line-height: 1.8;
-  padding-right: 5px;
+  padding-right: 2px;
 }
 
-/* حالة اللعبة داخل اللوحة الزرقاء الكبيرة (GAMES) */
+/* حالة اللعبة داخل اللوحة الزرقاء */
 #gameStatus {
   position: absolute;
   top: 74.0%;
@@ -174,7 +161,7 @@ body {
   color: #ffffff;
 }
 
-/* الفائز بالجولة داخل اللوحة الزرقاء الكبيرة */
+/* الفائز بالجولة داخل اللوحة الزرقاء */
 #gameWinner {
   position: absolute;
   top: 77.5%;
@@ -186,43 +173,70 @@ body {
   color: #ffffff;
 }
 
-/* رقم العداد التنازلي فوق الساعة الرملية على اليسار */
-#countdown {
+/* عداد الثواني (مع الساعة الرملية والسمايل المدمج) */
+#countdownContainer {
   position: absolute;
-  top: 80.5%;
+  top: 74.5%;
   left: 10.5%;
   width: 14.0%;
   text-align: center;
-  font-size: 1.8em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+#countdownContainer .emoji {
+  font-size: 1.3em;
+}
+#countdown {
+  font-size: 1.7em;
   font-weight: bold;
   color: #ffffff;
+  margin-top: -2px;
 }
 
-/* الرقم المطلوب فوق لوحة الهدف على اليمين */
-#targetNumber {
+/* الرقم المطلوب (مع الهدف والسمايل المدمج) */
+#targetContainer {
   position: absolute;
-  top: 80.5%;
+  top: 74.5%;
   left: 75.0%;
   width: 14.0%;
   text-align: center;
-  font-size: 1.8em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+#targetContainer .emoji {
+  font-size: 1.3em;
+}
+#targetNumber {
+  font-size: 1.7em;
   font-weight: bold;
   color: #ffffff;
+  margin-top: -2px;
 }
 
-/* عدد اللاعبين المتصلين (سمايلات) في الأسفل على اليسار */
+/* عدد اللاعبين المتصلين والسمايل بالأسفل */
 #playersCount {
   position: absolute;
-  top: 90.6%;
+  top: 90.2%;
   left: 3.5%;
   color: #ffffff;
-  font-size: 0.85em;
+  font-size: 0.8em;
   font-weight: bold;
   width: 14%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#playersCount span {
+  font-size: 1.4em;
+  margin-bottom: -3px;
 }
 
-/* نص المشرف / الروبوت في الشريط الأسود السفلي المنتصف */
+/* نص المشرف / الروبوت السفلي */
 #autoStatus {
   position: absolute;
   top: 94.8%;
@@ -231,10 +245,10 @@ body {
   text-align: center;
   font-size: 0.95em;
   font-weight: bold;
-  color: #ff00ff; /* لون فوشي متناسق مع كلمة المشرف كونترول */
+  color: #ff00ff;
 }
 
-/* زر الإدارة الشفاف والمطابق لترس الإدارة */
+/* زر الإدارة الشفاف */
 #adminBtn {
   position: absolute;
   top: 73.0%;
@@ -242,7 +256,7 @@ body {
   width: 21.0%;
   height: 4.5%;
   background: transparent;
-  color: transparent; /* جعل النص شفافاً لأن كلمة الإدارة مطبوعة خلفه */
+  color: transparent;
   border: none;
   cursor: pointer;
 }
@@ -272,29 +286,43 @@ body {
 
 <div class="game-container" id="mainContainer">
 
-<div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
 
 <!-- إطارات الرسائل والأسماء -->
 <div id="nameBox1">منير</div>
-<div id="msgBox1">جاري تحميل الرسائل...</div>
+<div id="msgBox1">جاري التحميل...</div>
 <div id="nameBox2">أحمد</div>
-<div id="msgBox2">جاري تحميل الرسائل...</div>
+<div id="msgBox2">جاري التحميل...</div>
 
 <div id="gameStatus">🎮 لعبة الرقم السريع</div>
-<div id="gameWinner">🏆 الفائز: لا أحد</div>
+<div id="gameWinner">🏆 الفائز: منير</div>
 
-<div id="countdown">0</div>
-<div id="targetNumber">0</div>
-
-<div id="winsBoard">
-1️⃣ منير: 0<br>
-2️⃣ أحمد: 0<br>
-3️⃣ محمد: 0
+<!-- العداد مع الساعة الرملية المدمجة -->
+<div id="countdownContainer">
+  <div class="emoji">⏳</div>
+  <div id="countdown">37</div>
 </div>
 
-<div id="playersCount">0</div>
-<div id="autoStatus">المشرف كونترول يعمل</div>
+<!-- الرقم المطلوب مع الهدف المدمج -->
+<div id="targetContainer">
+  <div class="emoji">🎯</div>
+  <div id="targetNumber">48</div>
+</div>
+
+<!-- لوحة ترتيب اللاعبين (تحدث تلقائياً) -->
+<div id="winsBoard">
+  🥇 منير 20<br>
+  🥈 أحمد 13<br>
+  🥉 محمد 7
+</div>
+
+<!-- سمايل المتصلين السفلي -->
+<div id="playersCount">
+  <span>🤪</span>
+  <small id="pCountText">سمايلات</small>
+</div>
+
+<div id="autoStatus">المشرف كونترول منير</div>
 
 <button id="adminBtn">⚙️</button>
 
@@ -307,7 +335,7 @@ body {
 
 <script type="module">
 
-// تثبيت الخطوط والعناصر ومنع حركتها نهائياً عند تكبير وتصغير الشاشة
+// تثبيت الخطوط والعناصر بالمليمتر ومنع حركتها عند تصغير الموقع
 function resizeGame() {
   const container = document.getElementById("mainContainer");
   if (container) {
@@ -395,7 +423,6 @@ if(data.status === "countdown"){
   document.getElementById("targetNumber").textContent = "؟";
 } else if(data.status === "playing") {
   document.getElementById("gameStatus").textContent = "🎮 لعبة الرقم السريع";
-  document.getElementById("countdown").textContent = "37"; // قيمة افتراضية مطابقة للصورة أو دمجها مع الكود
 }
 
 botEnabled = data.botEnabled;
@@ -444,14 +471,14 @@ onValue(winsRef,(snapshot)=>{
 const board = document.getElementById("winsBoard");
 const data = snapshot.val();
 if(!data){
-  board.innerHTML = "1️⃣ منير : 0<br>2️⃣ أحمد : 0<br>3️⃣ محمد : 0";
+  board.innerHTML = "🥇 منير 0<br>🥈 أحمد 0<br>🥉 محمد 0";
   return;
 }
 const players = Object.entries(data).sort((a,b)=>b[1].wins - a[1].wins);
 const topPlayers = players.slice(0,3);
 let html = "";
 topPlayers.forEach(([name,info],index)=>{
-  let num = (index === 0) ? "1️⃣" : (index === 1) ? "2️⃣" : "3️⃣";
+  let num = (index === 0) ? "🥇" : (index === 1) ? "🥈" : "🥉";
   html += num + " " + name + " " + info.wins + "<br>";
 });
 board.innerHTML = html;
