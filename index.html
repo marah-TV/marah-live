@@ -23,14 +23,14 @@ body {
   padding: 0;
 }
 
-/* حاوية اللعبة الثابتة والنسبية بالكامل بمقاس 420x740 */
+/* حاوية اللعبة الثابتة - تم إضافة خلفية زرقاء احتياطية في حال لم تتحمل الصورة */
 .game-container {
   position: relative;
   width: 100vw;
   height: calc(100vw * (740 / 420));
   max-width: 420px; 
   max-height: 740px;
-  background: url("munirmunir.jpg");
+  background: #1a242f url("munirmunir.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -138,4 +138,241 @@ body {
   font-size: 0.95em;
   font-weight: bold;
   color: #002D62;
-  display
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  white-space: normal;
+  line-height: 1.3;
+  padding: 2px 5px;
+}
+
+/* صندوق اسم أحمد السفلي */
+#nameBox2 {
+  position: absolute;
+  top: 30.7%;
+  left: 37.5%;
+  width: 41.5%;
+  height: 4.2%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.05em;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* صندوق رسالة أحمد السفلية */
+#msgBox2 {
+  position: absolute;
+  top: 35.2%;
+  left: 37.5%;
+  width: 41.5%;
+  height: 11.5%;
+  text-align: center;
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #002D62;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  white-space: normal;
+  line-height: 1.3;
+  padding: 2px 5px;
+}
+
+/* لوحة ترتيب اللاعبين */
+#winsBoard {
+  position: absolute;
+  top: 52.5%;
+  left: 4.5%;
+  width: 27.5%;
+  height: 15.0%;
+  font-size: 0.88em;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1.8;
+  padding-right: 2px;
+}
+
+/* حالة اللعبة داخل اللوحة الزرقاء */
+#gameStatus {
+  position: absolute;
+  top: 74.0%;
+  left: 32.0%;
+  width: 37.0%;
+  text-align: center;
+  font-size: 0.88em;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* الفائز بالجولة داخل اللوحة الزرقاء */
+#gameWinner {
+  position: absolute;
+  top: 77.5%;
+  left: 31.0%;
+  width: 38.0%;
+  text-align: center;
+  font-size: 1.05em;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* عداد الثواني */
+#countdownContainer {
+  position: absolute;
+  top: 74.5%;
+  left: 10.5%;
+  width: 14.0%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+#countdownContainer .emoji {
+  font-size: 1.3em;
+}
+#countdown {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: -2px;
+}
+
+/* الرقم المطلوب */
+#targetContainer {
+  position: absolute;
+  top: 74.5%;
+  left: 75.0%;
+  width: 14.0%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+#targetContainer .emoji {
+  font-size: 1.3em;
+}
+#targetNumber {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: -2px;
+}
+
+/* عدد اللاعبين المتصلين والسمايل بالأسفل */
+#playersCount {
+  position: absolute;
+  top: 90.2%;
+  left: 3.5%;
+  color: #ffffff;
+  font-size: 0.8em;
+  font-weight: bold;
+  width: 14%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#playersCount span {
+  font-size: 1.4em;
+  margin-bottom: -3px;
+}
+
+/* نص المشرف / الروبوت السفلي */
+#autoStatus {
+  position: absolute;
+  top: 94.8%;
+  left: 27.0%;
+  width: 46.0%;
+  text-align: center;
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #ff00ff;
+}
+
+/* زر الإدارة الشفاف السفلي على اليسار */
+#adminBtn {
+  position: absolute;
+  top: 93.8%;
+  left: 73.0%;
+  width: 25.0%;
+  height: 5.5%;
+  background: transparent;
+  color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+}
+
+/* لوحة الإدارة المثبتة في الأسفل يمين */
+#adminPanel {
+  position: absolute;
+  bottom: 6.5%;
+  right: 2%;
+  width: 45%;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #ff00ff;
+  padding: 5px;
+  border-radius: 4px;
+  z-index: 100;
+  text-align: center;
+}
+#adminPanel button {
+  width: 100%;
+  margin: 2px 0;
+  padding: 4px;
+  font-size: 0.75em;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="game-container" id="mainContainer">
+
+<div id="clock"></div>
+
+<div id="marahTvText">marah<br>TV<span>🔴</span></div>
+
+<div id="topControlButtons">
+  <button id="fastBotBtn">🤖 تشغيل/إيقاف الروبوت</button>
+  <button id="fastStartBtn">▶️ بدء الجولة</button>
+</div>
+
+<div id="nameBox1">منير</div>
+<div id="msgBox1">جاري التحميل...</div>
+<div id="nameBox2">أحمد</div>
+<div id="msgBox2">جاري التحميل...</div>
+
+<div id="gameStatus">🎮 لعبة الرقم السريع</div>
+<div id="gameWinner">🏆 الفائز: منير</div>
+
+<div id="countdownContainer">
+  <div class="emoji">⏳</div>
+  <div id="countdown">37</div>
+</div>
+
+<div id="targetContainer">
+  <div class="emoji">🎯</div>
+  <div id="targetNumber">48</div>
+</div>
+
+<div id="winsBoard">
+  🥇 منير 20<br>
+  🥈 أحمد 13<br>
+  🥉 محمد 7
+</div>
+
+<div id="playersCount">
+  <span>🤪</span>
+  <small id="pCountText">سمايلات</small>
+</div>
