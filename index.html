@@ -23,11 +23,10 @@ body {
   padding: 10px;
 }
 
-/* هذه الحاوية الذكية تثبت أبعاد لوحة اللعبة وتجعلها تتقلص وتتكبر تلقائياً ككتلة واحدة في الكمبيوتر والموبايل */
 .game-container {
   position: relative;
   width: 100vw;
-  height: calc(100vw * (740 / 420)); /* تحافظ على النسبة التناسبية الدقيقة للصورة */
+  height: calc(100vw * (740 / 420));
   max-width: 420px; 
   max-height: 740px;
   background: url("munirmunir.jpg");
@@ -38,187 +37,174 @@ body {
   border-radius: 4px;
 }
 
-#winsBoard {
+#logo {
   position: absolute;
-  top: 245px;
-  left: 5px;
-  padding: 10px;
+  top: 1.35%;
+  left: 52.38%;
+  font-size: 3.1vw;
 }
-#countdown {
-  position: absolute;
-  top: 435px;
-  left: 35px;
-  padding: 3px;
-  background:transparent;
-}
+@media (min-width: 420px) { #logo { font-size: 13px; } }
 
-#targetNumber {
+#clock {
   position: absolute;
-  top: 435px;
-  left: 290px;
-  padding: 3px;
-  background:transparent;
+  top: 6.08%;
+  left: 57.14%;
+  font-size: 3.1vw;
+  font-weight: bold;
 }
+@media (min-width: 420px) { #clock { font-size: 13px; } }
 
-#gameWinner {
-  position: absolute;
-  top: 430px;
-  left: 135px;
-  padding: 10px;
-  background:transparent;
-}
-
-#autoStatus {
-  position: absolute;
-  top: 588px;
-  left: 1px;
-  background: transparent;
-  padding: 3px;
-}
-#gameStatus {
-  position: absolute;
-  top: 415px;
-  left: 100px;
-  background: transparent;
-  padding: 1px;
-}
-#adminBtn {
-  position: absolute;
-  top: 520px;
-  left: 260px;
-  width: 100px;
-  height: 40px;
-  background: transparent;
-  color: white;
-  font-size: 20px;
-}
 #nameBox1 {
   position: absolute;
-  top: 75px;
-  left: 140px;
-  width: 140px;
-  height: 35px;
+  top: 10.13%;
+  left: 33.33%;
+  width: 33.33%;
+  height: 4.73%;
   text-align: center;
-  line-height: 35px;
 }
 
 #msgBox1 {
   position: absolute;
-  top: 115px;
-  left: 60px;
-  width: 220px;
-  height: 60px;
+  top: 15.54%;
+  left: 14.28%;
+  width: 52.38%;
+  height: 8.11%;
   text-align: center;
 }
 
 #nameBox2 {
   position: absolute;
-  top: 193px;
-  left: 140px;
-  width: 140px;
-  height: 35px;
+  top: 26.08%;
+  left: 33.33%;
+  width: 33.33%;
+  height: 4.73%;
   text-align: center;
-  line-height: 35px;
 }
 
 #msgBox2 {
   position: absolute;
-  top: 234px;
-  left: 60px;
-  width: 220px;
-  height: 60px;
+  top: 31.62%;
+  left: 14.28%;
+  width: 52.38%;
+  height: 8.11%;
   text-align: center;
 }
-#chatInput {
-  position: absolute;
-  top: 580px;
-  left: 100px;
-  width: 175px;
-  height: 30px;
-  font-size: 20px;
-}
 
-#sendBtn {
+#winsBoard {
   position: absolute;
-  top: 583px;
-  left: 290px;
-  width: 60px;
-  height: 30px;
-  font-size: 20px;
+  top: 33.1%;
+  left: 1.19%;
+  width: 33%;
+  font-size: 3.3vw;
 }
-#logo {
-  position: absolute;
-  top: 10px;
-  left: 220px;
-  padding: 10px;
-  font-size: 13px;
-  font-weight: bold;
-}
+@media (min-width: 420px) { #winsBoard { font-size: 14px; } }
 
-#clock {
+#gameStatus {
   position: absolute;
-  top: 45px;
-  left: 240px;
-  padding: 10px;
-  font-size: 13px;
-  font-weight: bold;
+  top: 56.08%;
+  left: 23.8%;
+  width: 52.38%;
+  text-align: center;
+  font-size: 3.5vw;
 }
-#liveChatTitle {
-  position: absolute;
-  top: 330px;
-  left: 110px;
-  padding: 10px;
-}
+@media (min-width: 420px) { #gameStatus { font-size: 15px; } }
 
-#liveName {
+#countdown {
   position: absolute;
-  top: 290px;
-  left: 250px;
-  padding: 10px;
+  top: 58.78%;
+  left: 8.33%;
+  font-size: 3.5vw;
 }
-#liveMessage {
+@media (min-width: 420px) { #countdown { font-size: 15px; } }
+
+#targetNumber {
   position: absolute;
-  top: 290px;
-  left: 130px;
-  padding: 10px;
-  width: 250px;
+  top: 58.78%;
+  left: 69.04%;
+  font-size: 3.5vw;
 }
-#gameBoxTitle {
+@media (min-width: 420px) { #targetNumber { font-size: 15px; } }
+
+#gameWinner {
   position: absolute;
-  top: 330px;
-  left: 220px;
-  padding: 10px;
+  top: 58.1%;
+  left: 32.14%;
+  width: 35.71%;
+  text-align: center;
+  font-size: 3.3vw;
 }
-#gameEntry1 {
-  position: absolute;
-  top: 350px;
-  left: 130px;
-  padding: 10px;
-}
-#gameEntry2 {
-  position: absolute;
-  top: 370px;
-  left: 130px;
-  padding: 10px;
-}
+@media (min-width: 420px) { #gameWinner { font-size: 14px; } }
 
 #playersCount {
   position: absolute;
-  top: 500px;
-  left: 15px;
-  padding: 3px;
+  top: 67.56%;
+  left: 3.57%;
   color: white;
+  font-size: 3.3vw;
 }
+@media (min-width: 420px) { #playersCount { font-size: 14px; } }
+
+#adminBtn {
+  position: absolute;
+  top: 70.27%;
+  left: 61.9%;
+  width: 23.8%;
+  height: 5.4%;
+  background: transparent;
+  color: white;
+  font-size: 4.7vw;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  cursor: pointer;
+}
+@media (min-width: 420px) { #adminBtn { font-size: 20px; } }
+
+#autoStatus {
+  position: absolute;
+  top: 79.45%;
+  left: 0.23%;
+  font-size: 3.1vw;
+}
+@media (min-width: 420px) { #autoStatus { font-size: 13px; } }
+
+#chatInput {
+  position: absolute;
+  top: 78.37%;
+  left: 23.8%;
+  width: 41.66%;
+  height: 4.05%;
+  font-size: 4.7vw;
+}
+@media (min-width: 420px) { #chatInput { font-size: 20px; } }
+
+#sendBtn {
+  position: absolute;
+  top: 78.78%;
+  left: 69.04%;
+  width: 14.28%;
+  height: 4.05%;
+  font-size: 4.7vw;
+}
+@media (min-width: 420px) { #sendBtn { font-size: 20px; } }
 
 #adminPanel {
   position: absolute;
-  top: 460px;
-  left: 100px;
-  background: rgba(0,0,0,0.8);
-  padding: 10px;
+  top: 62.16%;
+  left: 23.8%;
+  width: 52.38%;
+  background: rgba(0,0,0,0.9);
+  padding: 2%;
   border-radius: 5px;
   z-index: 10;
+  text-align: center;
 }
+#adminPanel button {
+  width: 100%;
+  margin: 2% 0;
+  padding: 3%;
+  font-size: 3.5vw;
+}
+@media (min-width: 420px) { #adminPanel button { font-size: 14px; } }
 </style>
 
 </head>
@@ -229,6 +215,12 @@ body {
 
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
+
+<!-- إطارات الرسائل والأسماء -->
+<div id="nameBox1"></div>
+<div id="msgBox1"></div>
+<div id="nameBox2"></div>
+<div id="msgBox2"></div>
 
 <div id="gameStatus">
 🚦 الاستعداد للجولة القادمة
@@ -415,7 +407,7 @@ name:name
 }
   
 if(text.toLowerCase() === "leave"){
-remove(ref(db("players/" + name));
+remove(ref(db,"players/" + name));
 }
 if(document.getElementById("text")) document.getElementById("text").value="";
 
