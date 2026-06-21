@@ -656,7 +656,34 @@ setInterval(()=>{
 document.getElementById("clock").textContent =
 new Date().toLocaleTimeString("ar");
 },1000);
+onValue(messagesRef,(snapshot)=>{
 
+const data = snapshot.val();
+
+if(!data) return;
+
+const gameChat =
+document.getElementById("gameChat");
+
+let html = "🎮 دردشة اللعبة<br>";
+
+const msgs = Object.values(data)
+.sort((a,b)=>b.time-a.time);
+
+msgs.forEach(msg=>{
+
+if(/^\d+$/.test(msg.text)){
+
+html += "🎯 " + msg.name +
+" : " + msg.text + "<br>";
+
+}
+
+});
+
+gameChat.innerHTML = html;
+
+});
 onValue(messagesRef,(snapshot)=>{
 
 const data = snapshot.val();
