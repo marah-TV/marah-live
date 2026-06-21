@@ -450,6 +450,54 @@ text-shadow:
     inset 0 0 6px rgba(255,215,0,0.2);
 z-index: 1000;
 }
+#ownerBanner{
+  position:absolute;
+
+  bottom:2.5%;
+  left:5%;
+
+  width:70%;
+  height:4%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  color:gold;
+  font-size:1em;
+  font-weight:bold;
+
+  background:rgba(0,0,0,0.55);
+
+  border:2px solid gold;
+  border-radius:30px;
+
+  text-shadow:
+  0 0 5px gold,
+  0 0 10px gold;
+
+  animation:
+  glowBanner 2s infinite alternate,
+  fadeBanner 4s infinite;
+}
+
+@keyframes glowBanner{
+  from{
+    box-shadow:0 0 5px gold;
+  }
+  to{
+    box-shadow:
+    0 0 10px gold,
+    0 0 20px gold,
+    0 0 30px orange;
+  }
+}
+
+@keyframes fadeBanner{
+  0%{opacity:1;}
+  50%{opacity:0.35;}
+  100%{opacity:1;}
+}
 </style>
 
 </head>
@@ -543,6 +591,10 @@ z-index: 1000;
 
 <div id="playersCount">
 👥 0
+</div>
+
+<div id="ownerBanner">
+👑 المشرف كونترول منير 👑
 </div>
 
 <button id="adminBtn">
