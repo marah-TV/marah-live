@@ -300,6 +300,16 @@ body {
   color:white;
   font-size:0.8em;
 }
+#playersCount{
+  position:absolute;
+  top:28%;
+  left:10%;
+  width:30%;
+  color:white;
+  font-size:0.9em;
+  font-weight:bold;
+  text-align:right;
+}
 </style>
 
 </head>
@@ -722,6 +732,27 @@ html += medal + " " + name + " : " + info.wins + "<br>";
 });
 
 board.innerHTML = html;
+
+});
+onValue(playersRef,(snapshot)=>{
+
+const players = snapshot.val();
+
+const countBox =
+document.getElementById("playersCount");
+
+if(!players){
+
+countBox.textContent = "👥 0";
+return;
+
+}
+
+const count =
+Object.keys(players).length;
+
+countBox.textContent =
+"👥 " + count;
 
 });
 onValue(playersRef,(snapshot)=>{
