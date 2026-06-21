@@ -679,8 +679,22 @@ if(/^\d+$/.test(msg.text)){
 html += "🎯 " + msg.name +
 " : " + msg.text + "<br>";
 
+const target =
+document.getElementById("targetNumber")
+.textContent.replace(/\D/g,'');
+
+if(
+target &&
+msg.text == target
+){
+
+update(gameRef,{
+winner: msg.name
+});
+
 }
 
+}
 });
 
 gameChat.innerHTML = html;
