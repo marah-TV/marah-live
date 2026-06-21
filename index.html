@@ -700,38 +700,54 @@ winner: msg.name
 gameChat.innerHTML = html;
 
 });
-onValue(messagesRef,(snapshot)=>{
+let normalMessages = [];
+let currentIndex = 0;
 
-const data = snapshot.val();
+function cleanText(txt){
 
-if(!data) return;
+  if(!txt) return "";
 
-const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
-
-
-const cleanText = (txt) => {
-
-  if (!txt) return "";
-
-  if (/^\d+$/.test(txt)) return "";
-
-  if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 30) {
-    return "";
-  }
+  if(/^\d+$/.test(txt)) return "";
 
   return txt;
-};
 
-if(sorted[0]) {
-  if(document.getElementById("nameBox1")) document.getElementById("nameBox1").textContent = sorted[0].name;
-  if(document.getElementById("msgBox1")) document.getElementById("msgBox1").textContent = cleanText(sorted[0].text);
 }
-if(sorted[1]) {
-  if(document.getElementById("nameBox2")) document.getElementById("nameBox2").textContent = sorted[1].name;
-document.getElementById("msgBox2").textContent = cleanText(sorted[1].text);
-}
+
+onValue(messagesRef,(snapshot)=>{
+
+  const data = snapshot.val();
+
+  if(!data) return;
+
+  normalMessages = Object.values(data)
+    .filter(msg => !/^\d+$/.test(msg.text))
+    .sort((a,b)=>a.time-b.time);
 
 });
+setInterval(()=>{
+
+  if(normalMessages.length < 2) return;
+
+  const msg1 = normalMessages[currentIndex % normalMessages.length];
+
+  const msg2 =
+  normalMessages[(currentIndex + 1) % normalMessages.length];
+
+  document.getElementById("nameBox1").textContent =
+  msg1.name || "";
+
+  document.getElementById("msgBox1").textContent =
+  cleanText(msg1.text);
+
+  document.getElementById("nameBox2").textContent =
+  msg2.name || "";
+
+  document.getElementById("msgBox2").textContent =
+  cleanText(msg2.text);
+
+  currentIndex += 2;
+
+},5000);
 let botEnabled = true;
 let gameRunning = false;
 
