@@ -669,8 +669,10 @@ let html = "🎮 دردشة اللعبة<br>";
 
 const msgs = Object.values(data)
 .sort((a,b)=>b.time-a.time);
-
-msgs.forEach(msg=>{
+const numbersOnly =
+msgs.filter(msg => /^\d+$/.test(msg.text))
+.slice(0,10);
+numbersOnly.forEach(msg=>{
 
 if(/^\d+$/.test(msg.text)){
 
