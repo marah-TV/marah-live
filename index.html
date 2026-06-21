@@ -106,13 +106,17 @@ text-shadow:
 
   text-align: center;
   font-size: 0.9em;
-
+flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
 
   overflow: hidden;
-  white-space: nowrap;
+  white-space: normal;
+word-wrap: break-word;
+overflow-wrap: break-word;
+line-height: 1.3;
+padding: 5px;
 }
 
 #nameBox2 {
@@ -145,9 +149,13 @@ text-shadow:
   display: flex;
   justify-content: center;
   align-items: center;
-
+flex-direction: column;
   overflow: hidden;
-  white-space: nowrap;
+  white-space: normal;
+word-wrap: break-word;
+overflow-wrap: break-word;
+line-height: 1.3;
+padding: 5px;
 }
 
 #winsBoard {
@@ -720,8 +728,10 @@ onValue(messagesRef,(snapshot)=>{
   if(!data) return;
 
   normalMessages = Object.values(data)
-    .filter(msg => !/^\d+$/.test(msg.text))
-    .sort((a,b)=>a.time-b.time);
+  .filter(msg => !/^\d+$/.test(msg.text))
+  .sort((a,b)=>b.time-a.time)
+  .slice(0,50)
+  .reverse();
 
 });
 setInterval(()=>{
