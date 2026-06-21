@@ -481,11 +481,11 @@ if(!data) return;
 
 const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
 
-// تنظيف الكلمات العشوائية فوراً ودون ترك ثلاث نقاط تشوه المظهر
+
 const cleanText = (txt) => {
   if (!txt) return "";
   if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 30) {
-    return ""; // يتم تصفير النص العشوائي تماماً لتنظيف الشاشة
+    return "";
   }
   return txt;
 };
