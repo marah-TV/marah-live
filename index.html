@@ -267,6 +267,37 @@ body {
   font-size:0.8em;
   line-height:1.4;
 }
+#lastJoined{
+  position:absolute;
+  top:46%;
+  left:-5%;
+  width:35%;
+  color:white;
+  font-size:0.75em;
+}
+#lastWinner{
+  position:absolute;
+  top:86%;
+  left:25%;
+  width:50%;
+  text-align:center;
+  color:white;
+  font-size:0.8em;
+}
+#roundCount{
+  position:absolute;
+  top:73%;
+  left:5%;
+  color:white;
+  font-size:0.8em;
+}
+#gameMode{
+  position:absolute;
+  top:73%;
+  left:55%;
+  color:white;
+  font-size:0.8em;
+}
 </style>
 
 </head>
@@ -305,7 +336,9 @@ body {
 <div id="playersList">
 👥 المشاركون
 </div>
-  
+<div id="lastJoined">
+آخر من انضم: -
+</div>  
 </div>
 <div id="logo">🔴 Marah TV</div>
 <div id="clock"></div>
@@ -324,12 +357,24 @@ body {
 ⏳ 10
 </div>
 
+<div id="roundCount">
+🎮 الجولة 1
+</div>
+
 <div id="targetNumber">
 🎯 ？
 </div>
 
+<div id="gameMode">
+🟢 انتظار اللاعبين
+</div>
+
 <div id="gameWinner">
 🏆 لا يوجد فائز بعد
+</div>
+
+<div id="lastWinner">
+آخر فائز: -
 </div>
 
 <div id="winsBoard">
@@ -338,6 +383,10 @@ body {
 
 <div id="autoStatus">
 🤖 الروبوت: يعمل
+</div>
+
+<div id="playersCount">
+👥 0
 </div>
 
 <button id="adminBtn">
