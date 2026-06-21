@@ -764,7 +764,7 @@ function cleanText(txt){
 
   if(/^\d+$/.test(txt)) return "";
 
-  return txt;
+  return txt.substring(0,120);
 
 }
 
