@@ -483,10 +483,15 @@ const sorted = Object.values(data).sort((a,b)=>b.time-a.time);
 
 
 const cleanText = (txt) => {
+
   if (!txt) return "";
+
+  if (/^\d+$/.test(txt)) return "";
+
   if (txt.includes("نينيتيم") || txt.includes("بزينين") || txt.length > 30) {
     return "";
   }
+
   return txt;
 };
 
