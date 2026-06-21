@@ -978,6 +978,23 @@ Object.keys(players).forEach(name=>{
 html += "👤 " + name + "<br>";
 
 });
+onValue(playersRef, (snapshot) => {
+
+  const players = snapshot.val();
+
+  if(!players) return;
+
+  const names = Object.keys(players);
+
+  if(names[0]){
+    document.getElementById("nameBox1").textContent = names[0];
+  }
+
+  if(names[1]){
+    document.getElementById("nameBox2").textContent = names[1];
+  }
+
+});
 
 box.innerHTML = html;
 
