@@ -913,6 +913,17 @@ let normalMessages = [];
 let gameMessages = [];
 let currentIndex = 0;
 let lastShown = [];
+get(gameRef).then((snapshot)=>{
+
+const data = snapshot.val();
+
+if(data && data.round){
+
+currentRound = data.round;
+
+}
+
+});
 function cleanText(txt){
 
   if(!txt) return "";
@@ -1207,7 +1218,8 @@ document.getElementById("startRound").addEventListener("click",()=>{
 update(gameRef,{
 countdown: 10,
 status: "countdown",
-winner: ""
+winner: "",
+round: currentRound
 });
 
 let count = 10;
