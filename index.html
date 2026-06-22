@@ -848,6 +848,7 @@ const gameRef = ref(db,"game");
 const messagesRef = ref(db,"messages");
 const winsRef = ref(db,"wins");
 const playersRef = ref(db,"players");
+const gamePlayersRef = ref(db,"gamePlayers");
 let countdownStarted = false;
 let countdown = 15;
 setInterval(()=>{
@@ -938,6 +939,26 @@ onValue(messagesRef,(snapshot)=>{
     }
 
   }
+  async function registerGamePlayer(name){
+
+  if(!name) return;
+
+  const playerRef =
+  ref(db,"gamePlayers/" + name);
+
+  const snap =
+  await get(playerRef);
+
+  if(!snap.exists()){
+
+    set(playerRef,{
+      joined:true,
+      joinedAt:Date.now()
+    });
+
+  }
+
+}
 
   const allMessages = Object.values(data);
 
@@ -953,9 +974,11 @@ allMessages.forEach(msg => {
   // رسائل اللعبة الرقمية فقط
   if(/^\d+$/.test(msg.text)){
 
-    registerPlayer(msg.name);
+  registerPlayer(msg.name);
 
-  }
+  registerGamePlayer(msg.name);
+
+}
 
 });
   normalMessages = allMessages
