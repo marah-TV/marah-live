@@ -759,7 +759,7 @@ gameChat.innerHTML = html;
 });
 let normalMessages = [];
 let currentIndex = 0;
-
+let lastShown = [];
 function cleanText(txt){
 
   if(!txt) return "";
@@ -777,9 +777,13 @@ onValue(messagesRef,(snapshot)=>{
   if(!data) return;
 
   normalMessages = Object.values(data)
-  .filter(msg => !/^\d+$/.test(msg.text))
+  .filter(msg =>
+    !/^\d+$/.test(msg.text) &&
+    msg.text &&
+    msg.text.length > 1
+  )
   .sort((a,b)=>b.time-a.time)
-  .slice(0,51)
+  .slice(0,100)
   .reverse();
 
 });
@@ -787,10 +791,30 @@ setInterval(()=>{
 
   if(normalMessages.length < 2) return;
 
-  const msg1 = normalMessages[currentIndex % normalMessages.length];
+  let availableMessages = normalMessages.filter(
+msg => !lastShown.includes(msg.name + msg.text)
+);
 
-  const msg2 =
-  normalMessages[(currentIndex + 1) % normalMessages.length];
+if(availableMessages.length < 2){
+
+lastShown = [];
+
+availableMessages = [...normalMessages];
+
+}
+
+const msg1 = availableMessages[0];
+
+const msg2 = availableMessages[1];
+
+lastShown.push(msg1.name + msg1.text);
+lastShown.push(msg2.name + msg2.text);
+
+if(lastShown.length > 20){
+
+lastShown = lastShown.slice(-20);
+
+}
 
   document.getElementById("nameBox1").textContent =
   msg1.name || "";
@@ -804,7 +828,6 @@ setInterval(()=>{
   document.getElementById("msgBox2").textContent =
   cleanText(msg2.text);
 
-  currentIndex += 2;
 
 },5000);
 let botEnabled = true;
