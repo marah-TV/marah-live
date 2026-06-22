@@ -755,7 +755,7 @@ onValue(messagesRef,(snapshot)=>{
   normalMessages = Object.values(data)
   .filter(msg => !/^\d+$/.test(msg.text))
   .sort((a,b)=>b.time-a.time)
-  .slice(0,1)
+  .slice(0,50)
   .reverse();
 
 });
