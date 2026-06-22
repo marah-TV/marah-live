@@ -694,6 +694,38 @@ z-index: 1000;
   }
 
 }
+@keyframes messageFade{
+
+0%{
+opacity:0;
+transform:translateY(-10px);
+}
+
+15%{
+opacity:1;
+transform:translateY(0);
+}
+
+85%{
+opacity:1;
+transform:translateY(0);
+}
+
+100%{
+opacity:0;
+transform:translateY(10px);
+}
+
+}
+
+#nameBox1,
+#msgBox1,
+#nameBox2,
+#msgBox2{
+
+animation: messageFade 5s linear infinite;
+
+}
 </style>
 
 </head>
@@ -888,6 +920,29 @@ update(gameRef,{
 winner: msg.name
 });
 
+get(ref(db,"wins/" + msg.name))
+.then(snapshot=>{
+
+const currentWins =
+snapshot.exists()
+? snapshot.val().wins || 0
+: 0;
+
+set(
+ref(db,"wins/" + msg.name),
+{
+wins: currentWins + 1
+}
+);
+
+});
+
+}
+
+update(gameRef,{
+winner: msg.name
+});
+
 }
 
 }
@@ -944,7 +999,13 @@ availableMessages = [...normalMessages];
 
 const msg1 = availableMessages[0];
 
-const msg2 = availableMessages[1];
+let msg2 = availableMessages.find(
+m => m.name !== msg1.name
+);
+
+if(!msg2){
+msg2 = availableMessages[1];
+}
 
 lastShown.push(msg1.name + msg1.text);
 lastShown.push(msg2.name + msg2.text);
