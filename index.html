@@ -1349,6 +1349,7 @@ html += "👤 " + name + "<br>";
 
 });
 
+box.innerHTML = html;
 let lastPlayer = "";
 
 let latestTime = 0;
@@ -1367,8 +1368,6 @@ Object.entries(players).forEach(([name,data])=>{
 
 document.getElementById("lastJoined").textContent =
 "آخر من انضم: " + lastPlayer;
-box.innerHTML = html;
-
 });
 resizeGame();
 </script>
