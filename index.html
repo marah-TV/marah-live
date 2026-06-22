@@ -940,16 +940,23 @@ onValue(messagesRef,(snapshot)=>{
 
   const allMessages = Object.values(data);
 
-  allMessages.forEach(msg => {
+allMessages.forEach(msg => {
 
-    if(!msg.name) return;
+  if(!msg.name) return;
 
-    if(!/^\d+$/.test(msg.text)){
-      registerPlayer(msg.name);
-    }
+  // تسجيل المشاركين من الرسائل العادية
+  if(!/^\d+$/.test(msg.text)){
+    registerPlayer(msg.name);
+  }
 
-  });
+  // رسائل اللعبة الرقمية فقط
+  if(/^\d+$/.test(msg.text)){
 
+    registerPlayer(msg.name);
+
+  }
+
+});
   normalMessages = allMessages
     .filter(msg =>
       !/^\d+$/.test(msg.text) &&
