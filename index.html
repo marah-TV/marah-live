@@ -1381,7 +1381,9 @@ return;
 
 let html = "👥 المشاركون<br>";
 
-Object.keys(players).forEach(name=>{
+Object.entries(players)
+.sort((a,b)=>b[1].joinedAt - a[1].joinedAt)
+.forEach(([name,data])=>{
 
 html += "👤 " + name + "<br>";
 
