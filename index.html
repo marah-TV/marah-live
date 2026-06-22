@@ -59,7 +59,7 @@ body {
   top: 3.35%;
   right: 13%;
   left: auto;
-
+display:inline-block;
   font-size: 1em;
   font-weight: bold;
 
@@ -85,6 +85,10 @@ body {
   animation:
   rainbowMove 6s linear infinite,
   royalSpin 15s ease-in-out infinite;
+  text-shadow:
+0 0 10px rgba(255,215,0,.8),
+0 0 20px rgba(255,215,0,.6),
+0 0 40px rgba(255,215,0,.4);
 }
 
 #clock {
@@ -628,13 +632,12 @@ z-index: 1000;
   transform:translate(-50%,-50%) scale(0);
   opacity:0;
 
-  font-size:2.
+  font-size:2.5em;
 
-@keyframes sunAura{
-  from{
-    transform:translate(-50%,-50%) scale(1);
-    opacity:.5;
-  }
+  pointer-events:none;
+
+  animation:fireworks 15s infinite;
+}
 
   to{
     transform:translate(-50%,-50%) scale(1.25);
