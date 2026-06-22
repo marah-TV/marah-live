@@ -849,6 +849,7 @@ const messagesRef = ref(db,"messages");
 const winsRef = ref(db,"wins");
 const playersRef = ref(db,"players");
 const gamePlayersRef = ref(db,"gamePlayers");
+let currentRound = 1;
 let countdownStarted = false;
 let countdown = 15;
 setInterval(()=>{
@@ -1149,6 +1150,15 @@ const data = snapshot.val();
 
 if(!data) return;
 
+if(data.round){
+
+document.getElementById("roundCount").textContent =
+"🎮 الجولة " + data.round;
+
+currentRound = data.round;
+
+}
+
 if(data.status === "countdown"){
 
 document.getElementById("gameStatus").textContent =
@@ -1231,10 +1241,13 @@ winner: ""
 
 function startNewRound(){
 
+currentRound++;
+
 update(gameRef,{
 countdown: 10,
 status: "countdown",
-winner: ""
+winner: "",
+round: currentRound
 });
 
 let count = 10;
