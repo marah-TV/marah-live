@@ -917,15 +917,48 @@ onValue(messagesRef,(snapshot)=>{
 
   if(!data) return;
 
-  normalMessages = Object.values(data)
-  .filter(msg =>
-    !/^\d+$/.test(msg.text) &&
-    msg.text &&
-    msg.text.length > 1
-  )
-  .sort((a,b)=>b.time-a.time)
-  .slice(0,100)
-  .reverse();
+  async function registerPlayer(name){
+
+    if(!name) return;
+
+    const playerRef =
+    ref(db,"players/" + name);
+
+    const snap =
+    await get(playerRef);
+
+    if(!snap.exists()){
+
+      set(playerRef,{
+        joined:true,
+        joinedAt:Date.now()
+      });
+
+    }
+
+  }
+
+  const allMessages = Object.values(data);
+
+  allMessages.forEach(msg => {
+
+    if(!msg.name) return;
+
+    if(!/^\d+$/.test(msg.text)){
+      registerPlayer(msg.name);
+    }
+
+  });
+
+  normalMessages = allMessages
+    .filter(msg =>
+      !/^\d+$/.test(msg.text) &&
+      msg.text &&
+      msg.text.length > 1
+    )
+    .sort((a,b)=>b.time-a.time)
+    .slice(0,100)
+    .reverse();
 
 });
 setInterval(()=>{
