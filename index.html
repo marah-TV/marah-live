@@ -899,6 +899,7 @@ gameChat.innerHTML = html;
 
 });
 let normalMessages = [];
+let gameMessages = [];
 let currentIndex = 0;
 let lastShown = [];
 function cleanText(txt){
@@ -966,7 +967,12 @@ allMessages.forEach(msg => {
     .sort((a,b)=>b.time-a.time)
     .slice(0,100)
     .reverse();
-
+gameMessages = allMessages
+  .filter(msg =>
+    /^\d+$/.test(msg.text)
+  )
+  .sort((a,b)=>b.time-a.time)
+  .slice(0,100);
 });
 setInterval(()=>{
 
