@@ -1349,7 +1349,24 @@ html += "👤 " + name + "<br>";
 
 });
 
+let lastPlayer = "";
 
+let latestTime = 0;
+
+Object.entries(players).forEach(([name,data])=>{
+
+  if(data.joinedAt > latestTime){
+
+    latestTime = data.joinedAt;
+
+    lastPlayer = name;
+
+  }
+
+});
+
+document.getElementById("lastJoined").textContent =
+"آخر من انضم: " + lastPlayer;
 box.innerHTML = html;
 
 });
