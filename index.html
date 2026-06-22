@@ -1307,6 +1307,28 @@ countBox.textContent =
 "👥 " + count;
 
 });
+onValue(gamePlayersRef,(snapshot)=>{
+
+  const players = snapshot.val();
+
+  if(!players){
+
+    document.getElementById("gameMode").textContent =
+    "🟢 لا يوجد لاعبو لعبة";
+
+    return;
+  }
+
+  const count =
+  Object.keys(players).length;
+
+  document.getElementById("gameMode").textContent =
+  "🎮 لاعبو اللعبة: " + count;
+
+});
+onValue(gamePlayersRef,(snapshot)=>{
+
+  const players
 onValue(playersRef,(snapshot)=>{
 
 const players = snapshot.val();
