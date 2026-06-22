@@ -1,4 +1,4 @@
-)<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -577,95 +577,6 @@ z-index: 1000;
   50%{opacity:0.35;}
   100%{opacity:1;}
 }
-@keyframes rainbowMove{
-  0%{background-position:0% 50%;}
-  100%{background-position:400% 50%;}
-}
-
-@keyframes royalSpin{
-  0%{
-    transform: rotateY(0deg);
-  }
-
-  45%{
-    transform: rotateY(0deg);
-  }
-
-  50%{
-    transform: rotateY(360deg);
-  }
-
-  55%{
-    transform: rotateY(360deg);
-  }
-
-  100%{
-    transform: rotateY(360deg);
-  }
-}
-#logo::before{
-  content:"";
-
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  width:120%;
-  height:120%;
-
-  transform:translate(-50%,-50%);
-
-  border-radius:50%;
-
-  background:
-  radial-gradient(
-  circle,
-  rgba(255,215,0,.35) 0%,
-  rgba(255,255,255,.15) 30%,
-  transparent 70%
-  );
-
-  filter:blur(10px);
-
-  z-index:-1;
-
-  animation:sunAura 4s infinite alternate;
-}
-
-#logo::after{
-
-  content:"🎆";
-
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:translate(-50%,-50%) scale(0);
-
-  opacity:0;
-
-  font-size:2.5em;
-
-  pointer-events:none;
-
-  animation:fireworks 15s infinite;
-}
-
-@keyframes sunAura{
-
-  from{
-    transform:translate(-50%,-50%) scale(1);
-    opacity:.5;
-  }
-
-  to{
-    transform:translate(-50%,-50%) scale(1.25);
-    opacity:1;
-  }
-
-}
 </style>
 
 </head>
@@ -860,29 +771,6 @@ update(gameRef,{
 winner: msg.name
 });
 
-get(ref(db,"wins/" + msg.name))
-.then(snapshot=>{
-
-const currentWins =
-snapshot.exists()
-? snapshot.val().wins || 0
-: 0;
-
-set(
-ref(db,"wins/" + msg.name),
-{
-wins: currentWins + 1
-}
-);
-
-});
-
-}
-
-update(gameRef,{
-winner: msg.name
-});
-
 }
 
 }
@@ -939,13 +827,7 @@ availableMessages = [...normalMessages];
 
 const msg1 = availableMessages[0];
 
-let msg2 = availableMessages.find(
-m => m.name !== msg1.name
-);
-
-if(!msg2){
-msg2 = availableMessages[1];
-}
+const msg2 = availableMessages[1];
 
 lastShown.push(msg1.name + msg1.text);
 lastShown.push(msg2.name + msg2.text);
