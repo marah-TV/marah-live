@@ -57,12 +57,15 @@ body {
 #logo {
   position: absolute;
   top: 3.35%;
-  left: 64.38%;
-overflow: visible;
-  font-size: 1.0em;
+  right: 6%;
+  left: auto;
+
+  font-size: 1em;
   font-weight: bold;
-position: absolute;
-isolation: isolate;
+
+  overflow: visible;
+  isolation: isolate;
+
   background: linear-gradient(
     90deg,
     #ff0000,
@@ -76,32 +79,12 @@ isolation: isolate;
   );
 
   background-size: 400% 400%;
-
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  text-shadow:
-    0 0 5px rgba(255,255,255,0.5),
-    0 0 10px rgba(255,215,0,0.5);
-
   animation:
-    rainbowMove 6s linear infinite,
-    royalSpin 15s ease-in-out infinite;
-}
-overflow: visible;
-  background-size: 400% 400%;
-position: absolute;
-isolation: isolate;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  text-shadow:
-    0 0 5px rgba(255,255,255,0.5),
-    0 0 10px rgba(255,215,0,0.5);
-
-  animation:
-    rainbowMove 6s linear infinite,
-    royalSpin 15s ease-in-out infinite;
+  rainbowMove 6s linear infinite,
+  royalSpin 15s ease-in-out infinite;
 }
 
 #clock {
