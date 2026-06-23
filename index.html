@@ -898,14 +898,17 @@ winner: msg.name
 
 });
 
-console.log("تم العثور على فائز:", msg.name);
-
 update(gameRef,{
 winner: msg.name
 });
 
-gameChat.innerHTML = html;
+}
 
+});
+
+});
+
+gameChat.innerHTML = html;
 });
 let normalMessages = [];
 let gameMessages = [];
