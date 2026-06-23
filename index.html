@@ -1507,6 +1507,58 @@ ref(db,"gamePlayers/" + name)
 }
 
 },60000);
+setInterval(async ()=>{
+
+  const now = Date.now();
+  const limit = 15 * 60 * 1000; // 15 دقيقة
+
+  // 👥 تنظيف اللاعبين العاديين
+  const playersSnap = await get(playersRef);
+
+  if(playersSnap.exists()){
+
+    const players = playersSnap.val();
+
+    for(const name in players){
+
+      const lastActive = players[name].lastActive || 0;
+
+      if(now - lastActive > limit){
+
+        await remove(ref(db,"players/" + name));
+
+        console.log("🧹 حذف لاعب خامل:", name);
+
+      }
+
+    }
+
+  }
+
+  // 🎮 تنظيف لاعبي اللعبة
+  const gamePlayersSnap = await get(gamePlayersRef);
+
+  if(gamePlayersSnap.exists()){
+
+    const gamePlayers = gamePlayersSnap.val();
+
+    for(const name in gamePlayers){
+
+      const lastActive = gamePlayers[name].lastActive || 0;
+
+      if(now - lastActive > limit){
+
+        await remove(ref(db,"gamePlayers/" + name));
+
+        console.log("🧹 حذف لاعب لعبة خامل:", name);
+
+      }
+
+    }
+
+  }
+
+}, 60000);
 resizeGame();
 </script>
 
