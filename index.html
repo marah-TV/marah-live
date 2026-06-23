@@ -1199,15 +1199,18 @@ botEnabled ? "🤖 الروبوت: يعمل" : "⛔ الروبوت متوقف";
 
 });
   
-document.getElementById("adminBtn").addEventListener("click",()=>{
+document.getElementById("adminBtn").addEventListener("click", async ()=>{
 
 const pass = prompt("أدخل كلمة المرور");
 
-if(pass !== "3"){
-alert("كلمة المرور غير صحيحة");
-return;
-}
+const snap = await get(ref(db,"game/admin/password"));
 
+const realPass = snap.val();
+
+if(pass !== realPass){
+  alert("كلمة المرور غير صحيحة");
+  return;
+}
 const panel =
 document.getElementById("adminPanel");
 
