@@ -694,36 +694,6 @@ z-index: 1000;
   100%{
     transform:rotate(360deg) scale(1);
   }
-.registerBanner{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  width:90%;
-  text-align:center;
-  font-size:1.2em;
-  font-weight:bold;
-
-  color:gold;
-
-  text-shadow:
-    0 0 5px darkred,
-    0 0 10px darkred;
-
-  animation: spinText 2s linear;
-}
-
-.registerBanner.top{
-  top:2%;
-}
-
-.registerBanner.bottom{
-  bottom:2%;
-}
-
-@keyframes spinText{
-  0%{transform:translateX(-50%) rotate(0deg);}
-  100%{transform:translateX(-50%) rotate(360deg);}
-}
 
 }
 </style>
