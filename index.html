@@ -702,14 +702,6 @@ z-index: 1000;
 
 <body>
 
-<div class="registerBanner top">
-  ✨ طريقة الاشتراك: اكتب سجل:اسمك ✨
-</div>
-
-<div class="registerBanner bottom">
-  👈 مثال: سجل:منير
-</div>
-
 <div class="game-container" id="mainContainer">
 <div id="designGrid">
   <div class="topLabels">
@@ -970,18 +962,6 @@ onValue(messagesRef,(snapshot)=>{
 }
 
   }
-function showBanners(){
-  document.querySelector(".registerBanner.top").style.display="block";
-  document.querySelector(".registerBanner.bottom").style.display="block";
-
-  setTimeout(()=>{
-    document.querySelector(".registerBanner.top").style.display="none";
-    document.querySelector(".registerBanner.bottom").style.display="none";
-  },8000);
-}
-
-setInterval(showBanners, 90000);
-showBanners();
   async function registerGamePlayer(name){
 
   if(!name) return;
@@ -1014,39 +994,15 @@ showBanners();
 
 allMessages.forEach(msg => {
 
-  async function registerByName(name){
-  if(!name) return;
+  if(!msg.name || !msg.text) return;
 
-  const playerRef = ref(db,"players/" + name);
-  const gamePlayerRef = ref(db,"gamePlayers/" + name);
+  const isNumber = /^\d+$/.test(msg.text);
 
-  const snap = await get(playerRef);
+  registerPlayer(msg.name);
 
-  if(snap.exists()){
-    alert("هذا الاسم مستخدم بالفعل، اختر اسم آخر");
-    return false;
+  if(isNumber){
+    registerGamePlayer(msg.name);
   }
-  if(msg.text && msg.text.startsWith("سجل:")){
-  const name = msg.text.split(":")[1]?.trim();
-
-  registerByName(name);
-  return;
-}
-
-  await set(playerRef,{
-    joined:true,
-    joinedAt:Date.now(),
-    lastActive:Date.now()
-  });
-
-  await set(gamePlayerRef,{
-    joined:true,
-    joinedAt:Date.now(),
-    lastActive:Date.now()
-  });
-
-  return true;
-}
 
 });
 
