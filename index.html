@@ -998,42 +998,14 @@ allMessages.forEach(msg => {
 
   const isNumber = /^\d+$/.test(msg.text);
 
-  // 🧠 تحديث النشاط دائماً
   registerPlayer(msg.name);
 
   if(isNumber){
-
-    // 🎮 رسالة لعبة (رقم)
     registerGamePlayer(msg.name);
-
-    console.log("🎯 Game Input:", msg.name, msg.text);
-
-  }else{
-
-    // 💬 دردشة عادية
-    console.log("💬 Chat:", msg.name, msg.text);
-
   }
 
 });
 
-  if(!msg.name) return;
-
-  // تسجيل المشاركين من الرسائل العادية
-  if(!/^\d+$/.test(msg.text)){
-    registerPlayer(msg.name);
-  }
-
-  // رسائل اللعبة الرقمية فقط
-  if(/^\d+$/.test(msg.text)){
-
-  registerPlayer(msg.name);
-
-  registerGamePlayer(msg.name);
-
-}
-
-});
   normalMessages = allMessages
     .filter(msg =>
       !/^\d+$/.test(msg.text) &&
