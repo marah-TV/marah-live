@@ -947,12 +947,19 @@ onValue(messagesRef,(snapshot)=>{
 
     if(!snap.exists()){
 
-      set(playerRef,{
-        joined:true,
-        joinedAt:Date.now()
-      });
+  set(playerRef,{
+    joined:true,
+    joinedAt:Date.now(),
+    lastActive: Date.now()
+  });
 
-    }
+}else{
+
+  update(playerRef,{
+    lastActive: Date.now()
+  });
+
+}
 
   }
   async function registerGamePlayer(name){
@@ -967,12 +974,19 @@ onValue(messagesRef,(snapshot)=>{
 
   if(!snap.exists()){
 
-    set(playerRef,{
-      joined:true,
-      joinedAt:Date.now()
-    });
+  set(playerRef,{
+    joined:true,
+    joinedAt:Date.now(),
+    lastActive: Date.now()
+  });
 
-  }
+}else{
+
+  update(playerRef,{
+    lastActive: Date.now()
+  });
+
+}
 
 }
 
@@ -1435,6 +1449,64 @@ playersPage = 0;
 }
 
 },4000);
+setInterval(async ()=>{
+
+const now = Date.now();
+
+const inactiveLimit =
+15 * 60 * 1000;
+
+const playersSnap =
+await get(playersRef);
+
+if(playersSnap.exists()){
+
+const players =
+playersSnap.val();
+
+for(const name in players){
+
+const lastActive =
+players[name].lastActive || 0;
+
+if(now - lastActive > inactiveLimit){
+
+await remove(
+ref(db,"players/" + name)
+);
+
+}
+
+}
+
+}
+
+const gamePlayersSnap =
+await get(gamePlayersRef);
+
+if(gamePlayersSnap.exists()){
+
+const gamePlayers =
+gamePlayersSnap.val();
+
+for(const name in gamePlayers){
+
+const lastActive =
+gamePlayers[name].lastActive || 0;
+
+if(now - lastActive > inactiveLimit){
+
+await remove(
+ref(db,"gamePlayers/" + name)
+);
+
+}
+
+}
+
+}
+
+},60000);
 resizeGame();
 </script>
 
