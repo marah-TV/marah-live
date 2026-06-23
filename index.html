@@ -871,7 +871,7 @@ const msgs = Object.values(data)
 .sort((a,b)=>b.time-a.time);
 const numbersOnly =
 msgs.filter(msg => /^\d+$/.test(msg.text))
-.slice(0,10);
+.slice(0,100);
 numbersOnly.forEach(msg=>{
 
 if(/^\d+$/.test(msg.text)){
