@@ -694,6 +694,36 @@ z-index: 1000;
   100%{
     transform:rotate(360deg) scale(1);
   }
+.registerBanner{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:90%;
+  text-align:center;
+  font-size:1.2em;
+  font-weight:bold;
+
+  color:gold;
+
+  text-shadow:
+    0 0 5px darkred,
+    0 0 10px darkred;
+
+  animation: spinText 2s linear;
+}
+
+.registerBanner.top{
+  top:2%;
+}
+
+.registerBanner.bottom{
+  bottom:2%;
+}
+
+@keyframes spinText{
+  0%{transform:translateX(-50%) rotate(0deg);}
+  100%{transform:translateX(-50%) rotate(360deg);}
+}
 
 }
 </style>
@@ -701,6 +731,14 @@ z-index: 1000;
 </head>
 
 <body>
+
+<div class="registerBanner top">
+  ✨ طريقة الاشتراك: اكتب سجل:اسمك ✨
+</div>
+
+<div class="registerBanner bottom">
+  👈 مثال: سجل:منير
+</div>
 
 <div class="game-container" id="mainContainer">
 <div id="designGrid">
@@ -962,6 +1000,18 @@ onValue(messagesRef,(snapshot)=>{
 }
 
   }
+function showBanners(){
+  document.querySelector(".registerBanner.top").style.display="block";
+  document.querySelector(".registerBanner.bottom").style.display="block";
+
+  setTimeout(()=>{
+    document.querySelector(".registerBanner.top").style.display="none";
+    document.querySelector(".registerBanner.bottom").style.display="none";
+  },8000);
+}
+
+setInterval(showBanners, 90000);
+showBanners();
   async function registerGamePlayer(name){
 
   if(!name) return;
@@ -994,15 +1044,39 @@ onValue(messagesRef,(snapshot)=>{
 
 allMessages.forEach(msg => {
 
-  if(!msg.name || !msg.text) return;
+  async function registerByName(name){
+  if(!name) return;
 
-  const isNumber = /^\d+$/.test(msg.text);
+  const playerRef = ref(db,"players/" + name);
+  const gamePlayerRef = ref(db,"gamePlayers/" + name);
 
-  registerPlayer(msg.name);
+  const snap = await get(playerRef);
 
-  if(isNumber){
-    registerGamePlayer(msg.name);
+  if(snap.exists()){
+    alert("هذا الاسم مستخدم بالفعل، اختر اسم آخر");
+    return false;
   }
+  if(msg.text && msg.text.startsWith("سجل:")){
+  const name = msg.text.split(":")[1]?.trim();
+
+  registerByName(name);
+  return;
+}
+
+  await set(playerRef,{
+    joined:true,
+    joinedAt:Date.now(),
+    lastActive:Date.now()
+  });
+
+  await set(gamePlayerRef,{
+    joined:true,
+    joinedAt:Date.now(),
+    lastActive:Date.now()
+  });
+
+  return true;
+}
 
 });
 
