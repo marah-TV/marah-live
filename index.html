@@ -902,6 +902,8 @@ winner: msg.name
 
 gameChat.innerHTML = html;
 });
+let playersArray = [];
+let playersPage = 0;
 let normalMessages = [];
 let gameMessages = [];
 let currentIndex = 0;
@@ -1361,10 +1363,45 @@ onValue(playersRef,(snapshot)=>{
 
 const players = snapshot.val();
 
+if(!players){
+
+playersArray = [];
+
+document.getElementById("playersList").innerHTML =
+"👥 المشاركون";
+
+return;
+
+}
+
+playersArray =
+Object.entries(players)
+.sort((a,b)=>b[1].joinedAt - a[1].joinedAt);
+
+let lastPlayer = "";
+let latestTime = 0;
+
+playersArray.forEach(([name,data])=>{
+
+if(data.joinedAt > latestTime){
+
+latestTime = data.joinedAt;
+lastPlayer = name;
+
+}
+
+});
+
+document.getElementById("lastJoined").textContent =
+"آخر من انضم: " + lastPlayer;
+
+});
+setInterval(()=>{
+
 const box =
 document.getElementById("playersList");
 
-if(!players){
+if(playersArray.length === 0){
 
 box.innerHTML = "👥 المشاركون";
 
@@ -1372,36 +1409,32 @@ return;
 
 }
 
+const pageSize = 4;
+
+const start = playersPage * pageSize;
+
+const currentPlayers =
+playersArray.slice(start,start + pageSize);
+
 let html = "👥 المشاركون<br>";
 
-Object.entries(players)
-.sort((a,b)=>b[1].joinedAt - a[1].joinedAt)
-.forEach(([name,data])=>{
+currentPlayers.forEach(([name])=>{
 
 html += "👤 " + name + "<br>";
 
 });
 
 box.innerHTML = html;
-let lastPlayer = "";
 
-let latestTime = 0;
+playersPage++;
 
-Object.entries(players).forEach(([name,data])=>{
+if(start + pageSize >= playersArray.length){
 
-  if(data.joinedAt > latestTime){
+playersPage = 0;
 
-    latestTime = data.joinedAt;
+}
 
-    lastPlayer = name;
-
-  }
-
-});
-
-document.getElementById("lastJoined").textContent =
-"آخر من انضم: " + lastPlayer;
-});
+},4000);
 resizeGame();
 </script>
 
