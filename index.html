@@ -879,9 +879,26 @@ if(/^\d+$/.test(msg.text)){
 html += "🎯 " + msg.name +
 " : " + msg.text + "<br>";
 
-const target =
-document.getElementById("targetNumber")
-.textContent.replace(/\D/g,'');
+get(gameRef).then((gameSnap)=>{
+
+const gameData = gameSnap.val();
+
+if(!gameData) return;
+
+const target = String(gameData.targetNumber);
+
+if(
+String(msg.text) === target &&
+!gameData.winner
+){
+
+update(gameRef,{
+winner: msg.name
+});
+
+}
+
+});
 
 console.log(
 "الرقم المطلوب:",
