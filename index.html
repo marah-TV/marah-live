@@ -897,6 +897,8 @@ target &&
 msg.text == target
 ){
 
+console.log("تم العثور على فائز:", msg.name);
+  
 update(gameRef,{
 winner: msg.name
 });
