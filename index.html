@@ -874,8 +874,6 @@ msgs.filter(msg => /^\d+$/.test(msg.text))
 .slice(0,100);
 numbersOnly.forEach(msg=>{
 
-if(/^\d+$/.test(msg.text)){
-
 html += "🎯 " + msg.name +
 " : " + msg.text + "<br>";
 
@@ -901,16 +899,6 @@ winner: msg.name
 });
 
 
-console.log("تم العثور على فائز:", msg.name);
-  
-update(gameRef,{
-winner: msg.name
-});
-
-}
-
-}
-});
 
 gameChat.innerHTML = html;
 
