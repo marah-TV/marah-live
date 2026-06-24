@@ -1039,16 +1039,41 @@ onValue(messagesRef,(snapshot)=>{
 
   const allMessages = Object.values(data);
 
-allMessages.forEach(msg => {
+allMessages.forEach(async msg => {
 
   if(!msg.name || !msg.text) return;
 
-  const isNumber = /^\d+$/.test(msg.text);
+  const text = String(msg.text).trim();
 
-  registerPlayer(msg.name);
+  if(text.startsWith("سجل:")){
 
-  if(isNumber){
-    registerGamePlayer(msg.name);
+    const playerName =
+    text.replace("سجل:","").trim();
+
+    if(!playerName) return;
+
+    const playerSnap =
+    await get(ref(db,"players/" + playerName));
+
+    if(playerSnap.exists()) return;
+
+    await set(
+      ref(db,"players/" + playerName),
+      {
+        joined:true,
+        joinedAt:Date.now(),
+        lastActive:Date.now()
+      }
+    );
+
+    await set(
+      ref(db,"gamePlayers/" + playerName),
+      {
+        joined:true,
+        joinedAt:Date.now(),
+        lastActive:Date.now()
+      }
+    );
   }
 
 });
