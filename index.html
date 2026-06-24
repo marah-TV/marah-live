@@ -180,6 +180,43 @@
             color: #ff4d4d;
         }
     </style>
+    /* حاوية شريط الإذاعة */
+.subscription-ticker {
+    width: 100%;
+    overflow: hidden; /* لإخفاء النص عندما يخرج عن أبعاد الشاشة */
+    background: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شبه شفافة ونقية */
+    color: #111; /* لون خط داكن وواضح */
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    white-space: nowrap; /* إجبار النص على البقاء في سطر واحد ليتحرك عرضياً */
+    position: relative;
+    
+    /* إلغاء أي حدود أو إطارات حمراء أو خضراء نهائياً */
+    border: none !important;
+    outline: none !important;
+}
+
+/* النص المتحرك وتأثير السحاب */
+.ticker-cloud-text {
+    display: inline-block;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #d90429; /* لون أحمر غامق ومميز للتنبيه */
+    padding-right: 100%; /* نقطة البداية للنص من أقصى اليسار خارج الرؤية */
+    animation: moveRightCloud 16s linear infinite; /* حركة مستمرة ناعمة */
+}
+
+/* أنيميشن تحريك النص من اليسار إلى اليمين */
+@keyframes moveRightCloud {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(100%, 0, 0);
+    }
+}
+
 </head>
 <body>
 
@@ -192,7 +229,12 @@
 
         <main class="main-content">
             <section class="chat-area">
-                
+                <div class="subscription-ticker">
+    <div class="ticker-cloud-text">
+        طريقة الاشتراك 📢 للتسجيل في الشات و اللعبة فقط قم بالتسجيل هكذا مثال سجل:منير لا تنسى ان تضع كلمة سجل و النقطتين: و الاسم
+    </div>
+</div>
+
                 <div class="chat-bubble user-ali">
                     <span class="user-label">علي العلي</span>
                     <p class="msg-text">احلا شباب شو قناة جديدة هي</p>
