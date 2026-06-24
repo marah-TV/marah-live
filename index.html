@@ -704,12 +704,10 @@ z-index: 1000;
   white-space:nowrap;
   z-index:2000;
 
-  /* 🔥 خلفية سوداء غامقة */
   background:rgba(0,0,0,0.85);
 
   border-radius:10px;
 
-  /* ✨ إطار الإضاءة */
   border:2px solid transparent;
 
   box-shadow:
@@ -720,16 +718,16 @@ z-index: 1000;
   animation:borderGlow 5s linear infinite;
 }
 
-/* حركة النص (بدون تغيير) */
+/* حركة النص (أبطأ + بدون توقف عند النهاية) */
 #registerTicker .track{
   display:flex;
   width:max-content;
-  animation: moveLeftToRight 14s linear infinite;
-animation-delay: 0s;
-animation-timing-function: linear;
-animation-fill-mode: both;
-animation-iteration-count: infinite;
-animation-direction: normal;
+  animation: moveLeftToRight 24s linear infinite;
+  animation-delay: 0s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
 }
 
 /* النص */
@@ -745,41 +743,41 @@ animation-direction: normal;
   font-weight:bold;
 }
 
-/* حركة مستمرة */
+/* حركة مستمرة بدون توقف */
 @keyframes moveLeftToRight{
   0%{
     transform:translateX(-100%);
   }
-
-  85%{
-    transform:translateX(100%);
-  }
-
   100%{
     transform:translateX(100%);
   }
+}
 
 /* 🌈 إطار نيون متغير */
 @keyframes borderGlow{
   0%{
     box-shadow:
       0 0 6px #ff00ff,
-      0 0 12px #ff00ff;
+      0 0 12px #ff00ff,
+      0 0 18px #ff00ff;
   }
   33%{
     box-shadow:
       0 0 6px #00ffff,
-      0 0 12px #00ffff;
+      0 0 12px #00ffff,
+      0 0 18px #00ffff;
   }
   66%{
     box-shadow:
       0 0 6px #ffcc00,
-      0 0 12px #ffcc00;
+      0 0 12px #ffcc00,
+      0 0 18px #ffcc00;
   }
   100%{
     box-shadow:
       0 0 6px #ff00ff,
-      0 0 12px #ff00ff;
+      0 0 12px #ff00ff,
+      0 0 18px #ff00ff;
   }
 }
 </style>
