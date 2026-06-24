@@ -695,75 +695,7 @@ z-index: 1000;
     transform:rotate(360deg) scale(1);
   }
 }
-#registerTicker{
-  position:absolute;
-  top:2.0%;
-  left:0;
-  width:50%;
-  overflow:hidden;
-  white-space:nowrap;
-  z-index:2000;
 
-  background:rgba(0,0,0,0.85);
-  border-radius:10px;
-
-  border:2px solid transparent;
-
-  box-shadow:
-    0 0 6px #ff00ff,
-    0 0 12px #00ffff,
-    0 0 18px #ffcc00;
-
-  animation:borderGlow 5s linear infinite;
-}
-
-/* تم إصلاحها + تحسين الأداء */
-#registerTicker .track{
-  display:inline-flex; /* مهم بدل flex */
-  white-space:nowrap;
-  will-change: transform;
-}
-
-/* النص */
-#registerTicker span{
-  display:inline-block;
-  padding:6px 18px;
-  margin-right:50px;
-
-  background:rgba(0,0,0,0.7);
-  border-radius:8px;
-
-  color:#FFD700;
-  font-weight:bold;
-}
-
-/* 🌈 إطار نيون متغير */
-@keyframes borderGlow{
-  0%{
-    box-shadow:
-      0 0 6px #ff00ff,
-      0 0 12px #ff00ff,
-      0 0 18px #ff00ff;
-  }
-  33%{
-    box-shadow:
-      0 0 6px #00ffff,
-      0 0 12px #00ffff,
-      0 0 18px #00ffff;
-  }
-  66%{
-    box-shadow:
-      0 0 6px #ffcc00,
-      0 0 12px #ffcc00,
-      0 0 18px #ffcc00;
-  }
-  100%{
-    box-shadow:
-      0 0 6px #ff00ff,
-      0 0 12px #ff00ff,
-      0 0 18px #ff00ff;
-  }
-}
 </style>
 
 </head>
@@ -1635,29 +1567,6 @@ setInterval(async ()=>{
 
 }, 60000);
 resizeGame();
-window.addEventListener("load", () => {
-  const track = document.querySelector("#registerTicker .track");
-
-  let pos = 0;
-  const speed = 1.5;
-
-  function animate() {
-    const width = track.scrollWidth;
-
-    pos += speed; // 👈 عكس الاتجاه (يمشي لليمين)
-
-    // إذا خرج بالكامل من اليمين
-    if (pos >= window.innerWidth) {
-      pos = -width; // يرجع من خارج اليسار
-    }
-
-    track.style.transform = `translateX(${pos}px)`;
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-});
 </script>
 
 </body>
