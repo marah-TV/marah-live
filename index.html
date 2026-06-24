@@ -1603,14 +1603,13 @@ window.addEventListener("load", () => {
   const track = document.querySelector("#registerTicker .track");
 
   let pos = 0;
-  const speed = 1.2;
-
-  const width = track.scrollWidth;
+  const speed = 1;
 
   function animate() {
-    pos -= speed;
+    pos += speed;
 
-    // إعادة سلسة بدون اختفاء
+    const width = track.scrollWidth / 3;
+
     if (Math.abs(pos) >= width) {
       pos = 0;
     }
