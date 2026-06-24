@@ -724,7 +724,12 @@ z-index: 1000;
 #registerTicker .track{
   display:flex;
   width:max-content;
-  animation: moveLeftToRight 18s linear infinite;
+  animation: moveLeftToRight 25s linear infinite;
+animation-delay: 0s;
+animation-timing-function: linear;
+animation-fill-mode: both;
+animation-iteration-count: infinite;
+animation-direction: normal;
 }
 
 /* النص */
@@ -742,9 +747,17 @@ z-index: 1000;
 
 /* حركة مستمرة */
 @keyframes moveLeftToRight{
-  0%{ transform:translateX(-50%); }
-  100%{ transform:translateX(0%); }
-}
+  0%{
+    transform:translateX(-100%);
+  }
+
+  90%{
+    transform:translateX(100%);
+  }
+
+  100%{
+    transform:translateX(100%);
+  }
 
 /* 🌈 إطار نيون متغير */
 @keyframes borderGlow{
