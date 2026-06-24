@@ -696,25 +696,15 @@ z-index: 1000;
   }
 }
 #registerTicker{
-
   position:absolute;
-
   top:10.5%;
-
   left:0;
-
   width:100%;
-
   overflow:hidden;
-
   white-space:nowrap;
-
   color:#FFD700;
-
   font-size:0.90em;
-
   font-weight:bold;
-
   text-shadow:
   0 0 3px #8B0000,
   0 0 6px #8B0000,
@@ -723,25 +713,25 @@ z-index: 1000;
   z-index:2000;
 }
 
+/* خلفية رفيعة خلف النص */
 #registerTicker span{
-
   display:inline-block;
-
+  padding:4px 0;
   padding-right:100%;
+  background:rgba(0,0,0,0.6);
+  border-radius:6px;
 
-  animation:tickerMove 20s linear infinite;
+  animation:tickerMove 40s linear infinite; /* تم تقليل السرعة */
 }
 
+/* الحركة من اليسار إلى اليمين */
 @keyframes tickerMove{
-
   from{
-    transform:translateX(100%);
-  }
-
-  to{
     transform:translateX(-100%);
   }
-
+  to{
+    transform:translateX(100%);
+  }
 }
 </style>
 
