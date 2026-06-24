@@ -697,98 +697,84 @@ z-index: 1000;
 }
 #registerTicker{
   position:absolute;
-  top:2.5%;
+  top:10.5%;
   left:0;
 
-  /* يمكنك تعديل عرض الشريط هنا */
-  width:50%;   /* ← هذا هو الحد الأقصى الذي طلبته */
-
+  width:40%;   /* يمكنك تغييره */
   overflow:hidden;
   white-space:nowrap;
   z-index:2000;
 
-  /* خلفية سوداء ثابتة */
   background:rgba(0,0,0,0.45);
-
-  /* إطار إضاءة احترافي */
   border-radius:10px;
+
   border:2px solid transparent;
 
   box-shadow:
-    0 0 8px #ff00ff,
-    0 0 12px #00ffff,
-    0 0 18px #ffcc00;
+    0 0 10px #ff00ff,
+    0 0 15px #00ffff,
+    0 0 20px #ffcc00;
 
   animation:borderGlow 3s linear infinite;
 }
 
-/* طبقة الحركة فقط */
+/* منطقة الحركة */
 #registerTicker .track{
   display:inline-block;
   white-space:nowrap;
-
-  /* مهم: نمنع ثبات المحتوى داخل الحاوية */
   min-width:100%;
-
-  animation: moveTicker 22s linear infinite;
+  animation: moveTicker 18s linear infinite;
 }
 
-/* نجعل النص يتحرك فعليًا داخل المسار */
+/* النص */
 #registerTicker span{
   display:inline-block;
   padding:6px 18px;
 
-  color:#FFD700;
-  font-size:0.9em;
-  font-weight:bold;
-
-  background:rgba(0,0,0,0.6);
+  background:rgba(0,0,0,0.65);
   border-radius:8px;
+
+  color:#FFD700;
+  font-weight:bold;
+  font-size:0.9em;
 
   text-shadow:
     0 0 3px #8B0000,
     0 0 6px #8B0000;
 }
-/* حركة من اليسار إلى اليمين */
+
+/* 🔥 حركة صحيحة 100% (حل مشكلة الثبات) */
 @keyframes moveTicker{
   0%{
-    transform:translateX(-100%);  /* يبدأ من خارج اليسار */
+    transform:translateX(-120%);
   }
 
-  70%{
-    transform:translateX(100%);   /* يصل للنهاية */
+  60%{
+    transform:translateX(120%);
   }
 
   80%{
-    transform:translateX(100%);   /* توقف 2 ثانية تقريبًا */
+    transform:translateX(120%);
   }
 
   100%{
-    transform:translateX(-100%);  /* إعادة */
+    transform:translateX(-120%);
   }
 }
 
-/* إطار نيون متغير الألوان */
+/* 🌈 إطار نيون متغير */
 @keyframes borderGlow{
   0%{
-    box-shadow:
-      0 0 6px #ff00ff,
-      0 0 12px #ff00ff;
+    box-shadow:0 0 6px #ff00ff, 0 0 12px #ff00ff;
   }
   33%{
-    box-shadow:
-      0 0 6px #00ffff,
-      0 0 12px #00ffff;
+    box-shadow:0 0 6px #00ffff, 0 0 12px #00ffff;
   }
   66%{
-    box-shadow:
-      0 0 6px #ffcc00,
-      0 0 12px #ffcc00;
+    box-shadow:0 0 6px #ffcc00, 0 0 12px #ffcc00;
   }
   100%{
-    box-shadow:
-      0 0 6px #ff00ff,
-      0 0 12px #ff00ff;
+    box-shadow:0 0 6px #ff00ff, 0 0 12px #ff00ff;
   }
 }
 </style>
@@ -828,9 +814,9 @@ z-index: 1000;
   </div>
 
 <div id="registerTicker">
-<span>
-📢 طريقة الاشتراك: للتسجيل في الشات واللعبة اكتب بهذا الشكل: سجل:منير — لا تنس كتابة كلمة سجل ثم النقطتين : ثم الاسم
-</span>
+  <div class="track">
+    <span>📢 طريقة الاشتراك: للتسجيل في الشات واللعبة اكتب بهذا الشكل: سجل:منير — لا تنس كتابة كلمة سجل ثم النقطتين : ثم الاسم</span>
+  </div>
 </div>
   
 <div id="playersList">
