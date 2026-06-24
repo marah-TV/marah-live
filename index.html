@@ -699,61 +699,95 @@ z-index: 1000;
   position:absolute;
   top:10.5%;
   left:0;
-  width:100%;
+
+  /* يمكنك تعديل عرض الشريط هنا */
+  width:40%;   /* ← هذا هو الحد الأقصى الذي طلبته */
+
   overflow:hidden;
   white-space:nowrap;
   z-index:2000;
-}
 
-#registerTicker span{
-  display:inline-block;
-  padding:6px 18px; /* عرض أكبر قليلًا حول النص */
-  margin:6px 0;
+  /* خلفية سوداء ثابتة */
+  background:rgba(0,0,0,0.45);
 
-  color:#FFD700;
-  font-size:0.90em;
-  font-weight:bold;
-
-  background:rgba(0,0,0,0.55);
+  /* إطار إضاءة احترافي */
   border-radius:10px;
-
-  /* إطار مضيء متعدد الألوان */
   border:2px solid transparent;
-  background-clip: padding-box;
 
   box-shadow:
-    0 0 8px #ff0000,
-    0 0 12px #00ffcc,
-    0 0 18px #ff00ff;
+    0 0 8px #ff00ff,
+    0 0 12px #00ffff,
+    0 0 18px #ffcc00;
 
-  animation:
-    tickerMove 40s linear infinite,
-    glowBorder 3s linear infinite;
+  animation:borderGlow 3s linear infinite;
+}
+
+/* طبقة الحركة فقط */
+#registerTicker .track{
+  display:inline-block;
+  white-space:nowrap;
+
+  /* حركة + توقف 2 ثانية */
+  animation: moveTicker 22s linear infinite;
+}
+
+/* النص */
+#registerTicker span{
+  display:inline-block;
+  padding:6px 18px;
+
+  color:#FFD700;
+  font-size:0.9em;
+  font-weight:bold;
+
+  background:rgba(0,0,0,0.6);
+  border-radius:8px;
+
+  text-shadow:
+    0 0 3px #8B0000,
+    0 0 6px #8B0000;
 }
 
 /* حركة من اليسار إلى اليمين */
-@keyframes tickerMove{
-  from{
-    transform:translateX(-120%);
+@keyframes moveTicker{
+  0%{
+    transform:translateX(-100%);  /* يبدأ من خارج اليسار */
   }
-  to{
-    transform:translateX(120%);
+
+  70%{
+    transform:translateX(100%);   /* يصل للنهاية */
+  }
+
+  80%{
+    transform:translateX(100%);   /* توقف 2 ثانية تقريبًا */
+  }
+
+  100%{
+    transform:translateX(-100%);  /* إعادة */
   }
 }
 
-/* تغير ألوان الإطار والوهج */
-@keyframes glowBorder{
+/* إطار نيون متغير الألوان */
+@keyframes borderGlow{
   0%{
-    box-shadow:0 0 6px #ff0000, 0 0 12px #ff0000;
+    box-shadow:
+      0 0 6px #ff00ff,
+      0 0 12px #ff00ff;
   }
   33%{
-    box-shadow:0 0 6px #00ffcc, 0 0 12px #00ffcc;
+    box-shadow:
+      0 0 6px #00ffff,
+      0 0 12px #00ffff;
   }
   66%{
-    box-shadow:0 0 6px #ff00ff, 0 0 12px #ff00ff;
+    box-shadow:
+      0 0 6px #ffcc00,
+      0 0 12px #ffcc00;
   }
   100%{
-    box-shadow:0 0 6px #ff0000, 0 0 12px #ff0000;
+    box-shadow:
+      0 0 6px #ff00ff,
+      0 0 12px #ff00ff;
   }
 }
 </style>
