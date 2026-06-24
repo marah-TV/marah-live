@@ -699,82 +699,74 @@ z-index: 1000;
   position:absolute;
   top:10.5%;
   left:0;
-
-  width:40%;   /* يمكنك تغييره */
+  width:40%;
   overflow:hidden;
   white-space:nowrap;
   z-index:2000;
 
-  background:rgba(0,0,0,0.45);
+  /* 🔥 خلفية سوداء غامقة */
+  background:rgba(0,0,0,0.85);
+
   border-radius:10px;
 
+  /* ✨ إطار الإضاءة */
   border:2px solid transparent;
 
   box-shadow:
-    0 0 10px #ff00ff,
-    0 0 15px #00ffff,
-    0 0 20px #ffcc00;
+    0 0 6px #ff00ff,
+    0 0 12px #00ffff,
+    0 0 18px #ffcc00;
 
   animation:borderGlow 3s linear infinite;
 }
 
-/* منطقة الحركة */
+/* حركة النص (بدون تغيير) */
 #registerTicker .track{
-  display:inline-block;
-  white-space:nowrap;
-  min-width:100%;
-  animation: moveTicker 18s linear infinite;
+  display:flex;
+  width:max-content;
+  animation: moveLeftToRight 18s linear infinite;
 }
 
 /* النص */
 #registerTicker span{
   display:inline-block;
   padding:6px 18px;
+  margin-right:50px;
 
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.7);
   border-radius:8px;
 
   color:#FFD700;
   font-weight:bold;
-  font-size:0.9em;
-
-  text-shadow:
-    0 0 3px #8B0000,
-    0 0 6px #8B0000;
 }
 
-/* 🔥 حركة صحيحة 100% (حل مشكلة الثبات) */
-@keyframes moveTicker{
-  0%{
-    transform:translateX(-120%);
-  }
-
-  60%{
-    transform:translateX(120%);
-  }
-
-  80%{
-    transform:translateX(120%);
-  }
-
-  100%{
-    transform:translateX(-120%);
-  }
+/* حركة مستمرة */
+@keyframes moveLeftToRight{
+  0%{ transform:translateX(-50%); }
+  100%{ transform:translateX(0%); }
 }
 
 /* 🌈 إطار نيون متغير */
 @keyframes borderGlow{
   0%{
-    box-shadow:0 0 6px #ff00ff, 0 0 12px #ff00ff;
+    box-shadow:
+      0 0 6px #ff00ff,
+      0 0 12px #ff00ff;
   }
   33%{
-    box-shadow:0 0 6px #00ffff, 0 0 12px #00ffff;
+    box-shadow:
+      0 0 6px #00ffff,
+      0 0 12px #00ffff;
   }
   66%{
-    box-shadow:0 0 6px #ffcc00, 0 0 12px #ffcc00;
+    box-shadow:
+      0 0 6px #ffcc00,
+      0 0 12px #ffcc00;
   }
   100%{
-    box-shadow:0 0 6px #ff00ff, 0 0 12px #ff00ff;
+    box-shadow:
+      0 0 6px #ff00ff,
+      0 0 12px #ff00ff;
   }
 }
 </style>
