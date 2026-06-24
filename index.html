@@ -1,139 +1,31 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marah TV - واجهة البث والألعاب</title>
-    <style>
-        /* --- 1. التنسيق العام والشبكة الخلفية (CSS) --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+/* هذا الكود خاص بالشريط الإخباري فقط، لا تقم بتغييره */
+.subscription-ticker {
+    width: 100%;
+    height: 50px; /* تحديد ارتفاع ثابت للشريط */
+    overflow: hidden; 
+    background: rgba(255, 255, 255, 0.95); 
+    color: #111; 
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    white-space: nowrap; 
+    position: relative;
+    border: none !important;
+    outline: none !important;
+    margin-bottom: 10px; /* مسافة بسيطة تحت الشريط */
+}
 
-        body {
-            background-color: #0d1b2a;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
+.ticker-cloud-text {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #d90429; 
+    /* هذا السطر هو السر: يبدأ النص من خارج اليمين ويتحرك لليسار */
+    padding-left: 100%; 
+    animation: moveRightCloud 15s linear infinite; 
+}
 
-        /* حاوية البث المصممة مثل أبعاد شاشة الجوال في صورتك */
-        .stream-container {
-            width: 100%;
-            max-width: 430px;
-            height: 92vh;
-            /* شبكة إحداثيات افتراضية تحاكي الخطوط الخضراء في صورتك */
-            background: linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px),
-                        radial-gradient(circle at center, #1b4332 0%, #081c15 100%);
-            background-size: 20px 20px, 20px 20px, auto;
-            border: 3px solid #1b4332;
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            padding: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-        }
-
-        /* نافذة الترويسة المفتوحة المبتكرة */
-        .stream-header {
-            background: rgba(0, 0, 0, 0.4);
-            border: 2px solid #ffb703;
-            border-radius: 8px;
-            padding: 8px;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .channel-title {
-            color: #8ecae6;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .live-clock {
-            color: #ffb703;
-            font-size: 0.9rem;
-            display: block;
-            margin-top: 3px;
-        }
-
-        /* منطقة وسط الشاشة للدردشة والمشاركين */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            flex: 1;
-        }
-
-        /* لوحة الإحصائيات والمشاركين المزدوجة */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: auto;
-        }
-
-        .info-card {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 8px;
-            padding: 8px;
-            font-size: 0.8rem;
-        }
-
-        .card-header {
-            color: #ffb703;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 4px;
-            margin-bottom: 6px;
-            font-weight: bold;
-        }
-
-        .info-card ul {
-            list-style: none;
-        }
-
-        .info-card ul li {
-            margin: 3px 0;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* اللوحة السفلية للألعاب والإدارة */
-        .games-footer {
-            margin-top: 15px;
-            background: linear-gradient(135deg, #03045e, #023e8a);
-            border: 2px solid #ffb703;
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .games-header {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ffb703;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .game-status {
-            font-size: 0.9rem;
-            color: #e0aaff;
-            margin-bottom: 6px;
-        }
-
-        .target-box {
-            font-size: 1.2rem;
-            color: #ccff33;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.3);
+@keyframes moveRightCloud {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
