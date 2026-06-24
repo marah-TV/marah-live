@@ -695,6 +695,36 @@ z-index: 1000;
     transform:rotate(360deg) scale(1);
   }
 }
+#registerTicker{
+  position:absolute;
+  top:2%;
+  left:0;
+  width:50%;
+  overflow:hidden;
+  white-space:nowrap;
+  background:rgba(0,0,0,0.85);
+  border-radius:10px;
+  z-index:2000;
+
+  box-shadow:
+    0 0 6px #ff00ff,
+    0 0 12px #00ffff,
+    0 0 18px #ffcc00;
+}
+
+.track{
+  display:flex;
+  width:max-content;
+  will-change: transform;
+}
+
+.track span{
+  display:inline-block;
+  padding:6px 25px;
+  color:#FFD700;
+  font-weight:bold;
+  white-space:nowrap;
+}
 
 </style>
 
@@ -734,7 +764,9 @@ z-index: 1000;
 
 <div id="registerTicker">
   <div class="track">
-    <span>📢 طريقة الاشتراك: للتسجيل في الشات واللعبة اكتب بهذا الشكل: سجل:منير — لا تنس كتابة كلمة سجل ثم النقطتين : ثم الاسم</span>
+    <span>📢 طريقة الاشتراك: للتسجيل في الشات واللعبة اكتب: سجل:اسمك — مثال: سجل:منير</span>
+    <span>📢 تنبيه: يرجى احترام القوانين داخل اللعبة وعدم إرسال رسائل مزعجة</span>
+    <span>📢 الأخبار الجديدة تظهر هنا بشكل مستمر مثل القنوات التلفزيونية</span>
   </div>
 </div>
   
@@ -1567,6 +1599,29 @@ setInterval(async ()=>{
 
 }, 60000);
 resizeGame();
+window.addEventListener("load", () => {
+  const track = document.querySelector("#registerTicker .track");
+
+  let pos = 0;
+  const speed = 1.2;
+
+  const width = track.scrollWidth;
+
+  function animate() {
+    pos -= speed;
+
+    // إعادة سلسة بدون اختفاء
+    if (Math.abs(pos) >= width) {
+      pos = 0;
+    }
+
+    track.style.transform = `translateX(${pos}px)`;
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
 </script>
 
 </body>
