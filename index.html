@@ -727,11 +727,13 @@ z-index: 1000;
   display:inline-block;
   white-space:nowrap;
 
-  /* حركة + توقف 2 ثانية */
+  /* مهم: نمنع ثبات المحتوى داخل الحاوية */
+  min-width:100%;
+
   animation: moveTicker 22s linear infinite;
 }
 
-/* النص */
+/* نجعل النص يتحرك فعليًا داخل المسار */
 #registerTicker span{
   display:inline-block;
   padding:6px 18px;
@@ -746,8 +748,11 @@ z-index: 1000;
   text-shadow:
     0 0 3px #8B0000,
     0 0 6px #8B0000;
-}
 
+  /* 🔥 الإضافة المهمة */
+  position:relative;
+  left:0;
+}
 /* حركة من اليسار إلى اليمين */
 @keyframes moveTicker{
   0%{
