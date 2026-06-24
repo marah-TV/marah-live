@@ -2,59 +2,79 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Marah TV - Dual View</title>
 <style>
-    body { background: #0c0f12; display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 0; padding: 10px; }
-    
-    .game-container {
-        position: relative;
-        width: 420px;
-        height: 740px;
-        background: url("munirmunir.jpg");
-        background-size: 100% 100%;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0c0f12; display: flex; flex-direction: column; align-items: center; gap: 15px; padding: 10px; }
 
-    /* تحويل كل الـ ID في كودك الأصلي إلى كلاسات هنا */
-    .logo { position: absolute; top: 3.35%; right: 13%; font-size: 1em; font-weight: bold; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff, #ff0000); background-size: 400% 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbowMove 6s linear infinite; }
-    .clock { position: absolute; top: 8.08%; left: 68.0%; color: gold; font-weight: bold; }
-    .playersCount { position: absolute; top: 26%; left: -6%; color: gold; font-weight: bold; }
-    .gameChat { position: absolute; top: 50%; left: 32.5%; width: 40%; height: 20%; color: white; font-size: 0.75em; background: rgba(0,0,0,0.5); overflow: hidden; }
-    
-    /* ملاحظة: قم بنسخ باقي تنسيقات الـ CSS الخاصة بك هنا مع استبدال # بـ . لكل العناصر */
+/* الحاوية المزدوجة */
+.game-container {
+  position: relative;
+  width: 420px;
+  height: 740px;
+  background: url("munirmunir.jpg");
+  background-size: 100% 100%;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  font-size: 16px;
+}
+
+/* التنسيقات (استخدام . بدلاً من #) */
+.logo { position: absolute; top: 3.35%; right: 13%; font-size: 1em; font-weight: bold; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff, #ff0000); background-size: 400% 400%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: rainbowMove 6s linear infinite, royalSpin 15s ease-in-out infinite; }
+.clock { position: absolute; top: 8.08%; left: 68.0%; color: gold; font-weight: bold; text-shadow: 0 0 3px black; }
+.nameBox { position: absolute; top: 12.0%; left: 44.0%; width: 33.33%; height: 4.73%; display: flex; justify-content: center; align-items: center; font-size: 0.80em; color: #b100ff; text-shadow: 1px 1px 0 #FFD700; }
+.msgBox { position: absolute; top: 16.0%; left: 30.0%; width: 50.38%; height: 15.11%; border: 3px solid red; background: rgba(255,0,0,0.2); text-align: center; color: #000; font-weight: 600; }
+.gameStatus { position: absolute; top: 73.0%; left: 28.8%; width: 52.38%; text-align: center; color: gold; font-weight: bold; }
+.countdown { position: absolute; top: 77.0%; left: 11.0%; color: gold; font-weight: bold; }
+.targetNumber { position: absolute; top: 77.0%; left: 43.0%; color: gold; font-weight: bold; }
+.gameWinner { position: absolute; top: 82.0%; left: 30.0%; width: 50%; text-align: center; color: gold; font-weight: bold; }
+.playersCount { position: absolute; top: 26%; left: -6%; color: gold; font-weight: bold; }
+.gameChat { position: absolute; top: 50%; left: 32.5%; width: 40%; height: 20%; background: rgba(120,80,0,0.25); border: 2px solid #b8860b; color: #fff8dc; font-size: 0.75em; padding: 6px; overflow: hidden; }
+/* ... (أضف بقية التنسيقات هنا بنفس الطريقة) ... */
+
+@keyframes rainbowMove { 0%{background-position:0% 50%;} 100%{background-position:400% 50%;} }
 </style>
 </head>
 <body>
 
-<div class="game-container" id="screen1">
+<div class="game-container">
     <div class="logo">🔴 Marah TV</div>
-    <div class="clock">00:00:00</div>
+    <div class="clock"></div>
+    <div class="nameBox nameBox1"></div>
+    <div class="msgBox msgBox1"></div>
+    <div class="gameStatus">🚦 الاستعدَاد للجولة القادمة</div>
+    <div class="countdown">⏳ 10</div>
+    <div class="targetNumber">🎯الرقم الجديد بعد👈</div>
+    <div class="gameChat">🎮 دردشة اللعبة</div>
     <div class="playersCount">👥 0</div>
-    <div class="gameChat">دردشة اللعبة...</div>
-</div>
+    </div>
 
-<div class="game-container" id="screen2">
+<div class="game-container">
     <div class="logo">🔴 Marah TV</div>
-    <div class="clock">00:00:00</div>
+    <div class="clock"></div>
+    <div class="nameBox nameBox1"></div>
+    <div class="msgBox msgBox1"></div>
+    <div class="gameStatus">🚦 الاستعدَاد للجولة القادمة</div>
+    <div class="countdown">⏳ 10</div>
+    <div class="targetNumber">🎯الرقم الجديد بعد👈</div>
+    <div class="gameChat">🎮 دردشة اللعبة</div>
     <div class="playersCount">👥 0</div>
-    <div class="gameChat">دردشة اللعبة...</div>
-</div>
+    </div>
 
 <script type="module">
-    // عند تحديث أي بيانات من Firebase، نقوم بتحديثها في الشاشتين معاً
-    function updateDisplay(className, value) {
-        const elements = document.querySelectorAll('.' + className);
-        elements.forEach(el => el.textContent = value);
-    }
+// دالة التحديث المزدوج
+function updateAll(className, content) {
+    document.querySelectorAll('.' + className).forEach(el => el.textContent = content);
+}
+function updateHTML(className, html) {
+    document.querySelectorAll('.' + className).forEach(el => el.innerHTML = html);
+}
 
-    // مثال على كيفية الربط مع Firebase:
-    // بدلاً من document.getElementById("clock").textContent = ...
-    // استخدم الدالة المحدثة:
-    // updateDisplay('clock', new Date().toLocaleTimeString("ar"));
-    
-    // استمر في استخدام هذا المنطق في باقي كود الـ Firebase الخاص بك
+// في جزء الـ Firebase الخاص بك، استبدل أوامر التحديث العادية بهذه الدوال:
+// مثال: بدلاً من document.getElementById("clock").textContent = x;
+// استخدم: updateAll('clock', x);
+// مثال للدردشة: updateHTML('gameChat', html);
 </script>
 
 </body>
