@@ -702,35 +702,58 @@ z-index: 1000;
   width:100%;
   overflow:hidden;
   white-space:nowrap;
-  color:#FFD700;
-  font-size:0.90em;
-  font-weight:bold;
-  text-shadow:
-  0 0 3px #8B0000,
-  0 0 6px #8B0000,
-  0 0 12px #8B0000;
-
   z-index:2000;
 }
 
-/* خلفية رفيعة خلف النص */
 #registerTicker span{
   display:inline-block;
-  padding:4px 0;
-  padding-right:100%;
-  background:rgba(0,0,0,0.6);
-  border-radius:6px;
+  padding:6px 18px; /* عرض أكبر قليلًا حول النص */
+  margin:6px 0;
 
-  animation:tickerMove 40s linear infinite; /* تم تقليل السرعة */
+  color:#FFD700;
+  font-size:0.90em;
+  font-weight:bold;
+
+  background:rgba(0,0,0,0.55);
+  border-radius:10px;
+
+  /* إطار مضيء متعدد الألوان */
+  border:2px solid transparent;
+  background-clip: padding-box;
+
+  box-shadow:
+    0 0 8px #ff0000,
+    0 0 12px #00ffcc,
+    0 0 18px #ff00ff;
+
+  animation:
+    tickerMove 40s linear infinite,
+    glowBorder 3s linear infinite;
 }
 
-/* الحركة من اليسار إلى اليمين */
+/* حركة من اليسار إلى اليمين */
 @keyframes tickerMove{
   from{
-    transform:translateX(-100%);
+    transform:translateX(-120%);
   }
   to{
-    transform:translateX(100%);
+    transform:translateX(120%);
+  }
+}
+
+/* تغير ألوان الإطار والوهج */
+@keyframes glowBorder{
+  0%{
+    box-shadow:0 0 6px #ff0000, 0 0 12px #ff0000;
+  }
+  33%{
+    box-shadow:0 0 6px #00ffcc, 0 0 12px #00ffcc;
+  }
+  66%{
+    box-shadow:0 0 6px #ff00ff, 0 0 12px #ff00ff;
+  }
+  100%{
+    box-shadow:0 0 6px #ff0000, 0 0 12px #ff0000;
   }
 }
 </style>
