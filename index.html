@@ -1635,25 +1635,29 @@ setInterval(async ()=>{
 
 }, 60000);
 resizeGame();
-const track = document.querySelector("#registerTicker .track");
+window.addEventListener("load", () => {
+  const track = document.querySelector("#registerTicker .track");
 
-let pos = 0;
+  let pos = 0;
+  const speed = 1.5;
 
-function animate() {
-  pos += 1.3; // السرعة (يمكن تعديلها)
+  function animate() {
+    const width = track.scrollWidth;
 
-  const width = track.scrollWidth;
+    pos += speed; // 👈 عكس الاتجاه (يمشي لليمين)
 
-  if (Math.abs(pos) >= width / 2) {
-    pos = 0; // إعادة فورية بدون أي تأخير
+    // إذا خرج بالكامل من اليمين
+    if (pos >= window.innerWidth) {
+      pos = -width; // يرجع من خارج اليسار
+    }
+
+    track.style.transform = `translateX(${pos}px)`;
+
+    requestAnimationFrame(animate);
   }
 
-  track.style.transform = `translateX(${pos}px)`;
-
-  requestAnimationFrame(animate);
-}
-
-animate();
+  animate();
+});
 </script>
 
 </body>
