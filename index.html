@@ -918,7 +918,22 @@ String(msg.text) === target &&
 ){
 
 update(gameRef,{
-winner: msg.name
+  winner: msg.name
+});
+
+// ⭐ زيادة wins للاعب
+const playerRef = ref(db,"wins/" + msg.name);
+
+get(playerRef).then((snap)=>{
+  if(snap.exists()){
+    update(playerRef,{
+      wins: snap.val().wins + 1
+    });
+  }else{
+    set(playerRef,{
+      wins: 1
+    });
+  }
 });
 
 }
