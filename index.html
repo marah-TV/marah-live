@@ -353,7 +353,7 @@ text-shadow:
 #adminPanel {
   position: absolute;
   top: 65%;
-  left: -75%;
+  left: 75%;
   width: 25%;
   background: rgba(0,0,0,0.95);
   padding: 10px;
@@ -513,26 +513,27 @@ text-shadow:
   position:absolute;
 
   top:65%;
-  left:0.0%;
+  left:0;
 
   width:40%;
   height:15%;
 
   overflow:hidden;
 
-  color:#000;
+  color:black;
 
-text-shadow:
-  -1px -1px 0 #fff,
-   1px -1px 0 #fff,
-  -1px  1px 0 #fff,
-   1px  1px 0 #fff;
+  text-shadow:
+    -2px -2px 0 #fff,
+     2px -2px 0 #fff,
+    -2px  2px 0 #fff,
+     2px  2px 0 #fff;
 
-  font-size:0.85em;
-  line-height:1.50;
+  font-size:1.2em;
+  line-height:1.6;
 
+  font-weight:700;
 
-z-index: 1000;
+  z-index:1000;
 }
 #ownerBanner{
   position:absolute;
@@ -1195,7 +1196,7 @@ if(!data) return;
 if(data.targetNumber){
 
 document.getElementById("targetNumber").textContent =
-"🎯المطلوب: " + data.targetNumber;
+"🎯اكتب: " + data.targetNumber;
 
 }
 
