@@ -1081,17 +1081,6 @@ allMessages.forEach(async msg => {
 
 });
 
-    await set(
-      ref(db,"gamePlayers/" + playerName),
-      {
-        joined:true,
-        joinedAt:Date.now(),
-        lastActive:Date.now()
-      }
-    );
-  }
-
-});
 
   normalMessages = allMessages
     .filter(msg =>
