@@ -872,6 +872,7 @@ messagingSenderId: "868399469455",
 appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
 };
 
+const registeredNamesRef = ref(db,"registeredNames");
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const gameRef = ref(db,"game");
@@ -1049,6 +1050,13 @@ allMessages.forEach(async msg => {
     text.replace("سجل:","").trim();
 
     if(!playerName) return;
+
+    const youtubeName = msg.name;
+
+await set(
+  ref(db,"registeredNames/" + youtubeName),
+  playerName
+);
 
     const playerSnap =
     await get(ref(db,"players/" + playerName));
