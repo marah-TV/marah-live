@@ -1055,14 +1055,31 @@ allMessages.forEach(async msg => {
 
     if(playerSnap.exists()) return;
 
-    await set(
-      ref(db,"players/" + playerName),
-      {
-        joined:true,
-        joinedAt:Date.now(),
-        lastActive:Date.now()
-      }
-    );
+    await set(ref(db,"players/" + playerName),{
+      joined:true,
+      joinedAt:Date.now(),
+      lastActive:Date.now()
+    });
+
+    await set(ref(db,"gamePlayers/" + playerName),{
+      joined:true,
+      joinedAt:Date.now(),
+      lastActive:Date.now()
+    });
+
+  }else{
+
+    const isNumber = /^\d+$/.test(msg.text);
+
+    registerPlayer(msg.name);
+
+    if(isNumber){
+      registerGamePlayer(msg.name);
+    }
+
+  }
+
+});
 
     await set(
       ref(db,"gamePlayers/" + playerName),
