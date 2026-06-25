@@ -872,7 +872,6 @@ messagingSenderId: "868399469455",
 appId: "1:868399469455:web:15fc7d07b342574c5e71fa"
 };
 
-const registeredNamesRef = ref(db,"registeredNames");
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const gameRef = ref(db,"game");
@@ -880,6 +879,7 @@ const messagesRef = ref(db,"messages");
 const winsRef = ref(db,"wins");
 const playersRef = ref(db,"players");
 const gamePlayersRef = ref(db,"gamePlayers");
+const registeredNamesRef = ref(db,"registeredNames");
 let currentRound = 1;
 let countdownStarted = false;
 let countdown = 15;
