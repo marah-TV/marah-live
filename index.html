@@ -1058,10 +1058,19 @@ await set(
   playerName
 );
 
-    const playerSnap =
-    await get(ref(db,"players/" + playerName));
+    let finalName = playerName;
 
-    if(playerSnap.exists()) return;
+let number = 1;
+
+while(
+  (await get(ref(db,"players/" + finalName))).exists()
+){
+
+  finalName = playerName + number;
+
+  number++;
+
+}
 
     await set(ref(db,"players/" + playerName),{
       joined:true,
