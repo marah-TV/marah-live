@@ -923,6 +923,7 @@ const registeredNamesRef = ref(db,"registeredNames");
 let currentRound = 1;
 let countdownStarted = false;
 let countdown = 15;
+const processedGameMessages = new Set();
 setInterval(()=>{
 document.getElementById("clock").textContent =
 new Date().toLocaleTimeString("ar");
@@ -1147,7 +1148,15 @@ registerPlayer(displayName);
 
 if(isNumber){
 
-  registerGamePlayer(displayName);
+  const messageId = msg.name + "|" + msg.text + "|" + msg.time;
+
+  if(!processedGameMessages.has(messageId)){
+
+    processedGameMessages.add(messageId);
+
+    registerGamePlayer(displayName);
+
+  }
 
 }
 
