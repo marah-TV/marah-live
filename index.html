@@ -903,9 +903,19 @@ const msgs = Object.values(data)
 const numbersOnly =
 msgs.filter(msg => /^\d+$/.test(msg.text))
 .slice(0,100);
-numbersOnly.forEach(msg=>{
+numbersOnly.forEach(async msg=>{
+let displayName = msg.name;
 
-html += "🎯 " + msg.name +
+const registeredSnap =
+await get(ref(db,"registeredNames/" + msg.name));
+
+if(registeredSnap.exists()){
+
+  displayName = registeredSnap.val();
+
+}
+
+html += "🎯 " + displayName +
 " : " + msg.text + "<br>";
 
 get(gameRef).then((gameSnap)=>{
@@ -922,7 +932,7 @@ String(msg.text) === target &&
 ){
 
 update(gameRef,{
-  winner: msg.name
+  winner: displayName
 });
 
 // ⭐ زيادة wins للاعب
@@ -1048,6 +1058,15 @@ allMessages.forEach(async msg => {
 
     const playerName =
     text.replace("سجل:","").trim();
+    let finalName = playerName;
+let number = 1;
+
+while(
+  (await get(ref(db,"players/" + finalName))).exists()
+){
+  finalName = playerName + number;
+  number++;
+}
 
     if(!playerName) return;
 
@@ -1055,30 +1074,16 @@ allMessages.forEach(async msg => {
 
 await set(
   ref(db,"registeredNames/" + youtubeName),
-  playerName
+finalName
 );
-
-    let finalName = playerName;
-
-let number = 1;
-
-while(
-  (await get(ref(db,"players/" + finalName))).exists()
-){
-
-  finalName = playerName + number;
-
-  number++;
-
-}
-
-    await set(ref(db,"players/" + playerName),{
+  
+    await set(ref(db,"players/" + finalName),{
       joined:true,
       joinedAt:Date.now(),
       lastActive:Date.now()
     });
 
-    await set(ref(db,"gamePlayers/" + playerName),{
+    await set(ref(db,"gamePlayers/" + finalName),{
       joined:true,
       joinedAt:Date.now(),
       lastActive:Date.now()
@@ -1088,11 +1093,24 @@ while(
 
     const isNumber = /^\d+$/.test(msg.text);
 
-    registerPlayer(msg.name);
+let displayName = msg.name;
 
-    if(isNumber){
-      registerGamePlayer(msg.name);
-    }
+const registeredSnap =
+await get(ref(db,"registeredNames/" + msg.name));
+
+if(registeredSnap.exists()){
+
+  displayName = registeredSnap.val();
+
+}
+
+registerPlayer(displayName);
+
+if(isNumber){
+
+  registerGamePlayer(displayName);
+
+}
 
   }
 
