@@ -1098,20 +1098,41 @@ allMessages.forEach(async msg => {
 
     const playerName =
     text.replace("سجل:","").trim();
-    let finalName = playerName;
-let number = 1;
+    const playerExists = await get(
+  ref(db,"players/" + playerName)
+);
 
-while(
-  (await get(ref(db,"players/" + finalName))).exists()
-){
-  finalName = playerName + number;
-  number++;
+if(playerExists.exists()){
+
+  push(messagesRef,{
+    name:"🤖 النظام",
+    text:"❌ الاسم " + playerName + " مستخدم بالفعل، اختر اسماً آخر.",
+    time:Date.now()
+  });
+
+  return;
+
 }
+
+const finalName = playerName;
 
     if(!playerName) return;
 
     const youtubeName = msg.name;
+const oldRegistration =
+await get(ref(db,"registeredNames/" + youtubeName));
 
+if(oldRegistration.exists()){
+
+  push(messagesRef,{
+    name:"🤖 النظام",
+    text:"❌ لديك اسم مسجل بالفعل: " + oldRegistration.val(),
+    time:Date.now()
+  });
+
+  return;
+
+}
 await set(
   ref(db,"registeredNames/" + youtubeName),
 finalName
