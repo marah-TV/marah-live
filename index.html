@@ -927,8 +927,7 @@ setInterval(()=>{
 document.getElementById("clock").textContent =
 new Date().toLocaleTimeString("ar");
 },1000);
-onValue(messagesRef,(snapshot)=>{
-
+onValue(messagesRef, async (snapshot)=>{
 const data = snapshot.val();
 
 if(!data) return;
