@@ -1150,8 +1150,24 @@ availableMessages = [...normalMessages];
 }
 
 const msg1 = availableMessages[0];
+const snap1 = await get(
+  ref(db,"registeredNames/" + msg1.name)
+);
+
+const displayName1 =
+snap1.exists()
+? snap1.val()
+: msg1.name;
 
 const msg2 = availableMessages[1];
+  const snap2 = await get(
+  ref(db,"registeredNames/" + msg2.name)
+);
+
+const displayName2 =
+snap2.exists()
+? snap2.val()
+: msg2.name;
 
 lastShown.push(msg1.name + msg1.text);
 lastShown.push(msg2.name + msg2.text);
@@ -1163,13 +1179,13 @@ lastShown = lastShown.slice(-20);
 }
 
   document.getElementById("nameBox1").textContent =
-  msg1.name || "";
+displayName1 || "";
 
   document.getElementById("msgBox1").textContent =
   cleanText(msg1.text);
 
   document.getElementById("nameBox2").textContent =
-  msg2.name || "";
+displayName2 || "";
 
   document.getElementById("msgBox2").textContent =
   cleanText(msg2.text);
