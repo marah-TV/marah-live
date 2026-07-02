@@ -943,7 +943,7 @@ const msgs = Object.values(data)
 const numbersOnly =
 msgs.filter(msg => /^\d+$/.test(msg.text))
 .slice(0,100);
-numbersOnly.forEach(async msg=>{
+for(const msg of numbersOnly){
 let displayName = msg.name;
 
 const registeredSnap =
@@ -994,7 +994,7 @@ get(playerRef).then((snap)=>{
 
 });
 
-});
+}
 
 gameChat.innerHTML = html;
 });
