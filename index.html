@@ -1091,7 +1091,7 @@ onValue(messagesRef,(snapshot)=>{
 allMessages.forEach(async msg => {
 
   if(!msg.name || !msg.text) return;
-
+if(msg.name === "🤖 النظام") return;
   const text = String(msg.text).trim();
 
   if(text.startsWith("سجل:")){
@@ -1104,15 +1104,8 @@ allMessages.forEach(async msg => {
 
 if(playerExists.exists()){
 
-  push(messagesRef,{
-    name:"🤖 النظام",
-    text:"❌ الاسم " + playerName + " مستخدم بالفعل، اختر اسماً آخر.",
-    time:Date.now()
-  });
-
-  return;
-
-}
+  alert("❌ الاسم " + playerName + " مستخدم بالفعل، اختر اسماً آخر.");
+return;
 
 const finalName = playerName;
 
@@ -1124,13 +1117,8 @@ await get(ref(db,"registeredNames/" + youtubeName));
 
 if(oldRegistration.exists()){
 
-  push(messagesRef,{
-    name:"🤖 النظام",
-    text:"❌ لديك اسم مسجل بالفعل: " + oldRegistration.val(),
-    time:Date.now()
-  });
-
-  return;
+  alert("❌ لديك اسم مسجل بالفعل: " + oldRegistration.val());
+return;
 
 }
 await set(
