@@ -705,11 +705,51 @@ text-shadow:
   font-weight:bold;
   white-space:nowrap;
 }
+#testPanel{
+position:fixed;
+left:50%;
+bottom:10px;
+transform:translateX(-50%);
+display:flex;
+gap:8px;
+z-index:999999;
+}
 
+#testPanel input{
+padding:8px;
+border:none;
+border-radius:8px;
+outline:none;
+width:130px;
+}
+
+#testPanel button{
+padding:8px 18px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
 </style>
 
 </head>
+<div id="testPanel">
 
+<input
+id="testName"
+type="text"
+placeholder="الاسم">
+
+<input
+id="testMessage"
+type="text"
+placeholder="اكتب الرسالة">
+
+<button id="sendTest">
+إرسال
+</button>
+
+</div>
 <body>
 
 <div class="game-container" id="mainContainer">
@@ -1118,11 +1158,12 @@ if(isNumber){
 
 
   normalMessages = allMessages
-    .filter(msg =>
-      !/^\d+$/.test(msg.text) &&
-      msg.text &&
-      msg.text.length > 1
-    )
+  .filter(msg =>
+    !/^\d+$/.test(msg.text) &&
+    !String(msg.text).startsWith("سجل:") &&
+    msg.text &&
+    msg.text.length > 1
+  )
     .sort((a,b)=>b.time-a.time)
     .slice(0,100)
     .reverse();
@@ -1133,7 +1174,7 @@ gameMessages = allMessages
   .sort((a,b)=>b.time-a.time)
   .slice(0,100);
 });
-setInterval(()=>{
+setInterval(async ()=>{
 
   if(normalMessages.length < 2) return;
 
@@ -1141,11 +1182,11 @@ setInterval(()=>{
 msg => !lastShown.includes(msg.name + msg.text)
 );
 
-if(availableMessages.length < 2){
+if(availableMessages.length === 0){
 
-lastShown = [];
+  lastShown = [];
 
-availableMessages = [...normalMessages];
+  availableMessages = [...normalMessages];
 
 }
 
@@ -1159,7 +1200,21 @@ snap1.exists()
 ? snap1.val()
 : msg1.name;
 
-const msg2 = availableMessages[1];
+let msg2 = availableMessages[1];
+
+if(!msg2){
+
+  msg2 = normalMessages.find(
+    m => m.text !== msg1.text || m.name !== msg1.name
+  );
+
+}
+
+if(!msg2){
+
+  msg2 = msg1;
+
+}
   const snap2 = await get(
   ref(db,"registeredNames/" + msg2.name)
 );
@@ -1707,6 +1762,25 @@ window.addEventListener("load", () => {
 
   animate();
 });
+document.getElementById("sendTest").onclick = async ()=>{
+
+const name =
+document.getElementById("testName").value.trim();
+
+const text =
+document.getElementById("testMessage").value.trim();
+
+if(!name || !text) return;
+
+await push(messagesRef,{
+  name:name,
+  text:text,
+  time:Date.now()
+});
+
+document.getElementById("testMessage").value = "";
+
+};
 </script>
 
 </body>
