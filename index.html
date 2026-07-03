@@ -879,9 +879,12 @@ const messagesRef = ref(db,"messages");
 const winsRef = ref(db,"wins");
 const playersRef = ref(db,"players");
 const gamePlayersRef = ref(db,"gamePlayers");
+const usersRef = ref(db,"users");
 let currentRound = 1;
 let countdownStarted = false;
 let countdown = 15;
+
+let currentUser = null;
 setInterval(()=>{
 document.getElementById("clock").textContent =
 new Date().toLocaleTimeString("ar");
