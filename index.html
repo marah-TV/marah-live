@@ -56,7 +56,7 @@ body {
 /* استخدام الـ em لربط الخطوط بالحاوية مباشرة لمنع أي تحرك نهائياً */
 #logo {
   position: absolute;
-  top: 15.95%;
+  top: 14.80%;
   right: 72.50%;
   left: auto;
 display:inline-block;
@@ -582,7 +582,7 @@ text-shadow:
 }
 
 #logo::after{
-  content:"💥";
+  content:"🎇";
   position:absolute;
   left:50%;
   top:50%;
@@ -705,51 +705,11 @@ text-shadow:
   font-weight:bold;
   white-space:nowrap;
 }
-#testPanel{
-position:fixed;
-left:50%;
-bottom:10px;
-transform:translateX(-50%);
-display:flex;
-gap:8px;
-z-index:999999;
-}
 
-#testPanel input{
-padding:8px;
-border:none;
-border-radius:8px;
-outline:none;
-width:130px;
-}
-
-#testPanel button{
-padding:8px 18px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-}
 </style>
 
 </head>
-<div id="testPanel">
 
-<input
-id="testName"
-type="text"
-placeholder="الاسم">
-
-<input
-id="testMessage"
-type="text"
-placeholder="اكتب الرسالة">
-
-<button id="sendTest">
-إرسال
-</button>
-
-</div>
 <body>
 
 <div class="game-container" id="mainContainer">
@@ -919,16 +879,15 @@ const messagesRef = ref(db,"messages");
 const winsRef = ref(db,"wins");
 const playersRef = ref(db,"players");
 const gamePlayersRef = ref(db,"gamePlayers");
-const registeredNamesRef = ref(db,"registeredNames");
 let currentRound = 1;
 let countdownStarted = false;
 let countdown = 15;
-const processedGameMessages = new Set();
 setInterval(()=>{
 document.getElementById("clock").textContent =
 new Date().toLocaleTimeString("ar");
 },1000);
-onValue(messagesRef, async (snapshot)=>{
+onValue(messagesRef,(snapshot)=>{
+
 const data = snapshot.val();
 
 if(!data) return;
@@ -943,19 +902,9 @@ const msgs = Object.values(data)
 const numbersOnly =
 msgs.filter(msg => /^\d+$/.test(msg.text))
 .slice(0,100);
-for(const msg of numbersOnly){
-let displayName = msg.name;
+numbersOnly.forEach(msg=>{
 
-const registeredSnap =
-await get(ref(db,"registeredNames/" + msg.name));
-
-if(registeredSnap.exists()){
-
-  displayName = registeredSnap.val();
-
-}
-
-html += "🎯 " + displayName +
+html += "🎯 " + msg.name +
 " : " + msg.text + "<br>";
 
 get(gameRef).then((gameSnap)=>{
@@ -972,7 +921,7 @@ String(msg.text) === target &&
 ){
 
 update(gameRef,{
-  winner: displayName
+  winner: msg.name
 });
 
 // ⭐ زيادة wins للاعب
@@ -994,7 +943,7 @@ get(playerRef).then((snap)=>{
 
 });
 
-}
+});
 
 gameChat.innerHTML = html;
 });
@@ -1091,98 +1040,48 @@ onValue(messagesRef,(snapshot)=>{
 allMessages.forEach(async msg => {
 
   if(!msg.name || !msg.text) return;
-if(msg.name === "🤖 النظام") return;
+
   const text = String(msg.text).trim();
 
   if(text.startsWith("سجل:")){
 
     const playerName =
     text.replace("سجل:","").trim();
-    const playerExists = await get(
-  ref(db,"players/" + playerName)
-);
-
-if(playerExists.exists()){
-
-  alert("❌ الاسم " + playerName + " مستخدم بالفعل، اختر اسماً آخر.");
-return;
-
-}
-  
-const finalName = playerName;
 
     if(!playerName) return;
 
-    const youtubeName = msg.name;
-const oldRegistration =
-await get(ref(db,"registeredNames/" + youtubeName));
+    const playerSnap =
+    await get(ref(db,"players/" + playerName));
 
-if(oldRegistration.exists()){
+    if(playerSnap.exists()) return;
 
-  alert("❌ لديك اسم مسجل بالفعل: " + oldRegistration.val());
-return;
+    await set(
+      ref(db,"players/" + playerName),
+      {
+        joined:true,
+        joinedAt:Date.now(),
+        lastActive:Date.now()
+      }
+    );
 
-}
-await set(
-  ref(db,"registeredNames/" + youtubeName),
-finalName
-);
-  
-    await set(ref(db,"players/" + finalName),{
-      joined:true,
-      joinedAt:Date.now(),
-      lastActive:Date.now()
-    });
-
-    await set(ref(db,"gamePlayers/" + finalName),{
-      joined:true,
-      joinedAt:Date.now(),
-      lastActive:Date.now()
-    });
-
-  }else{
-
-    const isNumber = /^\d+$/.test(msg.text);
-
-let displayName = msg.name;
-
-const registeredSnap =
-await get(ref(db,"registeredNames/" + msg.name));
-
-if(registeredSnap.exists()){
-
-  displayName = registeredSnap.val();
-
-}
-
-registerPlayer(displayName);
-
-if(isNumber){
-
-  const messageId = msg.name + "|" + msg.text + "|" + msg.time;
-
-  if(!processedGameMessages.has(messageId)){
-
-    processedGameMessages.add(messageId);
-
-    registerGamePlayer(displayName);
-
-  }
-
-}
-
+    await set(
+      ref(db,"gamePlayers/" + playerName),
+      {
+        joined:true,
+        joinedAt:Date.now(),
+        lastActive:Date.now()
+      }
+    );
   }
 
 });
 
-
   normalMessages = allMessages
-  .filter(msg =>
-    !/^\d+$/.test(msg.text) &&
-    !String(msg.text).startsWith("سجل:") &&
-    msg.text &&
-    msg.text.length > 1
-  )
+    .filter(msg =>
+      !/^\d+$/.test(msg.text) &&
+      msg.text &&
+      msg.text.length > 1
+    )
     .sort((a,b)=>b.time-a.time)
     .slice(0,100)
     .reverse();
@@ -1193,7 +1092,7 @@ gameMessages = allMessages
   .sort((a,b)=>b.time-a.time)
   .slice(0,100);
 });
-setInterval(async ()=>{
+setInterval(()=>{
 
   if(normalMessages.length < 2) return;
 
@@ -1201,47 +1100,17 @@ setInterval(async ()=>{
 msg => !lastShown.includes(msg.name + msg.text)
 );
 
-if(availableMessages.length === 0){
+if(availableMessages.length < 2){
 
-  lastShown = [];
+lastShown = [];
 
-  availableMessages = [...normalMessages];
+availableMessages = [...normalMessages];
 
 }
 
 const msg1 = availableMessages[0];
-const snap1 = await get(
-  ref(db,"registeredNames/" + msg1.name)
-);
 
-const displayName1 =
-snap1.exists()
-? snap1.val()
-: msg1.name;
-
-let msg2 = availableMessages[1];
-
-if(!msg2){
-
-  msg2 = normalMessages.find(
-    m => m.text !== msg1.text || m.name !== msg1.name
-  );
-
-}
-
-if(!msg2){
-
-  msg2 = msg1;
-
-}
-  const snap2 = await get(
-  ref(db,"registeredNames/" + msg2.name)
-);
-
-const displayName2 =
-snap2.exists()
-? snap2.val()
-: msg2.name;
+const msg2 = availableMessages[1];
 
 lastShown.push(msg1.name + msg1.text);
 lastShown.push(msg2.name + msg2.text);
@@ -1253,13 +1122,13 @@ lastShown = lastShown.slice(-20);
 }
 
   document.getElementById("nameBox1").textContent =
-displayName1 || "";
+  msg1.name || "";
 
   document.getElementById("msgBox1").textContent =
   cleanText(msg1.text);
 
   document.getElementById("nameBox2").textContent =
-displayName2 || "";
+  msg2.name || "";
 
   document.getElementById("msgBox2").textContent =
   cleanText(msg2.text);
@@ -1781,25 +1650,6 @@ window.addEventListener("load", () => {
 
   animate();
 });
-document.getElementById("sendTest").onclick = async ()=>{
-
-const name =
-document.getElementById("testName").value.trim();
-
-const text =
-document.getElementById("testMessage").value.trim();
-
-if(!name || !text) return;
-
-await push(messagesRef,{
-  name:name,
-  text:text,
-  time:Date.now()
-});
-
-document.getElementById("testMessage").value = "";
-
-};
 </script>
 
 </body>
