@@ -976,7 +976,8 @@ let playersArray = [];
 let playersPage = 0;
 let normalMessages = [];
 let gameMessages = [];
-let currentIndex = 0;
+let displayIndex = 0;
+let lastMessageCount = 0;
 let lastShown = [];
 get(gameRef).then((snapshot)=>{
 
@@ -1121,10 +1122,17 @@ setInterval(() => {
 
   if (normalMessages.length === 0) return;
 
-  const msg1 = normalMessages[normalMessages.length - 1];
-  const msg2 = normalMessages.length > 1
-      ? normalMessages[normalMessages.length - 2]
-      : null;
+  if (normalMessages.length != lastMessageCount) {
+    lastMessageCount = normalMessages.length;
+    displayIndex = Math.max(0, normalMessages.length - 2);
+  }
+
+  if (displayIndex >= normalMessages.length)
+    displayIndex = 0;
+
+  const msg1 = normalMessages[displayIndex];
+  const msg2 =
+      normalMessages[(displayIndex + 1) % normalMessages.length];
 
   document.getElementById("nameBox1").textContent =
       msg1.name || "";
@@ -1132,18 +1140,15 @@ setInterval(() => {
   document.getElementById("msgBox1").textContent =
       cleanText(msg1.text);
 
-  if (msg2) {
-    document.getElementById("nameBox2").textContent =
-        msg2.name || "";
+  document.getElementById("nameBox2").textContent =
+      msg2 ? msg2.name : "";
 
-    document.getElementById("msgBox2").textContent =
-        cleanText(msg2.text);
-  } else {
-    document.getElementById("nameBox2").textContent = "";
-    document.getElementById("msgBox2").textContent = "";
-  }
+  document.getElementById("msgBox2").textContent =
+      msg2 ? cleanText(msg2.text) : "";
 
-}, 500);
+  displayIndex += 2;
+
+},5000);
 let botEnabled = true;
 let gameRunning = false;
 
