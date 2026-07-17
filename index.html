@@ -1149,13 +1149,14 @@ setInterval(() => {
       msg2 ? cleanText(msg2.text) : "";
 
   document.getElementById("photoBox1").src =
-msg1.photo || "";
+msg1.photo && msg1.photo.trim() !== ""
+    ? msg1.photo
+    : "marah.tv.png";
 
 document.getElementById("photoBox2").src =
-msg2 ? (msg2.photo || "") : "";
-
-  displayIndex += 2;
-
+msg2 && msg2.photo && msg2.photo.trim() !== ""
+    ? msg2.photo
+    : "marah.tv.png";
 },5000);
 let botEnabled = true;
 let gameRunning = false;
