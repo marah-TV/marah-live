@@ -162,7 +162,17 @@ text-shadow:
 0px 0px 2px #ffffff,
 0px 0px 4px #ffffff;
 }
-
+#photoBox1{
+  position:absolute;
+  top:14.8%;
+  left:35.2%;
+  width:8%;
+  aspect-ratio:1/1;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid gold;
+  background:#222;
+}
 #nameBox2 {
   position: absolute;
   top: 39.0%;
@@ -220,7 +230,17 @@ text-shadow:
 0px 0px 2px #ffffff,
 0px 0px 4px #ffffff;
 }
-
+#photoBox2{
+  position:absolute;
+  top:38.8%;
+  left:35.2%;
+  width:8%;
+  aspect-ratio:1/1;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid gold;
+  background:#222;
+}
 #winsBoard {
   position: absolute;
   top: 20.0%;
@@ -771,8 +791,10 @@ text-shadow:
 
 
 <!-- إطارات الرسائل والأسماء -->
+<img id="photoBox1" src="" />
 <div id="nameBox1"></div>
 <div id="msgBox1"></div>
+<img id="photoBox2" src="" />
 <div id="nameBox2"></div>
 <div id="msgBox2"></div>
 
@@ -1095,49 +1117,33 @@ gameMessages = allMessages
   .sort((a,b)=>b.time-a.time)
   .slice(0,100);
 });
-setInterval(()=>{
+setInterval(() => {
 
-  if(normalMessages.length < 2) return;
+  if (normalMessages.length === 0) return;
 
-  let availableMessages = normalMessages.filter(
-msg => !lastShown.includes(msg.name + msg.text)
-);
-
-if(availableMessages.length < 2){
-
-lastShown = [];
-
-availableMessages = [...normalMessages];
-
-}
-
-const msg1 = availableMessages[0];
-
-const msg2 = availableMessages[1];
-
-lastShown.push(msg1.name + msg1.text);
-lastShown.push(msg2.name + msg2.text);
-
-if(lastShown.length > 20){
-
-lastShown = lastShown.slice(-20);
-
-}
+  const msg1 = normalMessages[normalMessages.length - 1];
+  const msg2 = normalMessages.length > 1
+      ? normalMessages[normalMessages.length - 2]
+      : null;
 
   document.getElementById("nameBox1").textContent =
-  msg1.name || "";
+      msg1.name || "";
 
   document.getElementById("msgBox1").textContent =
-  cleanText(msg1.text);
+      cleanText(msg1.text);
 
-  document.getElementById("nameBox2").textContent =
-  msg2.name || "";
+  if (msg2) {
+    document.getElementById("nameBox2").textContent =
+        msg2.name || "";
 
-  document.getElementById("msgBox2").textContent =
-  cleanText(msg2.text);
+    document.getElementById("msgBox2").textContent =
+        cleanText(msg2.text);
+  } else {
+    document.getElementById("nameBox2").textContent = "";
+    document.getElementById("msgBox2").textContent = "";
+  }
 
-
-},5000);
+}, 500);
 let botEnabled = true;
 let gameRunning = false;
 
