@@ -1148,6 +1148,12 @@ setInterval(() => {
   document.getElementById("msgBox2").textContent =
       msg2 ? cleanText(msg2.text) : "";
 
+  document.getElementById("photoBox1").src =
+msg1.photo || "";
+
+document.getElementById("photoBox2").src =
+msg2 ? (msg2.photo || "") : "";
+
   displayIndex += 2;
 
 },5000);
